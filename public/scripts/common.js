@@ -7,13 +7,12 @@ $(function(){
       $ins = $('#ins'),
       ins_html = $ins.html()
 
-  if (localStorage['palette_hidden'] == "false") {
-    shows_palette();
-        localStorage['palette_hidden'] == "false"
-
+  // Hides or shows palette
+  if (localStorage['palette_hidden']) {
+    localStorage['palette_hidden'] == "false" ? shows_palette() : hides_palette()
   } else {
+    localStorage.setItem('palette_hidden', true)
     hides_palette()
-    localStorage['palette_hidden'] == "true"
   }
 
   // Sets the value of the clipboard handler input
@@ -36,16 +35,27 @@ $(function(){
     localStorage['palette'] = JSON.stringify(palette_array)
   };
   $('#chosen_colors .color').click(remove_from_palette);
-
+  $('.scroller').scroll(function(){
+    localStorage.setItem('scrolled', $(this).scrollTop())
+  });
+  // $('.scroller').scrollTop(parseInt(localStorage['scrolled']))
   // Palette handlers
   function shows_palette () {
-    $('.scroller').css('top', $palette.innerHeight());
-    $('.scroller').scrollTop($('.scroller').scrollTop()+$palette.innerHeight());
+    if ($(window).width() >= 1400){
+      $body.addClass('palette-shown')
+      $('.scroller').scrollTop($('.scroller').scrollTop()+200);
+    } else if ($(window).width() < 1400) {
+      $('.scroller').scrollTop($('.scroller').scrollTop()+$palette.innerHeight());
+    }
     $palette.show();
   }
   function hides_palette () {
-    $('.scroller').scrollTop($('.scroller').scrollTop()-$palette.innerHeight());
-    $('.scroller').css('top', 0)
+    if ($(window).width() >= 1400){
+      $body.removeClass('palette-shown')
+    } else if ($(window).width() < 1400) {
+      $('.scroller').scrollTop($('.scroller').scrollTop()-$palette.innerHeight());
+      $('.scroller').css('top', 0)
+    }
     $palette.hide();
   }
 
@@ -75,7 +85,7 @@ $(function(){
     localStorage['palette'] = JSON.stringify(palette_array)
 
     // Shows the palette
-    $palette.show()
+    if (localStorage['palette_hidden']) shows_palette()
     localStorage['palette_hidden'] = false
   });
 
@@ -154,8 +164,4 @@ $(function(){
       if (pressed_key == 'C') $('title').text('Last copied: '+$clip_handler.val()+' — Coleure')
     }
   });
-  $('.scroller').scroll(function(){
-    localStorage.setItem('scrolled', $(this).scrollTop())
-  });
-  $('.scroller').scrollTop(parseInt(localStorage['scrolled']))
 });
