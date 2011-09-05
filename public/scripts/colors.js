@@ -28,7 +28,7 @@ function hsl(r, g, b){
       h /= 6;
   }
 
-  return [Math.floor(h * 360)+', '+Math.floor(s * 100)+', '+Math.floor(l * 100)];
+  return [Math.floor(h * 360)+', '+Math.floor(s * 100)+'%, '+Math.floor(l * 100)+'%'];
 }
 
 function markup_color(e) {
