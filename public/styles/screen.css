@@ -1,0 +1,183 @@
+@import url(reset.css);
+
+html {
+  overflow: hidden; }
+
+body {
+  font: 300 14px/1.5 "Helvetica Neue", sans-serif;
+  : hsla(352, 100, 45, 1); }
+
+strong {
+  font-weight: bold;
+}
+
+a {
+  color: #778c92;
+}
+
+.b-sizing {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+header.site {
+  position: fixed;
+  bottom: 0;
+  padding: 0 1%;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 70px;
+  background: #fff;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1) }
+
+header.site h1 {
+  position: absolute;
+  bottom: 20%;
+  color: black;
+  padding-right: 1em;
+  height: 0.915em;
+  overflow: hidden;
+  font-size: 60px;
+  letter-spacing: -0.12em; }
+header.site p {
+  position: absolute;
+  font-size: 12px;
+  width: 50%;
+  right: 0;
+  margin-bottom: -0.45em;
+  bottom: 20%; }
+
+.scroller {
+  position: fixed;
+  padding-bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 70px;
+  overflow-y: auto;
+  overflow-x: hidden; }
+
+footer.credits {
+  padding: 1em;
+  padding-bottom: 4em;
+  text-align: center; }
+
+#clipboard_handler {
+  position: absolute;
+  top: -99em;
+  left: -99em; }
+
+#colors_placeholder {
+  width: 101%; }
+
+.color, .black-space {
+  width: 8.33%;
+  padding-bottom: 8.33%; 
+  float: left; }
+.color {
+  position: relative;
+  z-index: 1;
+  overflow: hidden; }
+.color:hover .color_value {
+  background: rgba(255, 255, 255, 0.85);
+  color: rgba(0, 0, 0, 0.85) }
+
+.color_value {
+  position: absolute;
+  top: 0;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.35);
+  word-spacing: -0.5em;
+  white-space: nowrap;
+  cursor: default; }
+
+.color_value, code {
+  font: 11px/1.5 monaco, monospace; }
+
+code {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  background: #ccc; }
+
+.palette {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  padding: 2%;
+  padding-top: 1.5%;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  word-wrap: normal;
+  white-space: nowrap;
+}
+.palette h2 {
+  font-size: 24px;
+}
+#clear_palette {
+  font-weight: normal;
+  font-size: 0.75em;
+}
+#chosen_colors {
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+}
+#chosen_colors .color {
+  width: 10%;
+  padding-bottom: 10%;
+  float: none;
+  display: inline-block;
+}
+.ticker {
+  padding: 0.5em 0.75em;
+  position: fixed;
+  bottom: 70px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  z-index: 3;
+}
+.ticker code {
+  background: #333;
+}
+.ticker .close {
+  color: #fff;
+  float: right;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 720px){
+  .palette {
+    padding: 4%;
+    padding-top: 3.5%;
+  }
+  .palette h2 {
+    font-size: 16px;
+  }
+  .color_value {
+    width: 1.5em;
+    overflow: hidden;
+  }
+  .color_value:before {
+    content:'Ω';
+    padding: 0 0.5em;
+  }
+  #colors_placeholder {
+    width: 102%;
+  }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  header.site {
+    position: relative;
+  }
+  .palette {
+    border-top: 1px solid #eee;
+  }
+  .scroller {
+    position: relative;
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0'" />
+    <title>Coleure</title>
+    <link href="styles/screen.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- 
+    Used for contain the current color value in order to be copied.
+    NOTE: If `id` changed, update commons.js. -->
+    <input id="clipboard_handler" disabled type="text" />
+
+    <header class="site b-sizing">
+      <h1>Coleure</h1>
+      <h2></h2>
+      <p id="ins">
+        <big>
+          Hide color values <code>h</code> 
+          Switch between color formats (HEX/RGB/HSL) <code>f</code><br/>
+          Show Palette <code>e</code> 
+          Change the output for each format <code>o</code>
+        </big>
+      </p>
+    </header>
+
+    <aside id="colors_palette" class="palette cleared b-sizing">
+      <header>
+        <h2>Palette <a id="clear_palette" href="javascript:;">clear</a></h2>
+      </header>
+      <div id="chosen_colors"></div>
+    </aside>
+
+    <section id="scroller" class="scroller">
+      <!-- 
+      Colors will load here.
+      NOTE: If `id` changed, update commons.js. -->
+      <div id="colors_placeholder" class="cleared"></div>
+
+      <footer class="credits">
+        Made by <a href="http://rolando.pe" target="_blank">Rolando Murillo</a> inspired by PANTONE® colors.
+      </footer>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src='scripts/colors.js'></script>
+    <script src='scripts/formats.js'></script>
+    <script src='scripts/common.js'></script>
+  </body>
+</html>
