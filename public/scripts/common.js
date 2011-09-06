@@ -35,24 +35,22 @@ $(function(){
     localStorage['palette'] = JSON.stringify(palette_array)
   };
   $('#chosen_colors .color').click(remove_from_palette);
-  $('.scroller').scroll(function(){
-    localStorage.setItem('scrolled', $(this).scrollTop())
-  });
-  // $('.scroller').scrollTop(parseInt(localStorage['scrolled']))
-  // Palette handlers
+  
+  // Shows the palette and scrolls
   function shows_palette () {
     if ($(window).width() >= 1400){
-      $body.addClass('palette-shown')
-      $('.scroller').scrollTop($('.scroller').scrollTop()+200);
-    } else if ($(window).width() < 1400) {
+      $body.addClass('palette-shown');
+    } else {
       $('.scroller').scrollTop($('.scroller').scrollTop()+$palette.innerHeight());
+      $('.scroller').css('top', $palette.innerHeight())
     }
     $palette.show();
   }
+  // Hides the palette and scrolls again
   function hides_palette () {
     if ($(window).width() >= 1400){
       $body.removeClass('palette-shown')
-    } else if ($(window).width() < 1400) {
+    } else {
       $('.scroller').scrollTop($('.scroller').scrollTop()-$palette.innerHeight());
       $('.scroller').css('top', 0)
     }
@@ -164,4 +162,8 @@ $(function(){
       if (pressed_key == 'C') $('title').text('Last copied: '+$clip_handler.val()+' — Coleure')
     }
   });
+  $('.scroller').scroll(function(){
+    localStorage.setItem('scrolled', $(this).scrollTop())
+  });
+  $('.scroller').scrollTop(parseInt(localStorage['scrolled']))
 });
