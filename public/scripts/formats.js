@@ -54,7 +54,7 @@ $(function(){
         break;
     }
   }
-  $('#output').text(output_text(parseInt(current_format), parseInt(current_output)))
+  $('#output').text(output_text(parseInt(current_format), parseInt(current_output[current_format])))
 
   function returns_output() {
     var format = formats[current_format];
@@ -82,7 +82,7 @@ $(function(){
     localStorage['color_format'] = current_format
     $('#hex, #rgb, #hsl').removeClass('current')
     $('#'+formats[current_format]).addClass('current')
-    $('#output').text(output_text(parseInt(current_format), parseInt(current_output)))
+    $('#output').text(output_text(current_format, current_output[current_format]))
   }
 
   function rotates_output() {
@@ -92,7 +92,7 @@ $(function(){
 
     $('.color_value').text(returns_output)
     localStorage['color_output'] = JSON.stringify(current_output)
-    $('#output').text(output_text(current_format,current_output[current_format]))
+    $('#output').text(output_text(current_format, current_output[current_format]))
   }
 
   $('.color_value').text(returns_output)
