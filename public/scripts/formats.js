@@ -10,6 +10,51 @@ $(function(){
                 ['hsla', 'hsl', '']];
   
   $('#'+formats[current_format]).addClass('current')
+  
+  function output_text(format, output) {
+    switch(format){
+      case 0:
+        switch(output){
+          case 0:
+            return 'with #'
+            break;
+          case 1:
+            return 'without #'
+            break;
+          case 2:
+            return 'with 0x'
+            break;
+        }
+        break;
+      case 1:
+        switch(output){
+          case 0:
+            return 'in rgba()'
+            break;
+          case 1:
+            return 'in rgb()'
+            break;
+          case 2:
+            return 'in commas'
+            break;
+        }
+        break;
+      case 2:
+        switch(output){
+          case 0:
+            return 'in hsla()'
+            break;
+          case 1:
+            return 'in hsl()'
+            break;
+          case 2:
+            return 'in commas'
+            break;
+        }
+        break;
+    }
+  }
+  $('#output').text(output_text(parseInt(current_format), parseInt(current_output)))
 
   function returns_output() {
     var format = formats[current_format];
@@ -37,6 +82,7 @@ $(function(){
     localStorage['color_format'] = current_format
     $('#hex, #rgb, #hsl').removeClass('current')
     $('#'+formats[current_format]).addClass('current')
+    $('#output').text(output_text(parseInt(current_format), parseInt(current_output)))
   }
 
   function rotates_output() {
@@ -46,11 +92,13 @@ $(function(){
 
     $('.color_value').text(returns_output)
     localStorage['color_output'] = JSON.stringify(current_output)
+    $('#output').text(output_text(current_format,current_output[current_format]))
   }
 
   $('.color_value').text(returns_output)
 
   $('#rotates_format').click(function() {rotates_format();})
+  $('#rotates_output').click(function() {rotates_output();})
   $(document).keydown(function(e){
     var pressed_key = String.fromCharCode(e.which)
     switch(pressed_key){
