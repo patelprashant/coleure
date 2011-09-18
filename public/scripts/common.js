@@ -3,9 +3,7 @@ $(function(){
       $palette = $('#colors_palette'),
       $colors = $('.color'),
       $scroller = $('div#scroller'),
-      $clip_handler = $('#clipboard_handler'),
-      $ins = $('#ins'),
-      ins_html = $ins.html()
+      $clip_handler = $('#clipboard_handler')
 
   // Hides or shows palette
   if (localStorage['palette_hidden']) {
@@ -14,6 +12,21 @@ $(function(){
     localStorage.setItem('palette_hidden', true)
     hides_palette()
   }
+  
+  // Hides the color values
+  function toggle_color_values () {
+    var $color_value = $('.color_value')
+    localStorage['hidden_values'] == "true"? $color_value.hide() : $color_value.show();
+    localStorage['hidden_values'] = !(localStorage['hidden_values'] == "true");
+  }
+  var $color_value = $('.color_value')
+  $color_value.hide();
+      
+  // Hides the color values if the user hid them on last session
+  if (localStorage['hidden_values'] == "true")
+    $color_value.show();
+
+  $('#toggle_values').click(function(){toggle_color_values()});
 
   // Sets the value of the clipboard handler input
   // and selects it ready to be copied.
@@ -90,44 +103,6 @@ $(function(){
     if (localStorage['palette_hidden'] == 'true') shows_palette();
     localStorage['palette_hidden'] = false
   });
-
-  // Get the right command/control value
-  function cmd() {
-    var $filter = $('.get-cmd')
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.indexOf("mac") != -1) {
-      $filter.text("⌘");
-    } else {
-      $filter.text("Ctrl.");
-    }
-  }
-
-  if (!localStorage['hidden_ticker'])
-    $('body').append('<aside id="welcome_ticker" class="ticker b-sizing">Press <code><span class="get-cmd">cmd/crl</span></code> + <code>C</code> to copy <code class="ins_code">(hover a color)</code> to the clipboard. <a title="You won\'t see this message again." id="hide_ticker" class="close" href="javascript:;">&times;</a></aside>');
-    cmd()
-
-  $('#hide_ticker').click(function() {
-    $('#welcome_ticker').remove(); 
-    localStorage.setItem('hidden_ticker', true)
-  })
-
-  // Media queries to show the current color to be copied
-  function ins_mediaq() {
-    if ($(window).width() < 721){
-      $ins.html('<big><code>Ω</code> = <code class="ins_code">(hover a color)</code></big>')
-    } else if ($(window).width() >= 721) {
-      $ins.html(ins_html);
-    }
-    cmd()
-  }
-  ins_mediaq();
-  $(window).resize(function() {
-    ins_mediaq();
-    palette_hidden ? $('.scroller').css('top', 0):$('.scroller').css('top', $('.palette').innerHeight())
-    $('.scroller').scroll(function(){
-      localStorage.setItem('scrolled', palette_hidden? $(this).scrollTop() : $(this).scrollTop()-$('.palette').innerHeight())
-    });
-  });
   
   $('#show_palette').click(function() {handle_palette();});
 
@@ -141,20 +116,12 @@ $(function(){
     clear_palette(); 
   })
 
-  var $color_value = $('.color_value')
-      
-  // Hides the color values if the user hid them on last session
-  if (localStorage['hidden_values'] == "false")
-    $color_value.hide();
-
   $(document).keydown(function(e){
     var pressed_key = String.fromCharCode(e.which)
     switch(pressed_key){
       // Hides the color values
       case 'H':
-        var $color_value = $('.color_value')
-        localStorage['hidden_values'] == "true"? $color_value.hide() : $color_value.show();
-        localStorage['hidden_values'] = !(localStorage['hidden_values'] == "true");
+        toggle_color_values();
         break;
 
       // Hides (or shows) the palette

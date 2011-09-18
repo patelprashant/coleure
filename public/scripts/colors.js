@@ -53,6 +53,7 @@ $(function(){
       $placeholder.append(markup_color(object)):
       $placeholder.append('<div class="black-space" />');
   }
+  
   if (localStorage['palette'])
     var db_palette = localStorage['palette'],
         chosen_colors = JSON.parse(db_palette)

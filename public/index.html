@@ -17,20 +17,24 @@
       <h2></h2>
       <nav>
         <ul id="options">
-          <li>
+          <li id="min_mode"><code class="ins_code">(hover a color)</code></li>
+          <li class="option">
             <kbd>E</kbd><a id="show_palette" href="javascript:;">Palette</a>
           </li>
-          <li>
+          <li class="option">
             <kbd>F</kbd><a id="rotates_format" href="javascript:;">Format</a>
-            <ul class="inline formats">
+            <ul class="inline">
               <li id="output"></li>
               <li id="hex">HEX</li>
               <li id="rgb">RGB</li>
               <li id="hsl">HSL</li>
             </ul>
           </li>
-          <li>
+          <li class="option">
             <kbd>T</kbd><a id="rotates_output" href="javascript:;">Output</a>
+          </li>
+          <li class="option">
+            <kbd>H</kbd><a id="toggle_values" href="javascript:;">Values</a>
           </li>
         </ul>
       </nav>
@@ -59,6 +63,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src='scripts/colors.js'></script>
     <script src='scripts/formats.js'></script>
+    <script src='scripts/ticker.js'></script>
     <script src='scripts/common.js'></script>
+    <script src='scripts/responsive.js'></script>
   </body>
 </html>
