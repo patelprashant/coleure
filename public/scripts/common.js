@@ -56,6 +56,10 @@ $(function(){
     }
     $palette.hide();
   }
+  function handle_palette() {
+    localStorage['palette_hidden'] == "true"? shows_palette() : hides_palette();
+    localStorage['palette_hidden'] = !(localStorage['palette_hidden'] == "true");
+  }
 
   // Adds a color to the palette (and shows it)
   var palette_array = localStorage['palette']? JSON.parse(localStorage['palette']):[]
@@ -71,7 +75,7 @@ $(function(){
     $(this).clone(
       ).prependTo(
         '#chosen_colors'
-      ).addClass('created').addClass('will_animate added').hover(
+      ).hover(
         selects_color_value
       ).click(
         remove_from_palette
@@ -83,7 +87,7 @@ $(function(){
     localStorage['palette'] = JSON.stringify(palette_array)
 
     // Shows the palette
-    if (localStorage['palette_hidden']) shows_palette()
+    if (localStorage['palette_hidden'] == 'true') shows_palette();
     localStorage['palette_hidden'] = false
   });
 
@@ -124,6 +128,8 @@ $(function(){
       localStorage.setItem('scrolled', palette_hidden? $(this).scrollTop() : $(this).scrollTop()-$('.palette').innerHeight())
     });
   });
+  
+  $('#show_palette').click(function() {handle_palette();});
 
   // Needed for the subsequent functions
   function clear_palette() {
@@ -153,8 +159,7 @@ $(function(){
 
       // Hides (or shows) the palette
       case 'E':
-        localStorage['palette_hidden'] == "true"? shows_palette() : hides_palette();
-        localStorage['palette_hidden'] = !(localStorage['palette_hidden'] == "true");
+        handle_palette();
         break;
     }
     // Notifies the user that the color has been copied

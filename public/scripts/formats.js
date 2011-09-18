@@ -8,6 +8,8 @@ $(function(){
       outputs =[['#', '', '0x'],
                 ['rgba', 'rgb', ''],
                 ['hsla', 'hsl', '']];
+  
+  $('#'+formats[current_format]).addClass('current')
 
   function returns_output() {
     var format = formats[current_format];
@@ -33,6 +35,8 @@ $(function(){
     $('.color_value').text(returns_output)
 
     localStorage['color_format'] = current_format
+    $('#hex, #rgb, #hsl').removeClass('current')
+    $('#'+formats[current_format]).addClass('current')
   }
 
   function rotates_output() {
@@ -46,11 +50,12 @@ $(function(){
 
   $('.color_value').text(returns_output)
 
+  $('#rotates_format').click(function() {rotates_format();})
   $(document).keydown(function(e){
     var pressed_key = String.fromCharCode(e.which)
     switch(pressed_key){
       // Switches between outputs for each format
-      case 'O':
+      case 'T':
         rotates_output();
         break;
       

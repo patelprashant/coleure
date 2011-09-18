@@ -15,30 +15,40 @@
     <header class="site b-sizing">
       <h1>Coleure</h1>
       <h2></h2>
-      <p id="ins">
-        <big>
-          <kbd>h</kbd> Hide color values 
-          <kbd>f</kbd> Switch between color formats (HEX/RGB/HSL)<br/>
-          <kbd>e</kbd> Show Palette 
-          <kbd>o</kbd> Change the output for each format
-        </big>
-      </p>
+      <nav>
+        <ul id="options">
+          <li>
+            <kbd>E</kbd><a id="show_palette" href="javascript:;">Palette</a>
+          </li>
+          <li>
+            <kbd>F</kbd><a id="rotates_format" href="javascript:;">Format</a>
+            <ul class="inline formats">
+              <li id="hex">HEX</li>
+              <li id="rgb">RGB</li>
+              <li id="hsl">HSL</li>
+            </ul>
+          </li>
+          <!-- <li><a href="#">Options</a></li> -->
+        </ul>
+      </nav>
     </header>
 
     <aside id="colors_palette" class="palette cleared b-sizing">
       <header>
         <h2>Palette <a id="clear_palette" href="javascript:;">clear</a></h2>
       </header>
-      <div id="chosen_colors"></div>
+      <div id="chosen_colors"><span class="spacer"></span></div>
     </aside>
 
     <section id="scroller" class="scroller">
       <!-- 
       Colors will load here.
       NOTE: If `id` changed, update commons.js. -->
-      <div id="colors_placeholder" class="cleared"></div>
-
-      <footer class="credits">
+      <div id="colors_placeholder" class="cleared">
+        <p id="loading_indicator"><big>Loading…</big></p>
+      </div>
+      
+      <footer id="credits">
         Made by <a href="http://rolando.pe" target="_blank">Rolando Murillo</a> inspired by PANTONE® colors.
       </footer>
     </section>

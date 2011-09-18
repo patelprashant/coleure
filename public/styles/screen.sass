@@ -7,7 +7,7 @@ strong
   font-weight: bold
 
 a
-  color: #778c92
+  color: #0083b1
 
 .b-sizing
   box-sizing: border-box
@@ -33,13 +33,29 @@ header.site
     overflow: hidden
     font-size: 60px
     letter-spacing: -0.12em
-  p
-    position: absolute
+      
+#options
+  font-size: 16px
+  position: absolute
+  width: 65%
+  right: 0
+  bottom: 20%
+  > li
+    float: left
+    margin-right: 30px
+    &:last-child
+      margin-right: 0
+  kbd
+    margin-right: 10px
+  ul.inline
+    margin-left: 10px
     font-size: 12px
-    width: 65%
-    right: 0
-    margin-bottom: -0.45em
-    bottom: 20%
+    font-weight: 600
+    color: #999
+    &, li
+      display: inline-block
+    li.current
+      color: #000
 
 .scroller
   position: fixed
@@ -51,7 +67,8 @@ header.site
   overflow-y: auto
   overflow-x: hidden
 
-footer.credits
+footer#credits
+  display: none
   padding: 1em
   padding-bottom: 4em
   text-align: center
@@ -63,6 +80,10 @@ footer.credits
 
 #colors_placeholder
   width: 101%
+  
+#loading_indicator
+  padding: 25% 0
+  text-align: center
 
 .color, .black-space
   width: 8.33%
@@ -91,9 +112,11 @@ code, kbd
   font: 11px / 1.5 monaco, monospace
   display: inline-block
   padding: 0.25em 0.5em
-  background: #ccc
+  background: #eee
+  color: #888
 
 .palette
+  display: none
   position: fixed
   z-index: 2
   width: 100%
@@ -114,11 +137,13 @@ code, kbd
   width: 100%
   height: 100%
   overflow-x: scroll
-  .color
+  .color, span.spacer
     width: 10%
     padding-bottom: 10%
     float: none
     display: inline-block
+  span.spacer
+    width: 0px
 
 .ticker
   padding: 0.5em 0.75em
@@ -130,6 +155,7 @@ code, kbd
   z-index: 3
   code
     background: #333
+    color: #fff
   .close
     color: #fff
     float: right

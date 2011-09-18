@@ -60,4 +60,6 @@ $(function(){
       var object = chosen_colors[color];
       $('#chosen_colors').append(markup_color(object))
     }
+  $('#loading_indicator').remove();
+  $('#credits').show();
 });
