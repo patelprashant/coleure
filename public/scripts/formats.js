@@ -12,6 +12,7 @@ $(function(){
   $('#'+formats[current_format]).addClass('current')
   
   function output_text(format, output) {
+<<<<<<< HEAD
     return format == 0 ?  output == 0 ? 'with #'    :
                           output == 1 ? 'without #' :
                           output == 2 ? 'with 0x'   : null :
