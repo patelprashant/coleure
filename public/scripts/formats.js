@@ -12,47 +12,17 @@ $(function(){
   $('#'+formats[current_format]).addClass('current')
   
   function output_text(format, output) {
-    switch(format){
-      case 0:
-        switch(output){
-          case 0:
-            return 'with #'
-            break;
-          case 1:
-            return 'without #'
-            break;
-          case 2:
-            return 'with 0x'
-            break;
-        }
-        break;
-      case 1:
-        switch(output){
-          case 0:
-            return 'in rgba()'
-            break;
-          case 1:
-            return 'in rgb()'
-            break;
-          case 2:
-            return 'in commas'
-            break;
-        }
-        break;
-      case 2:
-        switch(output){
-          case 0:
-            return 'in hsla()'
-            break;
-          case 1:
-            return 'in hsl()'
-            break;
-          case 2:
-            return 'in commas'
-            break;
-        }
-        break;
-    }
+    return format == 0 ?  output == 0 ? 'with #'    :
+                          output == 1 ? 'without #' :
+                          output == 2 ? 'with 0x'   : null :
+
+           format == 1 ?  output == 0 ? 'in rgba()' :
+                          output == 1 ? 'in rgb()'  :
+                          output == 2 ? 'in commas' : null :
+
+           format == 2 ?  output == 0 ? 'in hsla()' :
+                          output == 1 ? 'in hsl()'  :
+                          output == 2 ? 'in commas' : null;
   }
   
   function sets_output_text () {
