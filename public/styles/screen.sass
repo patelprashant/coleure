@@ -145,6 +145,12 @@ code, kbd
   width: 100%
   height: 100%
   overflow-x: scroll
+  position: relative
+  &:after
+    content: 'To add a color, click on it.'
+    color: #999
+    position: absolute
+    left: 0
   .color, span.spacer
     width: 10%
     padding-bottom: 10%

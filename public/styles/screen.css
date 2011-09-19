@@ -143,7 +143,13 @@ code, kbd {
 #chosen_colors {
   width: 100%;
   height: 100%;
-  overflow-x: scroll; }
+  overflow-x: scroll;
+  position: relative; }
+  #chosen_colors:after {
+    content: "To add a color, click on it.";
+    color: #999999;
+    position: absolute;
+    left: 0; }
   #chosen_colors .color, #chosen_colors span.spacer {
     width: 10%;
     padding-bottom: 10%;
