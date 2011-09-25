@@ -1,5 +1,5 @@
 use Rack::Static, 
-  :urls => ["/styles", "/scripts"],
+  :urls => ["/styles", "/scripts", "/boner"],
   :root => "public"
 
 require 'sass/plugin/rack'
