@@ -34,7 +34,6 @@ function hsl(r, g, b){
 function markup_color(e) {
   var rgb_for_object = r(e)+', '+g(e) +', '+b(e),
       hsl_for_object = hsl(r(e), g(e), b(e));
-  // id="color-'+$.inArray(e, a)+'"
   return '<section class="color" style="background: #'+e+'"><header class="color_value" data-hex="'+e+'" data-rgb="'+rgb_for_object+'" data-hsl="'+hsl_for_object+'"></header></section>'
 }
 

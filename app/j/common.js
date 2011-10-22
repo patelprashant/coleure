@@ -1,4 +1,6 @@
 $(function(){
+  if(navigator.userAgent.match(/iPad/i)) alert('U R USING IPAZ');
+  if(navigator.userAgent.match(/iPhone/i)) window.top.scrollTo(0, 1);
   var $body = $('body'),
       $palette = $('#colors_palette'),
       $colors = $('.color'),

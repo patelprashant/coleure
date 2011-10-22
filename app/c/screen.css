@@ -1,4 +1,9 @@
 @import url(reset.css);
+
+html {
+  overflow: hidden;
+}
+
 body {
   font: 300 14px/1.5 "Helvetica Neue", sans-serif; }
 
@@ -198,21 +203,34 @@ code, kbd {
 
   .option {
     display: none; } }
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-  header.site {
+    
+/* //////////////////////
+iPad & iPhone editions
+////////////////////// */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px), only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  .scroller {
     position: relative; }
+  .ticker {
+    display: none;
+  }
+}
+    
+/* ////////////
+iPad edition
+//////////// */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  body {
+    font-weight: normal;
+  }
 
   .palette {
     border-top: 1px solid #eeeeee; }
 
   .scroller {
-    position: relative; }
-
-  kbd {
-    display: none; }
-
-  .ticker {
-    display: none; }
-
-  .color_value {
-    display: block; } }
+    position: relative; } }
+    
+/* //////////////
+iPhone edition
+////////////// */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+}
