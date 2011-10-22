@@ -1,9 +1,7 @@
 Current
 =======
 
-## Improve shortcuts
-
-- Enhace usability by providing current format and output indicators on the bottom.
+No currents.
 
 Solved
 ======
@@ -15,3 +13,4 @@ Solved
 - Check: Chrome scrollbar apparently not displaying. (Nothing happened)
 - Markup: change `<code>` to `<kbd>`.
 - Scroll position wasn't being recorded.
+- Enhace usability by providing current format and output indicators on the bottom.

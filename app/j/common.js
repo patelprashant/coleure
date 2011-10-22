@@ -12,21 +12,6 @@ $(function(){
     localStorage.setItem('palette_hidden', true)
     hides_palette()
   }
-  
-  // Hides the color values
-  function toggle_color_values () {
-    var $color_value = $('.color_value')
-    localStorage['hidden_values'] == "true"? $color_value.hide() : $color_value.show();
-    localStorage['hidden_values'] = !(localStorage['hidden_values'] == "true");
-  }
-  var $color_value = $('.color_value')
-  $color_value.hide();
-      
-  // Hides the color values if the user hid them on last session
-  if (localStorage['hidden_values'] == "true")
-    $color_value.show();
-
-  $('#toggle_values').click(function(){toggle_color_values()});
 
   // Sets the value of the clipboard handler input
   // and selects it ready to be copied.
@@ -119,11 +104,6 @@ $(function(){
   $(document).keydown(function(e){
     var pressed_key = String.fromCharCode(e.which)
     switch(pressed_key){
-      // Hides the color values
-      case 'H':
-        toggle_color_values();
-        break;
-
       // Hides (or shows) the palette
       case 'E':
         handle_palette();

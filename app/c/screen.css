@@ -101,19 +101,10 @@ footer#credits {
   position: relative;
   z-index: 1;
   overflow: hidden; }
-
+  
 .color_value {
-  position: absolute;
-  top: 0;
-  color: white;
-  background: rgba(0, 0, 0, 0.35);
-  word-spacing: -0.5em;
-  white-space: nowrap;
-  cursor: default;
-  font: 11px/1.5 monaco, monospace; }
-  .color:hover .color_value {
-    background: rgba(255, 255, 255, 0.85);
-    color: black; }
+  display: none;
+}
 
 code, kbd {
   font: 11px/1.5 monaco, monospace;
@@ -198,13 +189,6 @@ code, kbd {
     padding-top: 3.5%; }
     .palette h2 {
       font-size: 16px; }
-
-  .color_value {
-    width: 1.5em;
-    overflow: hidden; }
-    .color_value:before {
-      content: "Ω";
-      padding: 0 0.5em; }
 
   #colors_placeholder {
     width: 102%; }

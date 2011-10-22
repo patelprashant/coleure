@@ -3,7 +3,7 @@ Choosing a colour with ease
 
 **Coleure** is a color picker that combines a curated colors stack (inspired by PANTONE®) with the simple of use:
 
-- Clicking on a color adds it to the palette (and displays it).
+- Clicking on a color adds it to the palette (and displays the second).
 - Pressing `host+c` copies the color to the clipboard.
 
 Features
