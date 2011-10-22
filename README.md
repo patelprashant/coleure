@@ -20,7 +20,7 @@ It is possible to choose (by pressing `f`) between 3 formats in Coleure:
 - **HSL:**
   - Outputs: `hsla(360, 100%, 100%, 1)`, `hsl(360, 100%, 100%)`, `360, 100%, 100%`
 
-Outputs can be changed by pressing `o`.
+Outputs can be changed by pressing `t`.
 
 ### Palette
 
