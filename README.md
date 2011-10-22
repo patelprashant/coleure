@@ -47,3 +47,8 @@ Since Coleure is designed to be used while working and relies totally on shortcu
 - The appearance of the palette if you shown it before.
 
 And it will be doing that for every future feature (if any).
+
+Running Coleure
+--------
+
+Open `app/index.html`. The `config.ru` file is only used for production under Heroku. You really don't need Ruby nor Rack in order to run Coleure.
