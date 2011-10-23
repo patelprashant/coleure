@@ -1,4 +1,5 @@
-var $palette = $('#colors_palette');
+var $palette = $('#colors_palette'),
+    $body = $('body');
 
 // Toggle palette
 /////////////////
