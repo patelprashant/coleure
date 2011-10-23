@@ -91,6 +91,12 @@ $(function(){
     localStorage['palette_hidden'] = false
   });
   
+  $('#scroller .color').dblclick(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    alert('DOUBLE CLICK') 
+  })
+  
   $('#show_palette').click(function() {handle_palette();});
 
   // Needed for the subsequent functions

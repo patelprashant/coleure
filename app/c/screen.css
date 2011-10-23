@@ -1,4 +1,4 @@
-@import url(reset.css);
+@import url("reset.css");
 
 html {
   overflow: hidden;
@@ -71,36 +71,41 @@ header.site {
 
 .scroller {
   position: fixed;
-  padding-bottom: 0;
   top: 0;
-  right: 0;
-  left: 0;
+  width: 101%;
   bottom: 70px;
   overflow-y: auto;
   overflow-x: hidden; }
-
-footer#credits {
-  display: none;
-  padding: 1em;
-  padding-bottom: 4em;
-  text-align: center; }
 
 #clipboard_handler {
   position: absolute;
   top: -99em;
   left: -99em; }
 
-#colors_placeholder {
-  width: 101%; }
-
-#loading_indicator {
-  padding: 25% 0;
-  text-align: center; }
-
 .color, .black-space {
-  width: 8.33%;
+  width: 8.3%;
   padding-bottom: 8.33%;
   float: left; }
+.color:nth-child(12n+1) {
+  width: 8.7%;
+}
+  
+.black-space {
+  border: dashed #ddd;
+  border-width: 1px 1px 0 0;
+  margin-top: -1px;
+  margin-right: -1px;
+}
+
+footer.site {
+  max-width: 45%;
+  position: absolute;
+  padding: 10px 15px;
+  bottom: 0;
+  right: 1%;
+  color: #666;
+  background: #fff;
+}  
 
 .color {
   position: relative;
@@ -175,7 +180,9 @@ code, kbd {
   display: none;
   float: right; }
 
-/* Mini mode */
+/* ////////////
+Tiny edition
+//////////// */
 @media screen and (max-width: 720px) {
   header.site {
     padding: 0 2.5%;
@@ -186,17 +193,25 @@ code, kbd {
       width: auto;
       margin-right: 2.5%; }
 
-  .ticker, .scroller {
-    bottom: 50px; }
+  .scroller {
+    bottom: 30px; }
+    
+  .ticker {
+    bottom: 50px;
+  }
 
   .palette {
     padding: 4%;
     padding-top: 3.5%; }
     .palette h2 {
       font-size: 16px; }
-
-  #colors_placeholder {
-    width: 102%; }
+    
+  footer.site {
+    clear: both;
+    position: relative;
+    max-width: none;
+    top: 1px;
+  }
 
   #min_mode {
     display: block; }
