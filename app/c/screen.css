@@ -44,27 +44,28 @@ header.site {
   width: 65%;
   right: 0;
   bottom: 20%; }
-  #options .option {
-    float: left;
-    margin-right: 30px; }
-    #options .option:last-child {
-      margin-right: 0; }
-  #options kbd {
-    margin-right: 10px; }
-  #options ul.inline {
-    margin-left: 10px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #999999;
-    position: relative; }
-    #options ul.inline, #options ul.inline li {
-      display: inline-block; }
-    #options ul.inline li.current {
-      color: black; }
-
-#output {
+.option {
+  float: left;
+  margin-right: 30px; }
+.option:last-child {
+  margin-right: 0; }
+.option kbd {
+  margin-right: 10px; }
+  
+dl.colors-output {
+  margin-left: 10px;
+  font-size: 12px;
+  color: #999;
   position: absolute;
-  bottom: 100%;
+  width: 140px;
+  right: 0;
+  bottom: 17.5%; }
+dd.format {
+  display: inline;
+  font-weight: 600; }
+dd.current.format {
+  color: black; }
+#output {
   font-weight: 300;
   font-size: 13px;
   line-height: 1; }
@@ -213,7 +214,7 @@ Tiny edition
   #min_mode {
     display: block; }
 
-  .option {
+  .option, .colors-output {
     display: none; } }
     
 /* //////////////////////

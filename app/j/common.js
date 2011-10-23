@@ -12,21 +12,23 @@ function selectColor(){
   };
   
 function addOption(option){
-  $options.prepend(
-    '<li class="option">'+
-    (option.shortcut? '<kbd>'+option.shortcut+'</kbd>':'')+
-    '<a href="javascript:;">'+option.name+'</a></li>'
-  );
+  if(option.name) {
+    $options.append(
+      '<li class="option">'+
+      (option.shortcut? '<kbd>'+option.shortcut+'</kbd>':'')+
+      '<a href="javascript:;" onClick="'+option.run.name+'">'+option.name+'</a></li>'
+    );
+  };
   
-  $(document).keydown(function(e){
-    var pressedKey = String.fromCharCode(e.which)
-    switch(pressedKey){
-      // Switches between outputs for each format
-      case option.shortcut:
-        option.run();
-        break;
-    }
-  });
+  if(option.shortcut)
+    $(document).keydown(function(e){
+      var pressedKey = String.fromCharCode(e.which)
+      switch(pressedKey){
+        case option.shortcut:
+          option.run();
+          break;
+      }
+    });
 };
 
 $(function(){

@@ -16,13 +16,13 @@ $(function(){
                           output == 1 ? 'without #' :
                           output == 2 ? 'with 0x'   : null :
 
-           format == 1 ?  output == 0 ? 'in rgba()' :
-                          output == 1 ? 'in rgb()'  :
-                          output == 2 ? 'in commas' : null :
+           format == 1 ?  output == 0 ? 'with rgba()' :
+                          output == 1 ? 'with rgb()'  :
+                          output == 2 ? 'with commas' : null :
 
-           format == 2 ?  output == 0 ? 'in hsla()' :
-                          output == 1 ? 'in hsl()'  :
-                          output == 2 ? 'in commas' : null : null;
+           format == 2 ?  output == 0 ? 'with hsla()' :
+                          output == 1 ? 'with hsl()'  :
+                          output == 2 ? 'with commas' : null : null;
   }
   
   function sets_output_text () {
@@ -46,7 +46,7 @@ $(function(){
     }
   };
 
-  function rotates_format() {
+  function rotateFormat() {
     ++current_format;
     if (current_format == formats.length)
       current_format = 0;
@@ -59,7 +59,7 @@ $(function(){
     sets_output_text();
   }
 
-  function rotates_output() {
+  function rotateOutput() {
     ++current_output[current_format];
     if (current_output[current_format] == outputs[current_format].length)
       current_output[current_format] = 0;
@@ -70,22 +70,7 @@ $(function(){
   }
 
   $('.color_value').text(returns_output)
-
-  $('#rotates_format').click(function() {rotates_format();})
-  $('#rotates_output').click(function() {rotates_output();})
   
-  $(document).keydown(function(e){
-    var pressed_key = String.fromCharCode(e.which)
-    switch(pressed_key){
-      // Switches between outputs for each format
-      case 'T':
-        rotates_output();
-        break;
-      
-      // Switches the format between HEX/RGB/HSL
-      case 'F':
-        rotates_format();
-        break;
-    }
-  });
+  addOption({name:'Format', shortcut:'F', run: rotateFormat});
+  addOption({name:'Output', shortcut:'T', run: rotateOutput});
 });
