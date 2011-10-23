@@ -7,7 +7,7 @@ function togglePalette() {
   localStorage['palette_hidden'] == "true"? showPalette() : hidePalette();
   localStorage['palette_hidden'] = !(localStorage['palette_hidden'] == "true");
 };
-
+addOption({name:'Palette', shortcut: 'E', run: togglePalette});
 
 // Shows palette
 ////////////////

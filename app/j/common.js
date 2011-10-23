@@ -29,8 +29,6 @@ function addOption(option){
   });
 };
 
-addOption({name:'Test option', shortcut: 'G', run:alert('WOO HOO')});
-
 $(function(){
   var $colors = $('.color');
   //if(navigator.userAgent.match(/iPad/i)) alert('U R USING IPAZ');
@@ -42,12 +40,6 @@ $(function(){
   
   $(document).keydown(function(e){
     var pressed_key = String.fromCharCode(e.which)
-    switch(pressed_key){
-      // Hides (or shows) the palette
-      case 'E':
-        togglePalette();
-        break;
-    }
     // Notifies the user that the color has been copied
     if (e.metaKey || e.ctrlKey) {
       if (pressed_key == 'C') $('title').text('Last copied: '+$clip_handler.val()+' — Coleure')
