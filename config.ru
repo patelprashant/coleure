@@ -1,7 +1,7 @@
 @root = 'app'
 
 use Rack::Static, 
-  urls: ['/c', '/j'],
+  urls: ['/c', '/j', '/i'],
   root: @root
 
 run lambda { |env|

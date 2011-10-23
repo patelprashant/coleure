@@ -101,5 +101,4 @@ $(function(){
     $('#chosen_colors .color').remove();
   }
   $('#clear_palette').click(function(){clear_palette();});
-  $('#show_palette').click(function(){togglePalette();});
 });

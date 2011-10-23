@@ -12,7 +12,7 @@ function selectColor(){
   };
   
 function addOption(option){
-  $options.append(
+  $options.prepend(
     '<li class="option">'+
     (option.shortcut? '<kbd>'+option.shortcut+'</kbd>':'')+
     '<a href="javascript:;">'+option.name+'</a></li>'
@@ -23,7 +23,7 @@ function addOption(option){
     switch(pressedKey){
       // Switches between outputs for each format
       case option.shortcut:
-        option.run;
+        option.run();
         break;
     }
   });
