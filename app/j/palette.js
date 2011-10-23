@@ -12,24 +12,16 @@ addOption({name:'Palette', shortcut: 'E', run: togglePalette});
 // Shows palette
 ////////////////
 function showPalette() {
-  if ($(window).width() >= 1400){
-    $body.addClass('palette-shown');
-  } else {
-    $('.scroller').scrollTop($('.scroller').scrollTop()+$palette.innerHeight());
-    $('.scroller').css('top', $palette.innerHeight());
-  };
+  $('div#scroller').scrollTop($('div#scroller').scrollTop()+$palette.innerHeight());
+  $('div#scroller').css('top', $palette.innerHeight());
   $palette.show();
 };
 
 // Hides palette
 ////////////////
 function hidePalette() {
-  if ($(window).width() >= 1400){
-    $body.removeClass('palette-shown');
-  } else {
-    $('.scroller').scrollTop($('.scroller').scrollTop()-$palette.innerHeight());
-    $('.scroller').css('top', 0);
-  }
+  $('div#scroller').scrollTop($('div#scroller').scrollTop()-$palette.innerHeight());
+  $('div#scroller').css('top', 0);
   $palette.hide();
 };
 
@@ -56,7 +48,7 @@ $(function(){
     // Adds a color to the palette (and shows it)
   var palette_array = localStorage['palette']? JSON.parse(localStorage['palette']):[]
   $('#scroller .color').click(function(e){
-    var color_value_text = $('.color_value', this).attr('data-hex');
+    var color_value_text = $('.'+colorValue, this).attr('data-hex');
     
     // Sets the limit of colors
     // if (palette_array.length > 9){

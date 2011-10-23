@@ -1,3 +1,5 @@
+var colorValue = 'value';
+
 ////////////////
 // RGB functions
 ////////////////
@@ -38,20 +40,22 @@ function HSLFromRGB(r, g, b){
 function markupColor(e) {
   var returnRGB = r(e)+', '+g(e) +', '+b(e),
       returnHSL = HSLFromRGB(r(e), g(e), b(e));
-  return '<section class="color" style="background: #'+e+'"><header class="color_value" data-hex="'+e+'" data-rgb="'+returnRGB+'" data-hsl="'+returnHSL+'"></header></section>'
-}
+  return  '<section class="color" style="background: #'+e+'">'+
+            '<header class="'+colorValue+'" data-hex="'+e+'" data-rgb="'+returnRGB+'" data-hsl="'+returnHSL+'" style="display: none;" />'+
+          '</section>';
+};
 
 // Defining the placeholder where the colors will be loaded and
 // of course, the colors.
 $(function(){
-  var $colorsPlaceholder = $('#scroller');
+  var $colorsPlaceholder = $('footer.site');
   for (var pantoneColor in pantoneColors) {
     // Shortcut
     var color = pantoneColors[pantoneColor];
 
     // If the object is `false` only an spacer will be loaded
     color? 
-      $colorsPlaceholder.append(markupColor(color)):
-      $colorsPlaceholder.append('<div class="black-space" />');
-  }
+      $colorsPlaceholder.before(markupColor(color)):
+      $colorsPlaceholder.before('<div class="empty-color" />');
+  };
 });

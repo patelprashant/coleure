@@ -1,11 +1,14 @@
 @import url("reset.css");
 
+/* Prevents the bounce effect on Lion
+////////////////////////////////// */
 html {
-  overflow: hidden;
-}
+  overflow: hidden; }
 
 body {
-  font: 300 14px/1.5 "Helvetica Neue", sans-serif; }
+  font: 300 14px/1.5 "Helvetica Neue", sans-serif;
+  color: #000;
+  background: #fff; }
 
 strong {
   font-weight: bold; }
@@ -18,6 +21,11 @@ a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box; }
 
+#clipboard_handler {
+  position: absolute;
+  top: -99em;
+  left: -99em; }
+
 header.site {
   position: fixed;
   bottom: 0;
@@ -28,15 +36,15 @@ header.site {
   height: 70px;
   background: white;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1); }
-  header.site h1 {
-    position: absolute;
-    bottom: 20%;
-    color: black;
-    padding-right: 1em;
-    height: 0.915em;
-    overflow: hidden;
-    font-size: 60px;
-    letter-spacing: -0.12em; }
+h1.site {
+  overflow: hidden;
+  height: 0.915em;
+  position: absolute;
+  bottom: 20%;
+  padding-right: 1em;
+  letter-spacing: -0.12em;
+  font-size: 60px;
+  color: black; }
 
 #options {
   font-size: 16px;
@@ -59,60 +67,54 @@ dl.colors-output {
   position: absolute;
   width: 140px;
   right: 0;
-  bottom: 17.5%; }
+  bottom: 10%; }
 dd.format {
   display: inline;
   font-weight: 600; }
 dd.current.format {
   color: black; }
-#output {
-  font-weight: 300;
-  font-size: 13px;
-  line-height: 1; }
 
-.scroller {
-  position: fixed;
+#scroller {
+  position: absolute;
   top: 0;
-  width: 101%;
+  width: 100%;
   bottom: 70px;
   overflow-y: auto;
   overflow-x: hidden; }
 
-#clipboard_handler {
-  position: absolute;
-  top: -99em;
-  left: -99em; }
-
-.color, .black-space {
-  width: 8.33%;
-  padding-bottom: 8.33%;
-  float: left; }
-  
-.black-space {
-  border: dashed #ddd;
-  border-width: 1px 1px 0 0;
-  margin-top: -1px;
-  margin-right: -1px;
+#colors {
+  position: relative;
+  width: 100.777777777%;
+  overflow: hidden;
 }
-
+  
 footer.site {
-  max-width: 45%;
   position: absolute;
-  padding: 10px 15px;
+  right: 0;
   bottom: 0;
-  right: 1%;
+  max-width: 45%;
+  padding: 10px 15px;
   color: #666;
-  background: #fff;
-}  
+  background: #fff; }
+
+/* ///////////////////
+Colors and empty slots
+/////////////////// */
+.color, .empty-color {
+  width: 8.333333333%;
+  padding-bottom: 8.333333333%;
+  float: left; }
 
 .color {
   position: relative;
   z-index: 1;
   overflow: hidden; }
   
-.color_value {
-  display: none;
-}
+.empty-color {
+  border: dashed #ddd;
+  border-width: 1px 1px 0 0;
+  margin-top: -1px;
+  margin-right: -1px; }
 
 code, kbd {
   font: 11px/1.5 monaco, monospace;
@@ -191,12 +193,8 @@ Tiny edition
       width: auto;
       margin-right: 2.5%; }
 
-  .scroller {
-    bottom: 30px; }
-    
-  .ticker {
-    bottom: 50px;
-  }
+  #scroller, .ticker {
+    bottom: 50px; }
 
   .palette {
     padding: 4%;
@@ -208,7 +206,8 @@ Tiny edition
     clear: both;
     position: relative;
     max-width: none;
-    top: 1px;
+    top: -1px;
+    border-top: 1px solid #ddd;
   }
 
   #min_mode {
@@ -221,29 +220,22 @@ Tiny edition
 iPad & iPhone editions
 ////////////////////// */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px), only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-  .scroller {
+  #scroller {
     position: relative; }
   .ticker {
-    display: none;
-  }
+    display: none; }
 }
     
-/* ////////////
-iPad edition
-//////////// */
+/* /////////////////
+iPad edition only
+///////////////// */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
   body {
     font-weight: normal;
-  }
-
-  .palette {
-    border-top: 1px solid #eeeeee; }
-
-  .scroller {
-    position: relative; } }
+  } }
     
-/* //////////////
-iPhone edition
-////////////// */
+/* ///////////////////
+iPhone edition only
+/////////////////// */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 }
