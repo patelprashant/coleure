@@ -83,12 +83,9 @@ header.site {
   left: -99em; }
 
 .color, .black-space {
-  width: 8.3%;
+  width: 8.33%;
   padding-bottom: 8.33%;
   float: left; }
-.color:nth-child(12n+1) {
-  width: 8.7%;
-}
   
 .black-space {
   border: dashed #ddd;
