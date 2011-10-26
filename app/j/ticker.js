@@ -11,13 +11,13 @@ $(function(){
   }
 
   if (!localStorage['hidden_ticker'])
-    $('body').append('<aside id="welcome_ticker" class="ticker b-sizing">Press <code><span class="get-cmd">cmd/crl</span></code> + <code>C</code> to copy <code class="current-color">(hover a color)</code> to the clipboard. <a title="You won\'t see this message again." id="hide_ticker" class="close" href="javascript:;">&times;</a></aside>');
+    $body.append('<aside id="welcome_ticker" class="ticker b-sizing">Press <code><span class="get-cmd">cmd/crl</span></code> + <code>C</code> to copy <code class="current-color">(hover a color)</code> to the clipboard. <a title="You won\'t see this message again." id="hide_ticker" class="close" href="javascript:;">&times;</a></aside>');
     cmd();
-    $('#scroller').css('paddingBottom', $('#welcome_ticker').innerHeight())
+    $scroller.css('paddingBottom', $('#welcome_ticker').innerHeight())
 
   $('#hide_ticker').click(function() {
     $('#welcome_ticker').remove(); 
     localStorage.setItem('hidden_ticker', true);
-    $('#scroller').css('paddingBottom', 0)
+    $scroller.css('paddingBottom', 0)
   });
 });

@@ -1,6 +1,8 @@
-var $scroller = $('div#scroller'),
+var $body = $('body'),
+    $scroller = $('div#scroller'),
+    $colors = $('.color'),
     $clip_handler = $('#clipboard_handler'),
-    $options = $('#options');
+    $options = $('ul#options');
 
 // Grabs the current color value and prepends it 
 // to an input that will auto select.
@@ -34,23 +36,22 @@ function addOption(option){
 };
 
 $(function(){
-  var $colors = $('.color');
-  //if(navigator.userAgent.match(/iPad/i)) alert('U R USING IPAZ');
   if(navigator.userAgent.match(/iPhone/i)) window.top.scrollTo(0, 1);
-
-  // Sets the value of the clipboard handler input
-  // and selects it ready to be copied.
-  $colors.hover(selectColor);
+  
+  $colors.live("mouseover", selectColor);
   
   $(document).keydown(function(e){
     var pressed_key = String.fromCharCode(e.which)
     // Notifies the user that the color has been copied
     if (e.metaKey || e.ctrlKey) {
-      if (pressed_key == 'C') $('title').text('Last copied: '+$clip_handler.val()+' — Coleure')
+      if (pressed_key == 'C') $('title').text('Copied: '+$clip_handler.val()+' — Coleure')
     }
   });
-  $('div#scroller').scroll(function(){
+  
+  // Saves the current scroll state
+  /////////////////////////////////
+  $scroller.scroll(function(){
     localStorage.setItem('scrolled', $(this).scrollTop())
   });
-  $('div#scroller').scrollTop(parseInt(localStorage['scrolled']))
+  $scroller.scrollTop(parseInt(localStorage['scrolled']))
 });

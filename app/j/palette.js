@@ -1,5 +1,5 @@
 var $palette = $('#colors_palette'),
-    $body = $('body');
+    paletteArray = localStorage['palette']? JSON.parse(localStorage['palette']):[]
 
 // Toggle palette
 /////////////////
@@ -12,16 +12,16 @@ addOption({name:'Palette', shortcut: 'E', run: togglePalette});
 // Shows palette
 ////////////////
 function showPalette() {
-  $('div#scroller').scrollTop($('div#scroller').scrollTop()+$palette.innerHeight());
-  $('div#scroller').css('top', $palette.innerHeight());
+  $scroller.scrollTop($scroller.scrollTop()+$palette.innerHeight());
+  $scroller.css('top', $palette.innerHeight());
   $palette.show();
 };
 
 // Hides palette
 ////////////////
 function hidePalette() {
-  $('div#scroller').scrollTop($('div#scroller').scrollTop()-$palette.innerHeight());
-  $('div#scroller').css('top', 0);
+  $scroller.scrollTop($scroller.scrollTop()-$palette.innerHeight());
+  $scroller.css('top', 0);
   $palette.hide();
 };
 
@@ -43,54 +43,60 @@ if (localStorage['palette'])
     var object = paletteColors[color];
     $('#chosen_colors').append(markupColor(object))
   };
-
-$(function(){  
-    // Adds a color to the palette (and shows it)
-  var palette_array = localStorage['palette']? JSON.parse(localStorage['palette']):[]
-  $('#scroller .color').click(function(e){
-    var color_value_text = $('.'+colorValue, this).attr('data-hex');
-    
-    // Sets the limit of colors
-    // if (palette_array.length > 9){
-    //   palette_array.shift();
-    //   $('#chosen_colors .color:first-child').remove(); }
-
-    // Appends the color to the palette and saves its color_value to the array
-    $(this).clone(
-      ).prependTo(
-        '#chosen_colors'
-      ).hover(
-        selectColor
-      ).click(
-        remove_from_palette
-      );
-    palette_array.unshift(color_value_text)
-
-    // Saves the state of the palette to the DB
-    // NOTE: This _needs_ to be AFTER `palette_array.push(color_value_text)`
-    localStorage['palette'] = JSON.stringify(palette_array)
-
-    // Shows the palette
-    if (localStorage['palette_hidden'] == 'true') showPalette();
-    localStorage['palette_hidden'] = false
-  });
-    
-  // Removes item from palette (db, not visually)
-  function remove_from_palette(){
-    palette_array.splice($(this).index(), 1)
-    $(this).remove();
-
-    // Saves the state of the palette to the DB
-    // NOTE: This _needs_ to be AFTER `palette_array.push(color_value_text)`
-    localStorage['palette'] = JSON.stringify(palette_array)
-  };
-  $('#chosen_colors .color').click(remove_from_palette);
   
-  // Clears palette
-  function clear_palette() {
-    localStorage.removeItem('palette');
-    palette_array = []
-    $('#chosen_colors .color').remove();
-  }
-  $('#clear_palette').click(function(){clear_palette();});
+// Save changes for the palette
+///////////////////////////////
+function savePalette() {
+  localStorage['palette'] = JSON.stringify(paletteArray);
+};
+  
+// Adds a color to the palette 
+// and displays it (if hidden)
+//////////////////////////////
+function addToPalette() {
+  var colorValueText = $('.'+colorValue, this).attr('data-hex');
+  
+  // Appends the color to the palette and saves its colorValue to the array
+  $(this).clone().prependTo('#chosen_colors');
+  paletteArray.unshift(colorValueText);
+
+  // Saves the state of the palette to the DB
+  // NOTE: This _needs_ to be AFTER `paletteArray.push(colorValueText)`
+  savePalette();
+
+  // Shows the palette
+  if (localStorage['palette_hidden'] == 'true') showPalette();
+  localStorage['palette_hidden'] = false
+};
+
+// Removes item from palette
+////////////////////////////
+function removeFromPalette(){
+  paletteArray.splice($(this).index(), 1)
+  $(this).remove();
+
+  // Saves the state of the palette to the DB
+  // NOTE: This _needs_ to be AFTER `paletteArray.push(colorValueText)`
+  savePalette();
+};
+
+// Clears palette
+/////////////////
+function clearPalette() {
+  localStorage.removeItem('palette');
+  paletteArray = []
+  $('.color', $palette).remove();
+};
+
+$(function(){
+  $('.color', $scroller).click(addToPalette);
+  $('.color', $palette).live("click", removeFromPalette);
+  $('#clear_palette').click(clearPalette);
+});
+
+$(window).resize(function() {
+  localStorage['palette_hidden'] == "true" ? $scroller.css('top', 0):$scroller.css('top', $('.palette').innerHeight())
+  $scroller.scroll(function(){
+    localStorage.setItem('scrolled', localStorage['palette_hidden'] == "true" ? $(this).scrollTop() : $(this).scrollTop()-$('.palette').innerHeight())
+  });
 });
