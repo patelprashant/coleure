@@ -1,24 +1,27 @@
 var $zoom = $('#zoom');
 
-function zoomColor() {
-  var hexValue = $('.'+colorValue, this).attr('data-hex');
-  $zoom.fadeIn('fast');
+function zoomColor(e) {
+  var hexValue = $('.'+colorValue, e).attr('data-hex');
+  $zoom.fadeIn(250);
   $zoom.css('background','#'+hexValue);
   $('a').css('color','#'+hexValue);
 };
 
 function zoomOut() {
-  $zoom.fadeOut('fast');
+  $zoom.fadeOut(250);
   $('a').css('color','');
 }
 
 $(function(){
-  $(document).keydown(function(e){
+  $('.color', $scroller).click(function(e) {
     if (e.metaKey || e.ctrlKey) {
-      $('.color', $scroller).click(zoomColor);
+      zoomColor(this);
     } else {
-      $('.color', $scroller).click(addToPalette);
+      addToPalette(this);
     }
   });
   $zoom.click(zoomOut);
+});
+$(document).keypress(function(e){
+  if (e.which == 27) zoomOut();
 });

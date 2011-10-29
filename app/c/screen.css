@@ -28,7 +28,7 @@ header.site {
   padding: 0 1%;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 3;
   height: 70px;
   background: white;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1); }
@@ -80,7 +80,7 @@ dd.current.format {
   
 #zoom {
   display: none;
-  z-index: 9999;
+  z-index: 2;
 }
 
 #colors {
@@ -167,7 +167,7 @@ code, kbd {
   width: 100%;
   background: rgba(0, 0, 0, 0.85);
   color: white;
-  z-index: 3; }
+  z-index: 1; }
   .ticker code {
     background: #333333;
     color: white; }

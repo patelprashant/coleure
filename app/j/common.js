@@ -52,7 +52,7 @@ $(function(){
   $scroller.scrollTop(parseInt(localStorage['scrolled']))
 });
 
-$(document).keydown(function(e){
+$(document).keypress(function(e){
   var pressedKey = String.fromCharCode(e.which)
   // Notifies the user that the color has been copied
   if (e.metaKey || e.ctrlKey) {

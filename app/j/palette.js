@@ -53,11 +53,11 @@ function savePalette() {
 // Adds a color to the palette 
 // and displays it (if hidden)
 //////////////////////////////
-function addToPalette() {
-  var colorValueText = $('.'+colorValue, this).attr('data-hex');
+function addToPalette(e) {
+  var colorValueText = $('.'+colorValue, e).attr('data-hex');
   
   // Appends the color to the palette and saves its colorValue to the array
-  $(this).clone().prependTo('#chosen_colors');
+  $(e).clone().prependTo('#chosen_colors');
   paletteArray.unshift(colorValueText);
 
   // Saves the state of the palette to the DB
@@ -89,6 +89,7 @@ function clearPalette() {
 };
 
 $(function(){
+  // $('.color', $scroller).click(addToPalette);
   $('.color', $palette).live("click", removeFromPalette);
   $('#clear_palette').click(clearPalette);
 });
@@ -99,3 +100,7 @@ $(window).resize(function() {
     localStorage.setItem('scrolled', localStorage['palette_hidden'] == "true" ? $(this).scrollTop() : $(this).scrollTop()-$palette.innerHeight())
   });
 });
+
+// $(document).keydown(function(e){
+//   if (e.which == 27) hidePalette();
+// });
