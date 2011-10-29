@@ -8,10 +8,14 @@ var $body = $('body'),
 // to an input that will auto select.
 ////////////////////////////////////////////////
 function selectColor(){
-    var color_value_text = $('.value', this).text();
-    $clip_handler.val(color_value_text).select();
-    $('.current-color').text($clip_handler.val())
-  };
+  var color_value_text = $('.value', this).text();
+  $clip_handler.val(color_value_text).select();
+  $('.current-color').text($clip_handler.val())
+};
+
+function notify(){
+  $('title').text('Copied: '+$clip_handler.val()+' — Coleure');
+};
   
 function addOption(option){
   if(option.name) {
@@ -40,18 +44,18 @@ $(function(){
   
   $colors.live("mouseover", selectColor);
   
-  $(document).keydown(function(e){
-    var pressed_key = String.fromCharCode(e.which)
-    // Notifies the user that the color has been copied
-    if (e.metaKey || e.ctrlKey) {
-      if (pressed_key == 'C') $('title').text('Copied: '+$clip_handler.val()+' — Coleure')
-    }
-  });
-  
   // Saves the current scroll state
   /////////////////////////////////
   $scroller.scroll(function(){
     localStorage.setItem('scrolled', $(this).scrollTop())
   });
   $scroller.scrollTop(parseInt(localStorage['scrolled']))
+});
+
+$(document).keydown(function(e){
+  var pressedKey = String.fromCharCode(e.which)
+  // Notifies the user that the color has been copied
+  if (e.metaKey || e.ctrlKey) {
+    if(pressedKey == 'C') notify();
+  }
 });

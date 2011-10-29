@@ -89,14 +89,13 @@ function clearPalette() {
 };
 
 $(function(){
-  $('.color', $scroller).click(addToPalette);
   $('.color', $palette).live("click", removeFromPalette);
   $('#clear_palette').click(clearPalette);
 });
 
 $(window).resize(function() {
-  localStorage['palette_hidden'] == "true" ? $scroller.css('top', 0):$scroller.css('top', $('.palette').innerHeight())
+  localStorage['palette_hidden'] == "true" ? $scroller.css('top', 0):$scroller.css('top', $palette.innerHeight())
   $scroller.scroll(function(){
-    localStorage.setItem('scrolled', localStorage['palette_hidden'] == "true" ? $(this).scrollTop() : $(this).scrollTop()-$('.palette').innerHeight())
+    localStorage.setItem('scrolled', localStorage['palette_hidden'] == "true" ? $(this).scrollTop() : $(this).scrollTop()-$palette.innerHeight())
   });
 });
