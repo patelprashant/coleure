@@ -12,10 +12,6 @@ function selectColor(){
   $clip_handler.val(color_value_text).select();
   $('.current-color').text($clip_handler.val())
 };
-
-function notify(){
-  $('title').text('Copied: '+$clip_handler.val()+' — Coleure');
-};
   
 function addOption(option){
   if(option.name) {
@@ -39,9 +35,18 @@ function addOption(option){
   };
 };
 
+// Prepends the 
+function currentColorToTitle () {
+  $('title').text('Copied: '+$clip_handler.val()+' — Coleure');
+};
+
 $(function(){
-  if(navigator.userAgent.match(/iPhone/i)) window.top.scrollTo(0, 1);
+  // iPhone stuff:
+  // if(navigator.userAgent.match(/iPhone/i)) window.top.scrollTo(0, 1);
   
+  // Changes the color and selects the 
+  // color in the hidden input.
+  ////////////////////////////////////
   $colors.live("mouseover", selectColor);
   
   // Saves the current scroll state
@@ -52,10 +57,12 @@ $(function(){
   $scroller.scrollTop(parseInt(localStorage['scrolled']))
 });
 
-$(document).keypress(function(e){
-  var pressedKey = String.fromCharCode(e.which)
+$(document).keydown(function(e){
+  var pressedKey = String.fromCharCode(e.which);
+  
   // Notifies the user that the color has been copied
+  ///////////////////////////////////////////////////
   if (e.metaKey || e.ctrlKey) {
-    if(pressedKey == 'C') notify();
-  }
+    if(pressedKey == 'C') currentColorToTitle();
+  };
 });
