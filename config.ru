@@ -1,7 +1,7 @@
 @root = 'app'
 
 use Rack::Static, 
-  urls: ['/scripts', '/icons'],
+  urls: ['/scripts', '/icons', '/coleure.css'],
   root: @root
 
 run lambda { |env|
