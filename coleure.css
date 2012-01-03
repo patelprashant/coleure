@@ -1,9 +1,4 @@
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, figure, footer, header, hgroup, menu, nav, section, menu,
-time, mark, audio, video {
+* {
   margin:0;
   padding:0;
   border:0;
@@ -152,6 +147,29 @@ Colors and empty slots
   z-index: 1;
   overflow: hidden; }
   
+.addToPalette, .removeFromPalette {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 16px;
+  line-height:16px;
+  padding: 0 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  height: 20px;
+  opacity: 0;
+  -moz-opacity: 0;
+  filter:alpha(opacity=0);
+  -webkit-transition: all 0.15s;
+}
+.color:hover .addToPalette,
+.color:hover .removeFromPalette {
+  opacity: 1;
+  -moz-opacity: 1;
+  filter:alpha(opacity=1);
+}
+  
 .empty-color {
   border: dashed #ddd;
   border-width: 1px 1px 0 0;
@@ -204,8 +222,10 @@ code, kbd {
 .ticker {
   padding: 0.5em 0.75em;
   position: fixed;
-  bottom: 70px;
-  width: 100%;
+  bottom: 90px;
+  left: 20px;
+  right: 20px;
+  font-size: 18px;
   background: rgba(0, 0, 0, 0.85);
   color: white;
   z-index: 1; }

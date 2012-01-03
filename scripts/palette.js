@@ -41,7 +41,7 @@ if (localStorage['palette'])
       paletteColors = JSON.parse(paletteDB);
   for (var color in paletteColors) {
     var object = paletteColors[color];
-    $('#chosen_colors').append(markupColor(object))
+    $('#chosen_colors').append(markupColor(object, false))
   };
   
 // Save changes for the palette
@@ -54,10 +54,10 @@ function savePalette() {
 // and displays it (if hidden)
 //////////////////////////////
 function addToPalette(e) {
-  var colorValueText = $('.'+colorValue, e).attr('data-hex');
+  var colorValueText = $(this).attr('rel');
   
   // Appends the color to the palette and saves its colorValue to the array
-  $(e).clone().prependTo('#chosen_colors');
+  $('#chosen_colors').prepend(markupColor(colorValueText, false))
   paletteArray.unshift(colorValueText);
 
   // Saves the state of the palette to the DB
@@ -71,9 +71,9 @@ function addToPalette(e) {
 
 // Removes item from palette
 ////////////////////////////
-function removeFromPalette(){
-  paletteArray.splice($(this).index(), 1)
-  $(this).remove();
+function removeFromPalette(e){
+  paletteArray.splice(e.index(), 1)
+  e.remove();
 
   // Saves the state of the palette to the DB
   // NOTE: This _needs_ to be AFTER `paletteArray.push(colorValueText)`
@@ -89,8 +89,8 @@ function clearPalette() {
 };
 
 $(function(){
-  // $('.color', $scroller).click(addToPalette);
-  $('.color', $palette).live("click", removeFromPalette);
+  // $('.addToPalette', $scroller).click(addToPalette);
+  $('.removeFromPalette', $palette).live("click", function(){removeFromPalette($(this).parent())});
   $('#clear_palette').click(clearPalette);
 });
 

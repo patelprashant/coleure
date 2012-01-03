@@ -37,10 +37,16 @@ function HSLFromRGB(r, g, b){
   return [Math.floor(h * 360)+', '+Math.floor(s * 100)+'%, '+Math.floor(l * 100)+'%'];
 };
 
-function markupColor(e) {
+function markupColor(e, paletteSwitch) {
   var returnRGB = r(e)+', '+g(e) +', '+b(e),
-      returnHSL = HSLFromRGB(r(e), g(e), b(e));
-  return  '<section class="color" style="background: #'+e+'">'+
+      returnHSL = HSLFromRGB(r(e), g(e), b(e)),
+      colorLink;
+  
+  paletteSwitch?
+    colorLink = '<a class="addToPalette" href="javascript:;" rel="'+e+'">+</a>':
+    colorLink = '<a class="removeFromPalette" href="javascript:;" rel="'+e+'">&times;</a>'
+    
+  return  '<section class="color" style="background: #'+e+'">'+colorLink+
             '<header class="'+colorValue+'" data-hex="'+e+'" data-rgb="'+returnRGB+'" data-hsl="'+returnHSL+'" style="display: none;" />'+
           '</section>';
 };
@@ -55,7 +61,7 @@ $(function(){
 
     // If the object is `false` only an spacer will be loaded
     color? 
-      $colorsPlaceholder.before(markupColor(color)):
+      $colorsPlaceholder.before(markupColor(color, true)):
       $colorsPlaceholder.before('<div class="empty-color" />');
   };
 });

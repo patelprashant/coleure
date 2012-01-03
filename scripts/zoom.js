@@ -17,7 +17,7 @@ $(function(){
     if (e.metaKey || e.ctrlKey) {
       zoomColor(this);
     } else {
-      addToPalette(this);
+      $('.addToPalette', this).each(addToPalette);
     }
   });
   $zoom.click(zoomOut);
