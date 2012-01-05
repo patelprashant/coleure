@@ -89,7 +89,7 @@ function clearPalette() {
 };
 
 $(function(){
-  // $('.addToPalette', $scroller).click(addToPalette);
+  $('.addToPalette', $scroller).click(addToPalette);
   $('.removeFromPalette', $palette).live("click", function(){removeFromPalette($(this).parent())});
   $('#clear_palette').click(clearPalette);
 });
