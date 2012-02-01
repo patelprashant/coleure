@@ -5,7 +5,10 @@
   outline:0;
   font-size:100%;
   vertical-align:baseline;
-  background:transparent; }                  
+  background:transparent;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  user-select: none; }                  
 article, aside, figure, footer, header, hgroup, nav, section { display:block; }
 ul { list-style:none; }
 blockquote, q { quotes:none; }
@@ -39,7 +42,8 @@ a:hover, a:active { outline: none; }
 body {
   font: 300 14px/1.5 "Helvetica Neue", sans-serif;
   color: #000;
-  background: #fff; }
+  background: #fff;
+  cursor: default; }
 
 strong {
   font-weight: bold; }
