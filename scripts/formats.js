@@ -71,7 +71,7 @@ function rotateOutput() {
   refreshFormat();
 };
 addOption({name:'Format', shortcut:'F', run: rotateFormat});
-addOption({name:'Output', shortcut:'T', run: rotateOutput});
+addOption({name:'Output', shortcut:'D', run: rotateOutput});
                 
 $(function(){
   assignOutputs();
