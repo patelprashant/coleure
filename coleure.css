@@ -2,42 +2,19 @@
   margin:0;
   padding:0;
   border:0;
-  outline:0;
   font-size:100%;
   vertical-align:baseline;
-  background:transparent;
+  cursor: default;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box; }                  
+aside, footer, header, section { 
+  display: block;
+  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: -moz-none;
-  user-select: none; }                  
-article, aside, figure, footer, header, hgroup, nav, section { display:block; }
-ul { list-style:none; }
-blockquote, q { quotes:none; }
-blockquote:before, blockquote:after, q:before, q:after { content:''; content:none; }
-a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
-ins { background-color:#ff9; color:#000; text-decoration:none; }
-mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
-del { text-decoration: line-through; }
-abbr[title], dfn[title] { border-bottom:1px dotted #000; cursor:help; }
-table { border-collapse:collapse; border-spacing:0; }
-hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
-input, select { vertical-align:middle; }
-img { display:block; }
-
-input[type="radio"] { vertical-align: text-bottom; }
-input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
-.ie6 input { vertical-align: text-bottom; }
-label, input[type=button], input[type=submit], button { cursor: pointer; }
-
-h1,h2,h3,h4,h5,h6 { font-weight: bold; text-rendering: optimizeLegibility; }
-a:hover, a:active { outline: none; }
-
-.ir { display:block; text-indent:-999em; overflow:hidden; background-repeat: no-repeat; }
-.cleared:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
-.cleared { display: inline-block; }
-* html .cleared { height: 1%; }
-.cleared { display: block; }
-.hidden { display:none; visibility:hidden; } 
-.invisible { visibility: hidden; }
+}
+ul { list-style: none; }
 
 body {
   font: 300 14px/1.5 "Helvetica Neue", sans-serif;
@@ -45,17 +22,9 @@ body {
   background: #fff;
   cursor: default; }
 
-strong {
-  font-weight: bold; }
-
 a {
   color: #0083b1;
   -webkit-transition: color .25s linear; }
-
-.b-sizing {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box; }
 
 #clipboard_handler {
   position: absolute;
@@ -285,27 +254,3 @@ Tiny edition
 
   .option, .colors-output {
     display: none; } }
-    
-/* //////////////////////
-iPad & iPhone editions
-////////////////////// */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px), only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-  #scroller {
-    position: relative; }
-  .ticker {
-    display: none; }
-}
-    
-/* /////////////////
-iPad edition only
-///////////////// */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-  body {
-    font-weight: normal;
-  } }
-    
-/* ///////////////////
-iPhone edition only
-/////////////////// */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-}
