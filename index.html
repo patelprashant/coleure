@@ -4,25 +4,28 @@
     <meta charset="utf-8" />
     <title>Coleure</title>
     <link href="coleure.css" rel="stylesheet" />
-    <script src="src/require.js"></script>
-    <script>
-      require(['src/zepto', 'src/main'], function(){app.init()});
-    </script>
+    <script src="src/jquery.js"></script>
+    <script src="src/require.js" data-main="src/main"></script>
   </head>
   <body>
-    <input id="clipboard_handler" readonly type="text" />
+    <p id="tooltip" class="alert">Press <span class="metakey">⌘</span>C to copy</p>
+    <input id="clipboard_handler" class="hide" readonly type="text" value="test" />
     
     <header class="site b-sizing">
       <h1 class="site">Coleure</h1>
+        <dl class="colors-output">
+          <dt>Colors copied in</dt>
+          <dd id="hex" class="format">HEX</dd>
+          <dd id="rgb" class="format">RGB</dd>
+          <dd id="hsl" class="format">HSL</dd>
+          <dd id="output" />
+        </dl>
     </header>
 
-    <div id="scroller" class="scroller">
-      <section id="colors">
-        <footer class="site">
-          <p>Project by <a href="http://rolando.pe/" target="_blank">Rolando Murillo</a>, inspired by PANTONE® colors. Fork me on <a href="http://github.com/rnmp/coleure" target="_blank">Github</a>.</p>
-        </footer>
-      </section>
-    </div>
+    <footer id="credits" class="banner">
+      <p class="left">Fork me on <a href="http://github.com/rnmp/coleure" target="_blank">Github</a>.</p>
+      <p class="right">Project by <a href="http://rolando.pe/" target="_blank">Rolando Murillo</a>.</p>
+    </footer>
     <script>
       var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-26310431-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
     </script>

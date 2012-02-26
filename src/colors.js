@@ -1,15 +1,13 @@
-define(['./settings','./pantone'], function (settings, pantone){
-  var markupColor = function (color) {
-    return  '<section class="color" style="background: #'+color+'">'+
-              '<header class="value" style="display: none;" />'+
-            '</section>';
-  };
-  {
-    list: function(){
+define(['./configs','./pantone'], function (configs, pantone){
+  return {
+    markup: function(color) {
+      return '<section class="'+configs.colors.dom+'" style="background: #'+color+'">'+color+'</section>';
+    },
+    init: function(){
       for (var color in pantone.colors) {
         pantone.colors[color]? 
-          settings.colors.placeholder.before(markupColor(color)):
-          settings.colors.placeholder.before('<div class="empty-color" />')
+          configs.colors.placeholder.append(this.markup(pantone.colors[color])):
+          configs.colors.placeholder.append('<div class="empty-color" />')
       }
     }
   }

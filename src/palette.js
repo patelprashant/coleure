@@ -1,106 +1,73 @@
-var $palette = $('#colors_palette'),
-    paletteArray = localStorage['palette']? JSON.parse(localStorage['palette']):[]
-
-// Toggle palette
-/////////////////
-function togglePalette() {
-  localStorage['palette_hidden'] == "true"? showPalette() : hidePalette();
-  localStorage['palette_hidden'] = !(localStorage['palette_hidden'] == "true");
-};
-addOption({name:'Palette', shortcut: 'E', run: togglePalette});
-
-// Shows palette
-////////////////
-function showPalette() {
-  $scroller.scrollTop($scroller.scrollTop()+$palette.innerHeight());
-  $scroller.css('top', $palette.innerHeight());
-  $palette.show();
-};
-
-// Hides palette
-////////////////
-function hidePalette() {
-  $scroller.scrollTop($scroller.scrollTop()-$palette.innerHeight());
-  $scroller.css('top', 0);
-  $palette.hide();
-};
-
-// Restores visibility of palette
-/////////////////////////////////
-if (localStorage['palette_hidden']) {
-  localStorage['palette_hidden'] == "false" ? showPalette() : hidePalette();
-} else {
-  localStorage.setItem('palette_hidden', true);
-  hidePalette();
-};
-  
-// Restores palette colors
-//////////////////////////
-if (localStorage['palette'])
-  var paletteDB = localStorage['palette'],
-      paletteColors = JSON.parse(paletteDB);
-  for (var color in paletteColors) {
-    var object = paletteColors[color];
-    $('#chosen_colors').append(markupColor(object, false))
-  };
-  
-// Save changes for the palette
-///////////////////////////////
-function savePalette() {
-  localStorage['palette'] = JSON.stringify(paletteArray);
-};
-  
-// Adds a color to the palette 
-// and displays it (if hidden)
-//////////////////////////////
-function addToPalette(e) {
-  var colorValueText = $(this).attr('rel');
-  
-  // Appends the color to the palette and saves its colorValue to the array
-  $('#chosen_colors').prepend(markupColor(colorValueText, false))
-  paletteArray.unshift(colorValueText);
-
-  // Saves the state of the palette to the DB
-  // NOTE: This _needs_ to be AFTER `paletteArray.push(colorValueText)`
-  savePalette();
-
-  // Shows the palette
-  if (localStorage['palette_hidden'] == 'true') showPalette();
-  localStorage['palette_hidden'] = false
-};
-
-// Removes item from palette
-////////////////////////////
-function removeFromPalette(e){
-  paletteArray.splice(e.index(), 1)
-  e.remove();
-
-  // Saves the state of the palette to the DB
-  // NOTE: This _needs_ to be AFTER `paletteArray.push(colorValueText)`
-  savePalette();
-};
-
-// Clears palette
-/////////////////
-function clearPalette() {
-  localStorage.removeItem('palette');
-  paletteArray = []
-  $('.color', $palette).remove();
-};
-
-$(function(){
-  $('.addToPalette', $scroller).click(addToPalette);
-  $('.removeFromPalette', $palette).live("click", function(){removeFromPalette($(this).parent())});
-  $('#clear_palette').click(clearPalette);
+define(['./configs', './tooltip', './colors', './formats'], function(configs, tooltip, colors, formats){
+  var dropText = configs.palette.selector.find('p');
+  var paletteArray = localStorage.palette? JSON.parse(localStorage.palette):[]
+  var _this = {
+    checkQuantity: function(qty){
+      if(paletteArray.length>=qty) dropText.hide();
+    },
+    save: function(){
+      localStorage.palette = JSON.stringify(paletteArray)
+    }, 
+    makeDraggable: function(query){
+      query.attr('draggable', true)
+    },
+    restore: function(){
+      if (localStorage.palette)
+        var paletteColors = JSON.parse(localStorage.palette);
+            
+      for (var color in paletteColors) {
+        var object = paletteColors[color];
+        configs.palette.selector.append(colors.markup(object))
+      };
+      
+      _this.checkQuantity(1);
+    },
+    init: function(){
+      _this.restore();
+      
+      $('#palette > .color').on('click', function(){
+        var index = $(this).index();
+        $(this).remove()
+        paletteArray.splice(index,0);
+        console.log(paletteArray);
+      });
+      
+      var $bodyColors = $('body > .color');
+      
+      $bodyColors.attr('draggable', true);
+      
+      $bodyColors.on('dragstart', function(e){
+        tooltip.dismiss();
+        e.dataTransfer.effectAllowed = 'copy';
+        e.dataTransfer.setData('Color', $(this).attr('data-hex'));
+      });
+      
+      configs.palette.dropzone.on('dragover', function (e) {
+        if (e.preventDefault) e.preventDefault(); // allows us to drop
+        if(paletteArray.length<=(configs.palette.limit-1)) { 
+          e.dataTransfer.dropEffect = 'copy'
+        } else {
+          e.dataTransfer.dropEffect = 'none'
+        }
+        return false;
+      });
+      
+      configs.palette.dropzone.on('drop', function (e) {
+        var color = e.dataTransfer.getData('Color');
+        
+        if(paletteArray.length<=(configs.palette.limit-1))
+          configs.palette.selector.append(colors.markup(color))
+      
+        _this.checkQuantity(0);
+      
+        paletteArray.push(color);
+        // _this.save();
+        
+        console.log(paletteArray)
+        
+        return false;
+      });
+    }
+  }
+  return _this;
 });
-
-$(window).resize(function() {
-  localStorage['palette_hidden'] == "true" ? $scroller.css('top', 0):$scroller.css('top', $palette.innerHeight())
-  $scroller.scroll(function(){
-    localStorage.setItem('scrolled', localStorage['palette_hidden'] == "true" ? $(this).scrollTop() : $(this).scrollTop()-$palette.innerHeight())
-  });
-});
-
-// $(document).keydown(function(e){
-//   if (e.which == 27) hidePalette();
-// });
