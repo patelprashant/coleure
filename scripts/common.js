@@ -41,8 +41,6 @@ function currentColorToTitle () {
 };
 
 $(function(){
-  // iPhone stuff:
-  // if(navigator.userAgent.match(/iPhone/i)) window.top.scrollTo(0, 1);
   
   // Changes the color and selects the 
   // color in the hidden input.

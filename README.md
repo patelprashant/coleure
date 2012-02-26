@@ -20,7 +20,7 @@ It is possible to choose (by pressing `f`) between 3 formats in Coleure:
 - **HSL:**
   - Outputs: `hsla(360, 100%, 100%, 1)`, `hsl(360, 100%, 100%)`, `360, 100%, 100%`
 
-Outputs can be changed by pressing `t`.
+Outputs can be changed by pressing `d`.
 
 ### Palette
 
@@ -47,8 +47,3 @@ Since Coleure is designed to be used while working and relies totally on shortcu
 - The appearance of the palette if you shown it before.
 
 And it will be doing that for every future feature (if any).
-
-Running Coleure
---------
-
-Open `app/index.html`. The `config.ru` file is only used for production under Heroku. You really don't need Ruby nor Rack in order to run Coleure.
