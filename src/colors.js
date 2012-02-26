@@ -4,7 +4,7 @@ define(['./settings','./pantone'], function (settings, pantone){
               '<header class="value" style="display: none;" />'+
             '</section>';
   };
-  return {
+  {
     list: function(){
       for (var color in pantone.colors) {
         pantone.colors[color]? 

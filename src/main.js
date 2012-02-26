@@ -1,3 +1,5 @@
-define(['./settings', './colors'], function (settings, colors) {
-  colors.list();
+define(['./settings', './colors'], function init(settings, colors) {
+  {
+    init: colors.list() 
+  }
 })
