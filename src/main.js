@@ -1,3 +1,3 @@
-define(['./settings', './colors'], function (settings, colors) {
+require(['./colors'], function (colors) {
   colors.list();
 })
