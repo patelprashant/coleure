@@ -4,8 +4,9 @@
     <meta charset="utf-8" />
     <title>Coleure</title>
     <link href="coleure.css" rel="stylesheet" />
+    <script src="src/require.js"></script>
     <script>
-      var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-26310431-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+      require(['src/zepto', 'src/main']);
     </script>
   </head>
   <body>
@@ -13,26 +14,7 @@
     
     <header class="site b-sizing">
       <h1 class="site">Coleure</h1>
-      <nav>
-        <ul id="options">
-          <li id="min_mode"><code class="current-color">(hover a color)</code></li>
-        </ul>
-        <dl class="colors-output">
-          <dt>Colors copied in</dt>
-          <dd id="hex" class="format">HEX</dd>
-          <dd id="rgb" class="format">RGB</dd>
-          <dd id="hsl" class="format">HSL</dd>
-          <dd id="output" />
-        </dl>
-      </nav>
     </header>
-
-    <aside id="colors_palette" class="palette b-sizing">
-      <header>
-        <h2>Palette <a id="clear_palette" href="javascript:;">clear</a></h2>
-      </header>
-      <div id="chosen_colors"><span class="spacer"></span></div>
-    </aside>
 
     <div id="scroller" class="scroller">
       <section id="colors">
@@ -41,16 +23,8 @@
         </footer>
       </section>
     </div>
-    <div id="zoom">
-      
-    </div>
-    <script src="scripts/jquery.js"></script>
-    <script src="scripts/pantone.js"></script>
-    <script src="scripts/colors.js"></script>
-    <script src="scripts/common.js"></script>
-    <script src="scripts/palette.js"></script>
-    <script src="scripts/zoom.js"></script>
-    <script src="scripts/formats.js"></script>
-    <script src="scripts/ticker.js"></script>
+    <script>
+      var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-26310431-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+    </script>
   </body>
 </html>
