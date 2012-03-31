@@ -3,13 +3,11 @@ define(['./configs', './tooltip', './colors', './formats'], function(configs, to
   var paletteArray = localStorage.palette? JSON.parse(localStorage.palette):[]
   var _this = {
     checkQuantity: function(qty){
-      if(paletteArray.length>=qty) dropText.hide();
+      dropText.hide();
+      if(paletteArray.length==qty) dropText.show();
     },
     save: function(){
       localStorage.palette = JSON.stringify(paletteArray)
-    }, 
-    makeDraggable: function(query){
-      query.attr('draggable', true)
     },
     restore: function(){
       if (localStorage.palette)
@@ -20,53 +18,64 @@ define(['./configs', './tooltip', './colors', './formats'], function(configs, to
         configs.palette.selector.append(colors.markup(object))
       };
       
-      _this.checkQuantity(1);
+      _this.checkQuantity(0);
     },
     init: function(){
       _this.restore();
       
-      $('#palette > .color').on('click', function(){
-        var index = $(this).index();
-        $(this).remove()
-        paletteArray.splice(index,0);
-        console.log(paletteArray);
-      });
-      
-      var $bodyColors = $('body > .color');
-      
-      $bodyColors.attr('draggable', true);
-      
-      $bodyColors.on('dragstart', function(e){
+      configs.colors.placeholder.find('.color').on('dragstart', function(e){
         tooltip.dismiss();
-        e.dataTransfer.effectAllowed = 'copy';
-        e.dataTransfer.setData('Color', $(this).attr('data-hex'));
-      });
-      
-      configs.palette.dropzone.on('dragover', function (e) {
-        if (e.preventDefault) e.preventDefault(); // allows us to drop
-        if(paletteArray.length<=(configs.palette.limit-1)) { 
-          e.dataTransfer.dropEffect = 'copy'
-        } else {
-          e.dataTransfer.dropEffect = 'none'
-        }
-        return false;
-      });
-      
-      configs.palette.dropzone.on('drop', function (e) {
-        var color = e.dataTransfer.getData('Color');
+        e.originalEvent.dataTransfer.effectAllowed = 'copy';
+        e.originalEvent.dataTransfer.setData('Text', $(this).attr('data-hex'));
         
-        if(paletteArray.length<=(configs.palette.limit-1))
-          configs.palette.selector.append(colors.markup(color))
+        configs.palette.dropzone.on('dragover', function (e) {
+          if(paletteArray.length<=(configs.palette.limit-1)) {
+            e.originalEvent.dataTransfer.dropEffect = 'copy'
+          } else {
+            e.originalEvent.dataTransfer.dropEffect = 'none'
+          }
+          return false;
+          
+        }).on('drop', function (e) {
+          configs.palette.dropzone.off()
+          var color = e.originalEvent.dataTransfer.getData('Text');
+          
+          if(paletteArray.length<=(configs.palette.limit-1)) {
+            
+            configs.palette.selector.append(colors.markup(color))
+            
+            _this.checkQuantity(-1);
+          
+            paletteArray.push(color);
+            _this.save();
+        
+            formats.init('#palette > .color');
+          }
+          return false;
+        });
+      });
       
+      configs.palette.selector.on('dragstart', '.color', function(e){
+        configs.palette.dropzone.off();
+        e.originalEvent.dataTransfer.effectAllowed = 'move';
+        e.originalEvent.dataTransfer.setData('Text', $(this).index());
+        configs.palette.trash.show();
+      }).on('dragend', function(e){
+        configs.palette.trash.hide();
+      })
+      
+      configs.palette.trash.on('dragover', function(e){
+        e.originalEvent.dataTransfer.dropEffect = 'move'
+        return false;
+      }).on('drop', function(e){
+        var index = parseInt(e.originalEvent.dataTransfer.getData('Text'));
+        paletteArray.splice(index-1,1);
         _this.checkQuantity(0);
-      
-        paletteArray.push(color);
-        // _this.save();
-        
-        console.log(paletteArray)
-        
+        _this.save();
+        configs.palette.selector.find('.color').eq(index-1).remove()
+        $(this).hide();
         return false;
-      });
+      })
     }
   }
   return _this;

@@ -18,9 +18,10 @@ html {
 body {
   font: 300 14px/1.5 "Helvetica Neue", sans-serif;
   color: #000;
-  background: #fff;
+  background: #eee;
   cursor: default;
-  overflow-x: hidden;
+  padding: 30px 256px;
+  padding-left: 30px;
 }
 
 a { color: #0083b1; }
@@ -52,25 +53,22 @@ a:active {
   left: -9999em;
 }
 
-header.site {
-  position: fixed;
-  bottom: 0;
-  padding: 0 10px;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  height: 70px;
-  background: white;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1); }
 h1.site {
   overflow: hidden;
-  height: 0.915em;
-  position: absolute;
-  bottom: 20%;
-  padding-right: 1em;
+  width: 100%;
   letter-spacing: -0.12em;
   font-size: 60px;
-  color: black; }
+  color: black;
+  height: 32px;
+  line-height: 45px;
+}
+.color-hub {
+  position: absolute;
+  left: 200px;
+  font-size: 16px;
+  line-height: 1;
+  color: #666;
+}
   
 dl.colors-output {
   margin-left: 10px;
@@ -99,7 +97,9 @@ dd.current.format {
   padding: 10px;
   color: #999;
   background: #000;
+  background: linear-gradient(#111,#333);
   background: -webkit-linear-gradient(#111,#333);
+  background: -moz-linear-gradient(#111,#333);
   overflow: hidden;
 }
 .banner a {
@@ -109,10 +109,42 @@ dd.current.format {
 /* ///////////////////
 Colors and empty slots
 /////////////////// */
-.color, .empty-color {
+.item {
+  float: left;
+}
+[draggable=true] {
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+}
+body > .item {
   width: 8.333%;
   padding-bottom: 8.333%;
-  float: left; }
+}
+@-webkit-keyframes scalemation {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 32px;
+  }
+}
+#palette > .item {
+  width: 32px;
+  padding-bottom: 32px;
+  -webkit-animation: 0.25s scalemation;
+}
+
+#trash {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 70px;
+  z-index: 9999;
+}
 
 .color {
   position: relative;
@@ -125,4 +157,5 @@ Colors and empty slots
   border: dashed #ddd;
   border-width: 1px 1px 0 0;
   margin-top: -1px;
-  margin-right: -1px; }
+  margin-right: -1px;
+}

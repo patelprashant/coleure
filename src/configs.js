@@ -13,5 +13,11 @@ define({
   utils: {
     menu: $('#options')
   },
+  palette: {
+    dropzone: $('#dropzone'),
+    selector: $('#palette'),
+    trash: $('#trash'),
+    limit: 7
+  },
   tooltip: $('#tooltip')
 });

@@ -4,14 +4,15 @@ require([
     './colors',
     './formats',
     './clipboard',
-    './tooltip'
+    './tooltip',
+    './palette'
   ], 
-  function (configs, utils, colors, formats, clipboard, tooltip) {
+  function (configs, utils, colors, formats, clipboard, tooltip, palette) {
     "use strict";
     utils.metakey($('.metakey'));
     colors.init();
-    formats.init();
+    palette.init();
+    formats.init('.color');
     clipboard.init();
     tooltip.init();
-    $(window).scrollTop($('#credits').innerHeight());
 })

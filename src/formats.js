@@ -72,8 +72,8 @@ define(['./configs', './utils', './keyboard'], function(configs, utils, keyboard
   };
                   
   return {
-    init: function() {
-      $('.color').each(function(){
+    init: function(target) {
+      $(target).each(function(){
         self = $(this);
         hex = self.text();
         self.attr('data-hex', hex)

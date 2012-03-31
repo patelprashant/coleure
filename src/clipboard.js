@@ -1,5 +1,4 @@
 define(['./configs','./keyboard','./colors'], function(configs, keyboard){
-  
   function selectColor(){
     configs.clipboard.field.val($(this).text()).select();
   }
