@@ -1,6 +1,6 @@
 define ['./configs', './tooltip', './colors', './formats'], (configs, tooltip, colors, formats) ->
   dropText = configs.palette.selector.find('p')
-  paletteArray = localStorage.palette ? JSON.parse(localStorage.palette) : []
+  paletteArray = if localStorage.palette then JSON.parse(localStorage.palette) else []
   _this =
     checkQuantity: (qty) ->
       dropText.hide();

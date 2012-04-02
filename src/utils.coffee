@@ -1,5 +1,5 @@
 define ['./configs','./keyboard'], (configs, keyboard) ->
-    // Colors
+    # Colors
     r: (hex) ->
       return parseInt (hex).substring(0,2), 16
     g: (hex) ->
@@ -18,10 +18,10 @@ define ['./configs','./keyboard'], (configs, keyboard) ->
       h = s = l = (max + min) / 2
 
       if max is min
-        h = s = 0 // achromatic
+        h = s = 0 # achromatic
       else
-        var d = max - min
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+        d = max - min
+        s = if l > 0.5 then d / (2 - max - min) else d / (max + min)
         switch max
           when r then h = (g - b) / d + (g < b ? 6 : 0)
           when g then h = (b - r) / d + 2
@@ -30,7 +30,7 @@ define ['./configs','./keyboard'], (configs, keyboard) ->
 
       [Math.floor(h * 360)+', '+Math.floor(s * 100)+'%, '+Math.floor(l * 100)+'%']
   
-    // Metakeys
+    # Metakeys
     metakey: (selector) ->
       ua = navigator.userAgent.toLowerCase()
       if ua.indexOf('mac') isnt -1

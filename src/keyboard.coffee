@@ -1,11 +1,11 @@
-define(->
+define ->
   singleKeys = [];
   singleFunctions = [];
   
   combinedKeys = [];
   combinedFunctions = [];
   
-  $(document).keydown((event) ->
+  $(document).keydown (event) ->
     key = String.fromCharCode(event.which)
 
     index = singleKeys.indexOf(key)
@@ -15,12 +15,11 @@ define(->
       index = combinedKeys.indexOf(key)
       if index isnt -1 then combinedFunctions[index]()
 
-  return
-    single: function(key, fn) ->
-      length = singleKeys.length
-      singleKeys[length] = key
-      singleFunctions[length] = fn
-    combined: (key, fn) ->
-      length = combinedKeys.length
-      combinedKeys[length] = key
-      combinedFunctions[length] = fn
+  single: (key, fn) ->
+    length = singleKeys.length
+    singleKeys[length] = key
+    singleFunctions[length] = fn
+  combined: (key, fn) ->
+    length = combinedKeys.length
+    combinedKeys[length] = key
+    combinedFunctions[length] = fn

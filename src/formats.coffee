@@ -67,7 +67,7 @@ define ['./configs', './utils', './keyboard'], (configs, utils, keyboard) ->
     refreshFormat()
 
     init: (target) ->
-      $(target).each(->
+      $(target).each ->
         self = $(this)
         hex = self.text()
         self.attr('data-hex', hex)
