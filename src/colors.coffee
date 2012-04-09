@@ -5,10 +5,18 @@ define ->
       placeholderContent = ''
       emptyColor = '<div class="item empty-color"></div>'
       getColor = (color) ->
-        '<section draggable="true" class="item color" style="background: #'+color+'"></section>'
+        '<section
+          draggable="true"
+          class="item color"
+          data-hex="'+color.hex+'"
+          data-rgb="'+color.rgb+'"
+          data-hsl="'+color.hsl+'"
+          style="background: #'+color.hex+'">
+        </section>'
 
       for color in colors
-        placeholderContent += if color then getColor(color.hex) else emptyColor
+        placeholderContent += if color then getColor(color) else emptyColor
+
       document.getElementById('colors').innerHTML = placeholderContent
 
   get: (url, handler) ->
