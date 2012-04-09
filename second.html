@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Coleure</title>
+    <link href="coleure.css" rel="stylesheet" />
+    <script src="src/require.js" data-main="src/coleure"></script>
+    <script>
+      // var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-26310431-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+    </script>
+  </head>
+  <body>
+    <input id="clipboard_handler" class=hide readonly />
+    <aside id="panels">
+      <section id="info" class="two-colors">
+        <header id="primary" class="color-preview">
+          <a class="img close">&times;</a>
+          <div class="color" style="background: #f78773"></div>
+          <h1 class="color-name"><span>PANTONE</span> 1777</h1>
+        </header>
+        <header id="secondary" class="color-preview">
+          <a class="img close">&times;</a>
+          <div class="color" style="background: #fbd0d1"></div>
+          <h1 class="color-name"><span>PANTONE</span> 489</h1>
+        </header>
+        <hr style="clear: both;">
+        <p class="message" style="color: #f78773; background: #fbd0d1;"><u>First color</u> <b>over</b> <i>second</i>.</p>
+        <p class="message" style="color: #fbd0d1; background: #f78773;"><u>Second color</u> <b>over</b> <i>first</i>.</p>
+      </section>
+      <section class="sep">
+        <header>
+          <h1 class=s2>Palette</h1>
+        </header>
+        <div id="palette">
+          <i draggable="true" class="item color" data-hex="ffd646" data-rgb="255, 214, 70" data-hsl="46, 100%, 63%" style="background: #ffd646"></i>
+        </div>
+      </section>
+    </aside>
+    <section id="colors" />
+    <a id="toHEX" class=current>HEX</a>
+    <a id="toRGB">RGB</a>
+    <a id="toHSL">HSL</a>
+  </body>
+</html>
