@@ -6,4 +6,4 @@ define ['./keyboard'], (keyboard) ->
 
   keyboard.listenWithCtrl 'C', ->
     clipboard = document.getElementById('clipboard_handler').value
-    document.title = "#{clipboard} - Coleure"
+    document.title = "#{clipboard} | Coleure"

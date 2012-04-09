@@ -5,14 +5,14 @@ define ->
       placeholderContent = ''
       emptyColor = '<div class="item empty-color"></div>'
       getColor = (color) ->
-        '<section
+        '<i
           draggable="true"
           class="item color"
           data-hex="'+color.hex+'"
           data-rgb="'+color.rgb+'"
           data-hsl="'+color.hsl+'"
           style="background: #'+color.hex+'">
-        </section>'
+        </i>'
 
       for color in colors
         placeholderContent += if color then getColor(color) else emptyColor

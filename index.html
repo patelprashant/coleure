@@ -10,10 +10,42 @@
     </script>
   </head>
   <body>
-    <div id="colors"></div>
     <input id="clipboard_handler" class=hide readonly />
-    <a id="toHEX" class=current>HEX</a>
-    <a id="toRGB">RGB</a>
-    <a id="toHSL">HSL</a>
+    <aside id="panels">
+      <section id="info">
+        <header id="primary" class="color-preview">
+          <a class="img close">&times;</a>
+          <div class="color" style="background: #f78773"></div>
+          <h1 class="color-name"><span>PANTONE</span> 1777</h1>
+        </header>
+        <hr style="clear: both;">
+        <p class="message" style="color: #fff; background: #f78773;"><u>White</u> <b>over</b> <i>color</i>.</p>
+        <p class="message" style="color: #f78773; background: #fff;"><u>Color</u> <b>over</b> <i>white</i>.</p>
+        <p class="message" style="color: #000; background: #f78773;"><u>Black</u> <b>over</b> <i>color</i>.</p>
+        <p class="message" style="color: #f78773; background: #000;"><u>Color</u> <b>over</b> <i>black</i>.</p>
+      </section>
+      <section class="sep">
+        <header>
+          <h1 class=s2>Palette</h1>
+        </header>
+        <div id="palette">
+          <div class="dropzone">Drag your favorite colors here.</div>
+        </div>
+      </section>
+      <section class="sep">
+        <header class=s2>
+          <hgroup>
+            <h1 class="left">Format</h1>
+            <h2 class="right">    
+              <a id="toHEX" class="option active">HEX</a>
+              <a id="toRGB" class="option">RGB</a>
+              <a id="toHSL" class="option">HSL</a>
+            </h2>
+          </hgroup>
+        </header>
+      </section>
+      <img id="logo" draggable="false" src="logo.png" alt="Coleure" />
+    </aside>
+    <section id="colors" />
   </body>
 </html>
