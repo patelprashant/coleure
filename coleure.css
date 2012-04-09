@@ -118,7 +118,7 @@ Colors and empty slots
   -khtml-user-select: none;
   -webkit-user-select: none;
 }
-body > .item {
+#colors > .item {
   width: 8.333%;
   padding-bottom: 8.333%;
 }
