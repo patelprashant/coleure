@@ -163,7 +163,7 @@ Colors and empty slots
 }
 .option {
   color: #999;
-} .active.option {
+} .option[data-state=active] {
   color: #000;
 }
 #logo {
