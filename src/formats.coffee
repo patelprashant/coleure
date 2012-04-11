@@ -1,14 +1,14 @@
-define ['./settings'], (settings) ->
-  forEach = Array.prototype.forEach
+define ['./settings', './_'], (settings, _) ->
   formats = document.getElementsByClassName('set-format')
-  
+
   switchFormat = (event) =>
-    settings.format = event.target.getAttribute('id')
+    newFormat = event.target
+    settings.format = newFormat.getAttribute('id')
     
-    forEach.call formats, (el) ->
-      el.setAttribute 'data-state', 'inactive'
+    _.forEach formats, (element) ->
+      element.setAttribute 'data-state', 'inactive'
       
-    event.target.setAttribute 'data-state', 'active'
+    newFormat.setAttribute 'data-state', 'active'
       
-  forEach.call formats, (el) ->
-    el.addEventListener 'click', switchFormat
+  _.forEach formats, (element) ->
+    element.addEventListener 'click', switchFormat
