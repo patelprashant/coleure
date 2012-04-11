@@ -1,4 +1,3 @@
-#require ['./configs'], (configs) ->
-require ['./colors', './clipboard'], (colors, clipboard) ->
+require ['./colors', './clipboard', './formats'], (colors, clipboard, formats) ->
   "use strict"
   colors.load('src/pantone.json')
