@@ -1,5 +1,5 @@
 define ['./settings', './_'], (settings, _) ->
-  formats = document.getElementsByClassName('set-format')
+  formats = _.cls 'set-format'
 
   switchFormat = (event) =>
     newFormat = event.target
@@ -11,4 +11,4 @@ define ['./settings', './_'], (settings, _) ->
     newFormat.setAttribute 'data-state', 'active'
       
   _.forEach formats, (element) ->
-    element.addEventListener 'click', switchFormat
+    _.listen element, 'click', switchFormat

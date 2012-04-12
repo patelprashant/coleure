@@ -1,6 +1,6 @@
 define ['./_'], (_) ->
   load: (url) -> _.get url, (data) =>
-    colors = JSON.parse(data)
+    colors = JSON.parse data
     placeholderContent = ''
     emptyColor = '<div class="item empty-color"></div>'
     getColor = (color) ->
@@ -15,6 +15,6 @@ define ['./_'], (_) ->
       </i>'
 
     for color in colors
-      placeholderContent += if color then getColor(color) else emptyColor
+      placeholderContent += if color then getColor color else emptyColor
 
-    document.getElementById('colors').innerHTML = placeholderContent
+    _.id('colors').innerHTML = placeholderContent
