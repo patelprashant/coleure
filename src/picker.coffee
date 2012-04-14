@@ -6,7 +6,7 @@ define ['./_'], (_) ->
 
     info = _.id 'info'
     colorPreviews = _.cls info, 'color-preview'
-    messages = _.cls info, 'message'
+    messages = _.cls info, 'log'
     
     colorPreview = colorPreviews[0]
     _.cls(colorPreview, 'color')[0].style.background = colorValue
