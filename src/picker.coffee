@@ -2,17 +2,15 @@ define ['./_'], (_) ->
   _.listen _.id('colors'), 'click', (event) ->
     color = event.target
     colorValue = '#' + color.getAttribute 'data-hex'
-    colorName = ' #' + color.getAttribute 'data-name'
+    colorName = ' ' + color.getAttribute 'data-name'
 
     info = _.id 'info'
-    colorPreviews = _.cls info, 'color-preview'
-    messages = _.cls info, 'message'
     
-    colorPreview = colorPreviews[0]
+    colorPreview = _.cls(info, 'color-preview')[0]
     _.cls(colorPreview, 'color')[0].style.background = colorValue
     _.tag(colorPreview, 'h1')[0].lastChild.data = colorName
 
-    _.forEach messages, (element) ->
+    _.forEach _.cls(info, 'message'), (element) ->
       previousColor = element.style.color
 
       if previousColor is 'rgb(255, 255, 255)' or 
