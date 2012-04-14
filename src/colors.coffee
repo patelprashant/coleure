@@ -1,20 +1,26 @@
 define ['./_'], (_) ->
   load: (url) -> _.get url, (data) =>
     colors = JSON.parse data
-    placeholderContent = ''
-    emptyColor = '<div class="item empty-color"></div>'
-    getColor = (color) ->
-      '<i
-        draggable="true"
-        class="item color"
-        data-name="'+color.name+'"
-        data-hex="'+color.hex+'"
-        data-rgb="'+color.rgb+'"
-        data-hsl="'+color.hsl+'"
-        style="background: #'+color.hex+'">
-      </i>'
 
-    for color in colors
-      placeholderContent += if color then getColor color else emptyColor
+    _.template 'templates/color.html', (colorTemplate) =>
+      emptyColor = '<div class="item empty-color"></div>'
+      placeholderContent = ''
 
-    _.id('colors').innerHTML = placeholderContent
+      for color in colors
+        placeholderContent += if color then colorTemplate color else emptyColor
+      
+      _.id('colors').innerHTML = placeholderContent
+
+      console.log 'first'
+
+    _.template 'templates/color.html', (colorTemplate) =>
+      console.log 'second'
+
+    _.template 'templates/color.html', (colorTemplate) =>
+      console.log 'third'
+
+    _.template 'templates/color.html', (colorTemplate) =>
+      console.log 'fourth'
+
+    _.template 'templates/color.html', (colorTemplate) =>
+      console.log 'fifth'

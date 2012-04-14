@@ -1,5 +1,6 @@
 define ->
   _document: document
+  _documentEl: document.documentElement
 
   # Straightforward XHR.
 
@@ -21,20 +22,18 @@ define ->
   # Fast and smart access to functions with long names.
   
   $cls: Element.prototype.getElementsByClassName
-  _cls: document.getElementsByClassName
   cls: (element, names) ->
     if names
       @$cls.call element, names
     else
-      @_cls.apply @_document, arguments
+      @$cls.call @_documentEl, element
 
   $tag: Element.prototype.getElementsByTagName
-  _tag: document.getElementsByTagName
   tag: (element, tagName) ->
     if tagName
       @$tag.call element, tagName
     else
-      @_tag.apply @_document, arguments
+      @$tag.call @_documentEl, element
 
   $id: document.getElementById
   id: (id) ->
@@ -44,10 +43,45 @@ define ->
     if listener
       element.addEventListener type, listener
     else
-      @_document.addEventListener.apply @_document, arguments
+      @_documentEl.addEventListener element, type
 
   unlisten: (element, type, listener) ->
     if listener
       element.removeEventListener type, listener
     else
-      @_document.removeEventListener.apply @_document, arguments
+      @_documentEl.removeEventListener element, type
+
+  templatesOnProgress: {}
+  templates: {}
+  template: (src, callback) ->
+    if callback
+      if @templates.hasOwnProperty src
+        callback @templates[src]
+        return
+      else if @templatesOnProgress.hasOwnProperty src
+        @templatesOnProgress[src].push callback
+        return
+
+      @templatesOnProgress[src] = []
+      @get src, (data) =>
+        callback @templates[src] = @template data
+
+        for handler in @templatesOnProgress[src]
+          handler @templates[src]
+
+        delete @templatesOnProgress[src]
+
+      return
+
+    new Function(
+      "$", 
+      "var p=[];" +
+      "p.push('" +
+      src.replace(/[\r\t\n]/g, " ")
+         .replace(/'(?=[^%}]*[%}]})/g, "\t")
+         .split("'").join("\\'")
+         .split("\t").join("'")
+         .replace(/\{\{(.+?)\}\}/g, "',$1,'")
+         .split("{%").join("');")
+         .split("%}").join("p.push('") +
+      "');return p.join('');")
