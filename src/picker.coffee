@@ -2,7 +2,7 @@ define ['./_'], (_) ->
   _.listen _.id('colors'), 'click', (event) ->
     color = event.target
     colorValue = '#' + color.getAttribute 'data-hex'
-    colorName = ' #' + color.getAttribute 'data-name'
+    colorName = color.getAttribute 'data-name'
 
     info = _.id 'info'
     colorPreviews = _.cls info, 'color-preview'
