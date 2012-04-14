@@ -4,8 +4,7 @@ define ['./_'], (_) ->
     colorValue = '#' + color.getAttribute 'data-hex'
     colorName = ' ' + color.getAttribute 'data-name'
 
-    info = _.id 'info'
-    
+    info = _.id 'inspector'
     colorPreview = _.cls(info, 'color-preview')[0]
     _.cls(colorPreview, 'color')[0].style.background = colorValue
     _.tag(colorPreview, 'h1')[0].lastChild.data = colorName
