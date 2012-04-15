@@ -1,12 +1,12 @@
 define ['./_'], (_) ->
-  load: (url) -> _.get url, (data) =>
-    colors = JSON.parse data
-
-    _.template 'templates/color.html', (colorTemplate) =>
-      emptyColor = '<div class="item empty-color"></div>'
-      placeholderContent = ''
-
-      for color in colors
-        placeholderContent += if color then colorTemplate color else emptyColor
-      
-      _.id('colors').innerHTML = placeholderContent
+  load: (sources) ->
+    _.async @, 'display', 2
+    _.json sources.colors, (colors) => @display colors: colors
+    _.template sources.template, (template) => @display template: template
+  
+  display: (settings) ->
+    colors = settings.colors
+    template = settings.template
+    content = ''
+    content += template color for color in colors
+    _.id('colors').innerHTML = content

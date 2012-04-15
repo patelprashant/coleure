@@ -13,6 +13,31 @@ define ->
         callback request.responseText
     request.send()
 
+  json: (url, callback) ->
+    @get url, (data) =>
+      callback JSON.parse data
+
+  merge: (destination, source) ->
+    for property, value of source
+      destination[property] = value
+
+    destination
+  
+  async: (scope, name, length) ->
+    method = scope[name]
+    merge = @merge
+    keys = Object.keys
+
+    scope[name] = (options) ->
+      if keys(options).length < length
+        stashedOptions = options
+        enclosedMethod = arguments.callee
+        scope[name] = (options) ->
+          enclosedMethod merge options, stashedOptions
+      else
+        method.call scope, options
+        scope[name] = method
+
   # For pseudo-Array collections.
 
   $forEach: Array.prototype.forEach

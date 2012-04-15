@@ -1,3 +1,5 @@
+{% console.log(this); %}
+{% if ($) { %}
 <i
   draggable="true"
   class="item color"
@@ -7,3 +9,6 @@
   data-hsl="{{ $.hsl }}"
   style="background: #{{ $.hex }}">
 </i>
+{% } else { %}
+<div class="item empty-color"></div>
+{% } %}
