@@ -3,7 +3,7 @@ require [
   './colors'
   './picker'
   './clipboard'
-  './formats'], 
+  './formats'],
   (colors, picker) ->
     
     "use strict"
@@ -15,3 +15,5 @@ require [
     picker.setup
       previewTemplate: 'templates/preview.html'
       colorTemplate: 'templates/color.html'
+      testTemplate: 'templates/test.html'
+      singleTemplate: 'templates/test/single.html'
