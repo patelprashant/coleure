@@ -138,6 +138,7 @@ Colors and empty slots
   z-index: 99999;
 }
 .color-preview .color {
+  width: 100%;
   height: 75px;
 }
 .color-name {

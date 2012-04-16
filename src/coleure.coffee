@@ -5,13 +5,13 @@ require [
   './clipboard'
   './formats'], 
   (colors, picker) ->
-  
-  "use strict"
+    
+    "use strict"
 
-  colors.load
-    colors: 'src/pantone.json'
-    template: 'templates/color.html'
+    colors.load
+      colors: 'src/pantone.json'
+      template: 'templates/color.html'
 
-  picker.setup
-    previewTemplate: 'templates/preview.html'
-    colorTemplate: 'templates/color.html'
+    picker.setup
+      previewTemplate: 'templates/preview.html'
+      colorTemplate: 'templates/color.html'
