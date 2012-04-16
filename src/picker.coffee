@@ -1,19 +1,24 @@
 define ['./_'], (_) ->
-  _.listen _.id('colors'), 'click', (event) ->
-    color = event.target
-    colorValue = '#' + color.getAttribute 'data-hex'
-    colorName = ' ' + color.getAttribute 'data-name'
+  setup: (options) ->
+    _.listen _.id('colors'), 'click', (event) =>
+      _.async @, 'display', 3
+      
+      _.template options.previewTemplate, (template) =>
+        @display previewTemplate: template
+      
+      _.template options.colorTemplate, (template) =>
+        @display colorTemplate: template
+      
+      @display color: event.target
 
-    info = _.id 'inspector'
-    colorPreview = _.cls(info, 'color-preview')[0]
-    _.cls(colorPreview, 'color')[0].style.background = colorValue
-    _.tag(colorPreview, 'h1')[0].lastChild.data = colorName
+  display: (options) ->
+    element = options.color
+    attribute = element.getAttribute.bind element
+    color =
+      template: options.colorTemplate
+      name: attribute 'data-name'
+      hex: attribute 'data-hex'
+      rgb: attribute 'data-rgb'
+      hsl: attribute 'data-hsl'
 
-    _.forEach _.cls(info, 'message'), (element) ->
-      previousColor = element.style.color
-
-      if previousColor is 'rgb(255, 255, 255)' or 
-         previousColor is 'rgb(0, 0, 0)'
-        element.style.background = colorValue
-      else
-        element.style.color = colorValue
+    _.id('subjects').innerHTML = options.previewTemplate color
