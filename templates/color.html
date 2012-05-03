@@ -1,12 +1,12 @@
-{% if ($) { %}
+{% if (this) { %}
 <i
   draggable="true"
   class="item color"
-  data-name="{{ $.name }}"
-  data-hex="{{ $.hex }}"
-  data-rgb="{{ $.rgb }}"
-  data-hsl="{{ $.hsl }}"
-  style="background: #{{ $.hex }}">
+  data-name="{{ name }}"
+  data-hex="{{ hex }}"
+  data-rgb="{{ rgb }}"
+  data-hsl="{{ hsl }}"
+  style="background: #{{ hex }}">
 </i>
 {% } else { %}
 <div class="item empty-color"></div>

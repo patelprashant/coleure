@@ -1,21 +1,46 @@
 define ->
-  _document: document
-  _documentEl: document.documentElement
-
   # Straightforward XHR.
 
+  getList: (urls, callback) ->
+    add = (data, from) ->
+      contents[urls.indexOf from] = data
+      if ++downloaded is amount
+        callback contents
+
+    amount = urls.length
+    contents = new Array amount
+    downloaded = 0
+    
+    for url in urls
+      @get url, add
+
+
   get: (url, callback) ->
+    #if Array.isArray url then return @getList url, callback
+    cacheKey = 'downloadsInProgress'
+    return unless @inProgress cacheKey, url, callback
+
     request = new XMLHttpRequest()
     request.open 'GET', url
     @listen request, 'readystatechange', (event) =>
-      if request.readyState is 4 and request.status is 200
+      if request.readyState is 4 and 
+         request.status is 200
         @unlisten event.target, event.type, arguments.callee
-        callback request.responseText
+
+        store = @cache cacheKey, url
+        for callback in store
+          callback request.responseText, url
+
+        @clearCache cacheKey, url
+        store.length = 0
+
     request.send()
 
   json: (url, callback) ->
-    @get url, (data) =>
+    @get url, (data) ->
       callback JSON.parse data
+
+  # Other utilities
 
   merge: (destination, source) ->
     for property, value of source
@@ -37,6 +62,22 @@ define ->
       else
         method.call scope, options
         scope[name] = method
+
+  cache: (storeName, key, value) ->
+    store = (@["_cacheData"] or= {})[storeName] or= {}
+    if value then store[key] = value else store[key]
+
+  inProgress: (cacheKey, key, value) ->
+    unless @cache cacheKey, key
+      @cache cacheKey, key, [value]
+      true
+    else
+      store = @cache cacheKey, key
+      store[store.length] = value
+      false
+
+  clearCache: (cacheKey, key) ->
+    @["_cacheData"][cacheKey][key] = null
 
   # For pseudo-Array collections.
 
@@ -76,37 +117,101 @@ define ->
     else
       @_documentEl.removeEventListener element, type
 
-  templatesOnProgress: {}
-  templates: {}
-  template: (src, callback) ->
-    if callback
-      if @templates.hasOwnProperty src
-        callback @templates[src]
-        return
-      else if @templatesOnProgress.hasOwnProperty src
-        @templatesOnProgress[src].push callback
-        return
+  # Internal stuff
 
-      @templatesOnProgress[src] = []
-      @get src, (data) =>
-        callback @templates[src] = @template data
+  _document: document
+  _documentEl: document.documentElement
 
-        for handler in @templatesOnProgress[src]
-          handler @templates[src]
+  ###################
+  # Template Engine #
+  ###################
 
-        delete @templatesOnProgress[src]
+  templateList: (urls, callback, scopes, compileOnly = false) ->
+    compiled = 0
+    contents = []
 
-      return
+    listCallback = (template) ->
+      scope = scopes[compiled]
+      if scope then template = "with(#{scope}){#{template}}"
+      contents[compiled] = template
+      if ++compiled is urls.length
+        callback contents
 
-    new Function(
-      "$", 
-      "var p=[];" +
-      "p.push('" +
-      src.replace(/[\r\t\n]/g, " ")
-         .replace(/'(?=[^%}]*[%}]})/g, "\t")
-         .split("'").join("\\'")
-         .split("\t").join("'")
-         .replace(/\{\{(.+?)\}\}/g, "',$1,'")
+    for own i, url of urls
+      @template url, listCallback, compileOnly
+
+  template: (src, callback, compileOnly = false) ->
+    #Get from cache
+    cacheKey = if compileOnly then 'bareTemplates' else 'templates'
+    template = @cache cacheKey, src
+    if template then return callback template
+
+    cacheKey = 'templatesInProgress'
+    return unless @inProgress cacheKey, src, callback
+
+    @get src, (data) =>
+      #Strip whitespaces
+      data = @_strip data
+
+      #Find subtemplates
+      subtmpls = @_find data
+
+      finish = =>
+        store = @cache cacheKey, src
+        template = @_generate src, data, compileOnly
+        for callback in store
+          callback template
+        @clearCache cacheKey, src
+
+      applySubtemplates = (contents) =>
+          #Replace subtemplates declarations
+          data = @_apply data, subtmpls.urls, contents
+          finish()
+      
+      if subtmpls
+        @templateList subtmpls.urls, applySubtemplates, subtmpls.scopes, true
+      else
+        finish()
+
+  _generate: (src, data, compileOnly) ->
+    functionBody = @_compile data
+    fn = new Function "var p=[];with(this){#{functionBody}}return p.join('');"
+    fnContext = (context) -> fn.call context
+
+    @cache 'templates', src, fnContext
+    @cache 'bareTemplates', src, functionBody
+
+    if compileOnly then functionBody else fnContext
+
+  _apply: (data, urls, contents) ->
+    data.replace /\{\*\s*([^\s]+).+?\s*\*\}/g, (match, url) =>
+      index = urls.indexOf url
+      urls[index] = null
+      "{% #{contents[index]} %}"
+
+  _find: (str) ->
+    urls = []
+    scopes = []
+    i = 0
+
+    str.replace /\{\*\s*([^\s]+)\s+(.+?)?\s*\*\}/g, (match, url, scope) ->
+      urls[i] = url
+      scopes[i] = scope
+      ++i
+
+    if i > 0
+      urls: urls
+      scopes: scopes
+
+  _strip: (str) ->
+    str.replace(/[\r\t\n\s]/g, " ")
+       .replace(/'(?=[^%}]*[%}]\})/g, "\t")
+       .split("'").join("\\'")
+       .split("\t").join("'")
+
+  _compile: (str) ->
+    ("p.push('" +
+      str.replace(/\{\{(.+?)\}\}/g, "',$1,'")
          .split("{%").join("');")
          .split("%}").join("p.push('") +
-      "');return p.join('');")
+    "');").replace(/p\.push\('\s*'\);/g, '')
