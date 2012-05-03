@@ -10,24 +10,10 @@
     </script>
   </head>
   <body>
-    <input id="clipboard_handler" class=hide readonly />
     <aside id="panels">
       <section id="inspector">
-        <div id="subjects" class="clear">
-          <!-- preview.html derived shit goes here -->
-          <header class="color-preview">
-            <a class="img close">&times;</a>
-            <div class="color" style="background: #f78773"></div>
-            <h1 class="color-name"><span>PANTONE</span> 1777</h1>
-          </header>
-        </div>
-        <div id="tests">
-          <!-- test.html derived shit goes here -->
-          <p class="log" style="color: #fff; background: #f78773;"><u>White</u> <b>over</b> <i>color</i>.</p>
-          <p class="log" style="color: #f78773; background: #fff;"><u>Color</u> <b>over</b> <i>white</i>.</p>
-          <p class="log" style="color: #000; background: #f78773;"><u>Black</u> <b>over</b> <i>color</i>.</p>
-          <p class="log" style="color: #f78773; background: #000;"><u>Color</u> <b>over</b> <i>black</i>.</p>
-        </div>
+        <div id="subjects" class="clear"></div>
+        <div id="tests"></div>
       </section>
       <section class="sep">
         <header>
@@ -40,12 +26,12 @@
       <section class="sep">
         <header class=s2>
           <hgroup>
-            <h1 class="left">Format</h1>
-            <h2 class="right">    
+            <input id="clipboard_handler" class="b-size" placeholder="Hover any color" readonly />
+            <h6>    
               <a id="hex" data-state="active" class="set-format option">HEX</a>
               <a id="rgb" class="set-format option">RGB</a>
               <a id="hsl" class="set-format option">HSL</a>
-            </h2>
+            </h6>
           </hgroup>
         </header>
       </section>
