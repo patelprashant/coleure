@@ -4,10 +4,10 @@ define ['./_'], (_) ->
       clickedColor = event.target
 
       _.template options.previewTemplate, (template) =>
-        @displaySubject template: template color: clickedColor
+        @displaySubject template: template, color: clickedColor
       
       _.template options.singleTemplate, (template) =>
-        @displayTests template: template color: clickedColor
+        @displayTests template: template, color: clickedColor
 
   displaySubject: (options) ->
     element = options.color
