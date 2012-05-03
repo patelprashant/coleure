@@ -1,4 +1,4 @@
-define ['./_'], (_) ->
+define ['./goodies'], (_) ->
   singleKeys = []
   singleFunctions = []
   

@@ -1,6 +1,6 @@
 (function() {
 
-  define(['./settings', './_'], function(settings, _) {
+  define(['./settings', './goodies'], function(settings, _) {
     var formats, switchFormat,
       _this = this;
     formats = _.cls('set-format');

@@ -1,4 +1,4 @@
-define ['./_'], (_) ->
+define ['./goodies'], (_) ->
   setup: (options) ->
     _.listen _.id('colors'), 'click', (event) => @displayColor event, options
 

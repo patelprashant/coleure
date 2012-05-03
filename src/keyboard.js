@@ -1,6 +1,6 @@
 (function() {
 
-  define(['./_'], function(_) {
+  define(['./goodies'], function(_) {
     var combinedFunctions, combinedKeys, singleFunctions, singleKeys;
     singleKeys = [];
     singleFunctions = [];

@@ -1,6 +1,6 @@
 (function() {
 
-  define(['./_'], function(_) {
+  define(['./goodies'], function(_) {
     return {
       setup: function(options) {
         var _this = this;

@@ -1,4 +1,4 @@
-define ['./_'], (_) ->
+define ['./goodies'], (_) ->
   load: (sources) ->
     _.async @, 'display', 2
     _.json sources.colors, (colors) => @display colors: colors

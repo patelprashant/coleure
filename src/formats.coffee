@@ -1,4 +1,4 @@
-define ['./settings', './_'], (settings, _) ->
+define ['./settings', './goodies'], (settings, _) ->
   formats = _.cls 'set-format'
 
   switchFormat = (event) =>

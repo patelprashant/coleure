@@ -1,6 +1,6 @@
 (function() {
 
-  define(['./_'], function(_) {
+  define(['./goodies'], function(_) {
     return {
       load: function(sources) {
         var _this = this;

@@ -1,4 +1,4 @@
-define ['./keyboard', './settings', './_'], (keyboard, settings, _) ->
+define ['./keyboard', './settings', './goodies'], (keyboard, settings, _) ->
   _.listen _.id('colors'), 'mouseover', (event) ->
     clipboardHandler = _.id 'clipboard_handler'
     clipboardHandler.value = event.target.getAttribute('data-'+settings.format)

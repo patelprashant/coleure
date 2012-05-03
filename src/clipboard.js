@@ -1,6 +1,6 @@
 (function() {
 
-  define(['./keyboard', './settings', './_'], function(keyboard, settings, _) {
+  define(['./keyboard', './settings', './goodies'], function(keyboard, settings, _) {
     _.listen(_.id('colors'), 'mouseover', function(event) {
       var clipboardHandler;
       clipboardHandler = _.id('clipboard_handler');
