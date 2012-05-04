@@ -1,11 +1,18 @@
 (function() {
 
   define(['./keyboard', './settings', './goodies'], function(keyboard, settings, _) {
-    _.listen(_.id('colors'), 'mouseover', function(event) {
+    var selectColor;
+    selectColor = function(color) {
       var clipboardHandler;
       clipboardHandler = _.id('clipboard_handler');
-      clipboardHandler.value = event.target.getAttribute('data-' + settings.format);
+      clipboardHandler.value = color.getAttribute('data-' + settings.format);
       return clipboardHandler.select();
+    };
+    _.listen(_.id('colors'), 'mouseover', function(event) {
+      return selectColor(event.target);
+    });
+    _.listen(_.id('subjects'), 'mouseover', function(event) {
+      return selectColor(event.target);
     });
     return keyboard.listenWithCtrl('C', function() {
       var clipboard;

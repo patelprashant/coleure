@@ -1,7 +1,7 @@
 define ['./goodies'], (_) ->
   setup: (options) ->
     _.listen _.id('colors'), 'click', (event) => 
-      if event.altKey
+      if event.metaKey or event.ctrlKey
         @addColor event, options
       else
         @displayColor event, options

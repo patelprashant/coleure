@@ -5,7 +5,7 @@
       setup: function(options) {
         var _this = this;
         _.listen(_.id('colors'), 'click', function(event) {
-          if (event.altKey) {
+          if (event.metaKey || event.ctrlKey) {
             return _this.addColor(event, options);
           } else {
             return _this.displayColor(event, options);

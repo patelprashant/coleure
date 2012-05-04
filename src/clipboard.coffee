@@ -1,8 +1,14 @@
 define ['./keyboard', './settings', './goodies'], (keyboard, settings, _) ->
-  _.listen _.id('colors'), 'mouseover', (event) ->
+
+  selectColor = (color) ->
     clipboardHandler = _.id 'clipboard_handler'
-    clipboardHandler.value = event.target.getAttribute('data-'+settings.format)
+    clipboardHandler.value = color.getAttribute('data-'+settings.format)
     clipboardHandler.select()
+
+  _.listen _.id('colors'), 'mouseover', (event) ->
+    selectColor event.target
+  _.listen _.id('subjects'), 'mouseover', (event) ->
+    selectColor event.target
 
   keyboard.listenWithCtrl 'C', ->
     clipboard = _.id('clipboard_handler').value
