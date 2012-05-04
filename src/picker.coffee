@@ -5,7 +5,11 @@ define ['./goodies'], (_) ->
         @addColor event, options
       else
         @displayColor event, options
+    _.listen _.id('subjects'), 'click', (event) =>
+      @hideColor event, options
+  
   subjects: 0
+
   displayColor: (event, options) ->
     clickedColor = event.target
     attribute = clickedColor.getAttribute.bind clickedColor
@@ -31,12 +35,26 @@ define ['./goodies'], (_) ->
       hex: attribute 'data-hex'
       firstHex: _.cls('color-preview')[0].getAttribute 'data-hex'
 
-    @subjects++
-
     cache = _.id('subjects').innerHTML
     _.template options.previewTemplate, (template) ->
       _.id('subjects').innerHTML = cache + template data
+
+    @subjects++
     _.id('subjects').setAttribute 'data-subjects', @subjects
     
     _.template options.doubleTemplate, (template) ->
       _.id('tests').innerHTML = template data
+
+  hideColor: (event, options) ->
+    closeButton = event.target
+    if closeButton.classList.contains('close')
+      _.remove closeButton.parentNode
+
+      @subjects--
+      _.id('subjects').setAttribute 'data-subjects', @subjects
+
+      data =
+        hex: _.cls('color-preview')[0].getAttribute('data-hex')
+
+      _.template options.singleTemplate, (template) ->
+        _.id('tests').innerHTML = template data
