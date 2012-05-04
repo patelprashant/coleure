@@ -134,6 +134,9 @@
           return this._documentEl.removeEventListener(element, type);
         }
       },
+      remove: function(el) {
+        return el.parentNode.removeChild(el);
+      },
       _document: document,
       _documentEl: document.documentElement,
       templateList: function(urls, callback, scopes, compileOnly) {

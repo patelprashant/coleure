@@ -15,3 +15,4 @@ require [
     picker.setup
       previewTemplate: 'templates/preview.html'
       singleTemplate: 'templates/test/single.html'
+      doubleTemplate: 'templates/test/double.html'

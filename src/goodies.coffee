@@ -117,6 +117,9 @@ define ->
     else
       @_documentEl.removeEventListener element, type
 
+  remove: (el) ->
+    el.parentNode.removeChild el
+
   # Internal stuff
 
   _document: document
