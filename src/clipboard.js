@@ -1,22 +1,26 @@
 (function() {
 
   define(['./keyboard', './settings', './goodies'], function(keyboard, settings, _) {
-    var selectColor;
+    var clipboard_handler, colors_class, selectColor;
+    colors_class = 'color';
+    clipboard_handler = _.id('clipboard_handler');
     selectColor = function(color) {
-      var clipboardHandler;
-      clipboardHandler = _.id('clipboard_handler');
-      clipboardHandler.value = color.getAttribute('data-' + settings.format);
-      return clipboardHandler.select();
+      clipboard_handler.value = color.getAttribute('data-' + settings.format);
+      return clipboard_handler.select();
     };
     _.listen(_.id('colors'), 'mouseover', function(event) {
-      return selectColor(event.target);
+      if (event.target.classList.contains(colors_class)) {
+        return selectColor(event.target);
+      }
     });
     _.listen(_.id('subjects'), 'mouseover', function(event) {
-      return selectColor(event.target);
+      if (event.target.classList.contains(colors_class)) {
+        return selectColor(event.target);
+      }
     });
     return keyboard.listenWithCtrl('C', function() {
       var clipboard;
-      clipboard = _.id('clipboard_handler').value;
+      clipboard = clipboard_handler.value;
       return document.title = "" + clipboard + " - Coleure";
     });
   });

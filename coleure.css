@@ -64,12 +64,15 @@ Foundation
 }
 
 body {
-  font: 14px/1.5 "Helvetica Neue", sans-serif;
+  font: 12px/1.5 "Helvetica Neue", sans-serif;
   color: #000;
   background: #eee;
   cursor: default;
   padding: 32px 256px;
   padding-left: 30px;
+}
+header {
+  font-size: 14px;
 }
 
 a { 
@@ -93,6 +96,10 @@ input {
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
+}
+kbd {
+  color: #fff;
+  background: #000;
 }
 
 /* ///////////////////
@@ -174,7 +181,7 @@ Colors and empty slots
   margin-top: 20px;
   border-top: 1px solid #ccc;
 }
-.sep > header {
+.sep-header {
   padding: 10px 0;
 }
 .s2 {

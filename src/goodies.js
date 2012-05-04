@@ -137,6 +137,13 @@
       remove: function(el) {
         return el.parentNode.removeChild(el);
       },
+      hide: function(el) {
+        return el.style.display = 'none';
+      },
+      show: function(el, type) {
+        if (type == null) type = 'block';
+        return el.style.display = type;
+      },
       _document: document,
       _documentEl: document.documentElement,
       templateList: function(urls, callback, scopes, compileOnly) {

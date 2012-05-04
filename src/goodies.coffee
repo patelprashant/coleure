@@ -120,6 +120,12 @@ define ->
   remove: (el) ->
     el.parentNode.removeChild el
 
+  hide: (el) ->
+    el.style.display = 'none'
+
+  show: (el, type='block') ->
+    el.style.display = type
+
   # Internal stuff
 
   _document: document
