@@ -120,6 +120,9 @@ button {
   color: #333;
   text-shadow: 1px 1px #fff;
   background: -webkit-linear-gradient(#ddd, #ccc);
+  background: -moz-linear-gradient(#ddd, #ccc);
+  background: -o-linear-gradient(#ddd, #ccc);
+  background: -linear-gradient(#ddd, #ccc);
 }
 button.join {
   margin-top: 10px;
@@ -142,6 +145,9 @@ button.join[data-state=active] {
   color: #fff;
   border-color: #666;
   background: -webkit-linear-gradient(#666, #999);
+  background: -moz-linear-gradient(#666, #999);
+  background: -o-linear-gradient(#666, #999);
+  background: -linear-gradient(#666, #999);
   text-shadow: 1px 1px rgba(0,0,0,0.2);
   border-width: 1px;
   z-index: 1;
@@ -244,4 +250,5 @@ Colors and empty slots
 #logo {
   position: fixed;
   bottom: 0;
+  right: 30px;
 }

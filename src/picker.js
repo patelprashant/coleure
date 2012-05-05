@@ -64,8 +64,7 @@
         closeButton = event.target;
         if (!closeButton.classList.contains('close')) return;
         previewsLength = _.cls('color-preview').length - 1;
-        _.attr(_.id('subjects'), 'data-subjects', previewsLength);
-        _.id('subjects').classList.toggle('lol');
+        _.attr(_.id('subjects'), 'data-subjects', previewsLength, true);
         _.remove(closeButton.parentNode);
         this.toggleMessage(previewsLength !== 0);
         preview = _.cls('color-preview')[0];

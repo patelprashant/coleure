@@ -103,11 +103,11 @@
       $getAttr: Element.prototype.getAttribute,
       $setAttr: Element.prototype.setAttribute,
       attr: function(element, property, value, safariShit) {
-        if (value) {
-          return this.$setAttr.call(element, property, value);
-        } else {
-          return this.$getAttr.call(element, property);
-        }
+        var result;
+        if (safariShit == null) safariShit = false;
+        result = (value ? this.$setAttr : this.$getAttr).call(element, property, value);
+        if (safariShit) element.classList.toggle('safariFix');
+        return result;
       },
       $cls: HTMLHtmlElement.prototype.getElementsByClassName,
       cls: function(element, names) {
@@ -117,11 +117,12 @@
           return this.$cls.call(this._documentEl, element);
         }
       },
-      $tag: Element.prototype.getElementsByTagName,
+      $tag: HTMLHtmlElement.prototype.getElementsByTagName,
       tag: function(element, tagName) {
         if (tagName) {
           return this.$tag.call(element, tagName);
         } else {
+          console.log('lole');
           return this.$tag.call(this._documentEl, element);
         }
       },
