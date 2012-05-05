@@ -90,11 +90,13 @@ define ->
   $getAttr: Element.prototype.getAttribute
   $setAttr: Element.prototype.setAttribute
 
-  attr: (element, property, value, safariShit) ->
-    if value
-      @$setAttr.call element, property, value
-    else
-      @$getAttr.call element, property
+  attr: (element, property, value, safariShit = false) ->
+    result = (if value then @$setAttr else @$getAttr).call element, property, value
+    
+    if safariShit
+      element.classList.toggle 'safariFix'
+
+    result
   
   $cls: HTMLHtmlElement.prototype.getElementsByClassName
   cls: (element, names) ->
@@ -103,11 +105,12 @@ define ->
     else
       @$cls.call @_documentEl, element
 
-  $tag: Element.prototype.getElementsByTagName
+  $tag: HTMLHtmlElement.prototype.getElementsByTagName
   tag: (element, tagName) ->
     if tagName
       @$tag.call element, tagName
     else
+      console.log 'lole'
       @$tag.call @_documentEl, element
 
   $id: document.getElementById

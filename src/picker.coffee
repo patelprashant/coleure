@@ -55,8 +55,7 @@ define ['./goodies'], (_) ->
     return unless closeButton.classList.contains 'close'
 
     previewsLength = _.cls('color-preview').length - 1
-    _.attr _.id('subjects'), 'data-subjects', previewsLength
-    _.id('subjects').classList.toggle 'lol'
+    _.attr _.id('subjects'), 'data-subjects', previewsLength, true
     _.remove closeButton.parentNode
 
     @toggleMessage previewsLength isnt 0
