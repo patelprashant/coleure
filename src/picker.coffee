@@ -32,31 +32,28 @@ define ['./goodies'], (_) ->
       hsl: attribute 'data-hsl'
 
     if event.metaKey or event.ctrlKey
-      addColor = (event) ->
-        data.firstHex = color_previews[0].getAttribute 'data-hex'
-        cache = color_subjects.innerHTML
-        _.template options.previewTemplate, (template) ->
-          color_subjects.innerHTML = cache + template data
-      
-        _.template options.doubleTemplate, (template) ->
-          color_tests.innerHTML = template data
+      _.remove color_previews[+!event.shiftKey] if @subjects > 1
 
-      if @subjects is 1
-        addColor event
-        @subjects = 2
-        color_subjects.setAttribute 'data-subjects', @subjects
-      else
-        _.remove color_previews[0]
-        addColor event
+      data.firstHex = color_previews[0].getAttribute 'data-hex'
+      cache = color_subjects.innerHTML
+      _.template options.previewTemplate, (template) ->
+        color_subjects.innerHTML = cache + template data
+    
+      _.template options.doubleTemplate, (template) ->
+        color_tests.innerHTML = template data
+
+      @subjects = 2
+
     else
       _.template options.previewTemplate, (template) ->
         color_subjects.innerHTML = template data
-
-      @subjects = 1
-      color_subjects.setAttribute 'data-subjects', @subjects
       
       _.template options.singleTemplate, (template) ->
         color_tests.innerHTML = template data
+
+      @subjects = 1
+    
+    color_subjects.setAttribute 'data-subjects', @subjects
 
   removeColor: (event, options) ->
     closeButton = event.target

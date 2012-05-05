@@ -28,7 +28,7 @@
         }
       },
       selectColor: function(event, options) {
-        var addColor, attribute, clickedColor, color_previews, color_subjects, color_tests, data;
+        var attribute, cache, clickedColor, color_previews, color_subjects, color_tests, data;
         clickedColor = event.target;
         attribute = clickedColor.getAttribute.bind(clickedColor);
         color_subjects = _.id('subjects');
@@ -41,35 +41,26 @@
           hsl: attribute('data-hsl')
         };
         if (event.metaKey || event.ctrlKey) {
-          addColor = function(event) {
-            var cache;
-            data.firstHex = color_previews[0].getAttribute('data-hex');
-            cache = color_subjects.innerHTML;
-            _.template(options.previewTemplate, function(template) {
-              return color_subjects.innerHTML = cache + template(data);
-            });
-            return _.template(options.doubleTemplate, function(template) {
-              return color_tests.innerHTML = template(data);
-            });
-          };
-          if (this.subjects === 1) {
-            addColor(event);
-            this.subjects = 2;
-            return color_subjects.setAttribute('data-subjects', this.subjects);
-          } else {
-            _.remove(color_previews[0]);
-            return addColor(event);
-          }
+          if (this.subjects > 1) _.remove(color_previews[+(!event.shiftKey)]);
+          data.firstHex = color_previews[0].getAttribute('data-hex');
+          cache = color_subjects.innerHTML;
+          _.template(options.previewTemplate, function(template) {
+            return color_subjects.innerHTML = cache + template(data);
+          });
+          _.template(options.doubleTemplate, function(template) {
+            return color_tests.innerHTML = template(data);
+          });
+          this.subjects = 2;
         } else {
           _.template(options.previewTemplate, function(template) {
             return color_subjects.innerHTML = template(data);
           });
-          this.subjects = 1;
-          color_subjects.setAttribute('data-subjects', this.subjects);
-          return _.template(options.singleTemplate, function(template) {
+          _.template(options.singleTemplate, function(template) {
             return color_tests.innerHTML = template(data);
           });
+          this.subjects = 1;
         }
+        return color_subjects.setAttribute('data-subjects', this.subjects);
       },
       removeColor: function(event, options) {
         var closeButton, data;

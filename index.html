@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <title>Coleure</title>
-    <link href="favicon.png" rel="shortcut icon" />
     <link href="coleure.css" rel="stylesheet" />
+    <link class="favicon" rel="icon" type="image/png" href="favicon.png" />
     <script src="src/require.js" data-main="src/coleure"></script>
     <script>
       // var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-26310431-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
@@ -22,26 +22,24 @@
       </section>
       <section class="sep">
         <header class="sep-header">
-          <h1 class=s2>Palette</h1>
+          <input id="clipboard_handler" class="b-size" placeholder="Hover any color" readonly><kbd class="inside-input">⌘C</kbd></input>
+          <button id="hex" data-state="active" class="set-format option join">HEX</button>
+          <button id="rgb" class="set-format option join">RGB</button>
+          <button id="hsl" class="set-format option join">HSL</button>
+        </header>
+      </section>
+      <!-- <section class="sep">
+        <header class="sep-header">
+          <h1 class=s2>Copy to palette</h1>
         </header>
         <div id="palette">
           <div class="dropzone">Drag your favorite colors here.</div>
         </div>
-      </section>
-      <section class="sep">
-        <header class="sep-header s2">
-          <hgroup>
-            <input id="clipboard_handler" class="b-size" placeholder="Hover any color" readonly />
-            <h6>    
-              <a id="hex" data-state="active" class="set-format option">HEX</a>
-              <a id="rgb" class="set-format option">RGB</a>
-              <a id="hsl" class="set-format option">HSL</a>
-            </h6>
-          </hgroup>
-        </header>
-      </section>
+      </section> -->
+      
       <img id="logo" draggable="false" src="logo.png" alt="Coleure" />
     </aside>
-    <section id="colors" />
+    <section id="colors" class="clear"></section>
+    <p style="margin-top: 20px;">Pantone colors on computer screens may vary based on the  graphics card and monitor used in your system. Do not rely on this as your only method for final color selection.  For true accuracy use the Pantone Fomula Guide. PANTONE® and other Pantone, Inc. trademarks are the property of Pantone, Inc.  </p>
   </body>
 </html>
