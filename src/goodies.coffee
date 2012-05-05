@@ -86,6 +86,15 @@ define ->
     @$forEach.call array, callback
 
   # Fast and smart access to functions with long names.
+
+  $getAttr: Element.prototype.getAttribute
+  $setAttr: Element.prototype.setAttribute
+
+  attr: (element, property, value, safariShit) ->
+    if value
+      @$setAttr.call element, property, value
+    else
+      @$getAttr.call element, property
   
   $cls: HTMLHtmlElement.prototype.getElementsByClassName
   cls: (element, names) ->

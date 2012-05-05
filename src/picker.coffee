@@ -4,74 +4,68 @@ define ['./goodies'], (_) ->
       if event.target.classList.contains 'color'
         #check templates/color.html for more info
         @selectColor event, options
-        @toggleMessage event, options
     _.listen _.id('subjects'), 'click', (event) =>
       @removeColor event, options
-  
-  subjects: 0
 
-  toggleMessage: (event, options) ->
+  toggleMessage: (showTests) ->
     welcome_message = _.id 'welcome-message'
     color_tests = _.id 'tests'
 
-    if @subjects is 0
-      _.show welcome_message
-      _.hide color_tests
-    else
+    if showTests
       _.hide welcome_message
       _.show color_tests
+    else
+      _.show welcome_message
+      _.hide color_tests
 
   selectColor: (event, options) ->
     clickedColor = event.target
-    attribute = clickedColor.getAttribute.bind clickedColor
+    attribute = _.$getAttr.bind clickedColor
     color_subjects = _.id 'subjects'
     color_previews = _.cls 'color-preview'
-    color_tests = _.id 'tests'
     data =
       name: attribute 'data-name'
       hex: attribute 'data-hex'
       rgb: attribute 'data-rgb'
       hsl: attribute 'data-hsl'
 
-    console.log 'heyo'
     if color_previews.length > 0 and (event.metaKey or event.ctrlKey)
-      _.remove color_previews[+!event.shiftKey] if @subjects > 1
+      if color_previews.length is 2
+        _.remove color_previews[+!event.shiftKey]
 
-      data.firstHex = color_previews[0].getAttribute 'data-hex'
-      cache = color_subjects.innerHTML
-      _.template options.previewTemplate, (template) ->
-        color_subjects.innerHTML = cache + template data
-    
-      _.template options.doubleTemplate, (template) ->
-        color_tests.innerHTML = template data
-
-      @subjects = 2
-
+      data.firstHex = _.attr color_previews[0], 'data-hex'
+      colorTemplate = options.doubleTemplate
+      previewsLength = 2
     else
-      _.template options.previewTemplate, (template) ->
-        color_subjects.innerHTML = template data
-      
-      _.template options.singleTemplate, (template) ->
-        color_tests.innerHTML = template data
+      colorTemplate = options.singleTemplate
+      previewsLength = 1
 
-      @subjects = 1
+    _.attr color_subjects, 'data-subjects', previewsLength
+    @toggleMessage true
+
+    _.template options.previewTemplate, (template) ->
+      cache = if previewsLength is 2 then color_subjects.innerHTML else ''
+      color_subjects.innerHTML = cache + template data
     
-    color_subjects.setAttribute 'data-subjects', @subjects
+    _.template colorTemplate, (template) ->
+      _.id('tests').innerHTML = template data
 
   removeColor: (event, options) ->
     closeButton = event.target
     return unless closeButton.classList.contains 'close'
 
+    previewsLength = _.cls('color-preview').length - 1
+    _.attr _.id('subjects'), 'data-subjects', previewsLength
+    _.id('subjects').classList.toggle 'lol'
     _.remove closeButton.parentNode
-    _.id('subjects').setAttribute 'data-subjects', --@subjects
 
-    @toggleMessage event, options
+    @toggleMessage previewsLength isnt 0
 
-    colorPlaceholder = _.cls('color-preview')[0]
-    return unless colorPlaceholder
+    preview = _.cls('color-preview')[0]
+    return unless preview
 
     data =
-      hex: colorPlaceholder.getAttribute 'data-hex'
+      hex: _.attr preview, 'data-hex'
 
     _.template options.singleTemplate, (template) ->
       _.id('tests').innerHTML = template data
