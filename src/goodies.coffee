@@ -87,7 +87,7 @@ define ->
 
   # Fast and smart access to functions with long names.
   
-  $cls: Element.prototype.getElementsByClassName
+  $cls: HTMLHtmlElement.prototype.getElementsByClassName
   cls: (element, names) ->
     if names
       @$cls.call element, names

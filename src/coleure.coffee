@@ -1,18 +1,18 @@
-#window.addEventListener 'load', -> if Opera support is wanted
-require [
-  './colors'
-  './picker'
-  './clipboard'
-  './formats'],
-  (colors, picker) ->
-    
-    "use strict"
+window.addEventListener 'load', ->
+  require [
+    './colors'
+    './picker'
+    './clipboard'
+    './formats'],
+    (colors, picker) ->
+      
+      "use strict"
 
-    colors.load
-      colors: 'src/pantone.json'
-      template: 'templates/color.html'
+      colors.load
+        colors: 'src/pantone.json'
+        template: 'templates/color.html'
 
-    picker.setup
-      previewTemplate: 'templates/preview.html'
-      singleTemplate: 'templates/test/single.html'
-      doubleTemplate: 'templates/test/double.html'
+      picker.setup
+        previewTemplate: 'templates/preview.html'
+        singleTemplate: 'templates/test/single.html'
+        doubleTemplate: 'templates/test/double.html'
