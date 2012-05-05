@@ -85,6 +85,9 @@ aside, footer, header, section {
   -moz-user-select: -moz-none;
   user-select: none;
 }
+p {
+  margin-bottom: 10px;
+}
 
 [draggable=true] {
   -khtml-user-drag: element;
@@ -227,6 +230,9 @@ Colors and empty slots
 .sep {
   margin-top: 20px;
   border-top: 1px solid #ccc;
+}
+.note {
+  color: #999;
 }
 .sep-header {
   position: relative;

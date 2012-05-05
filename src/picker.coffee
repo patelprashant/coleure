@@ -2,7 +2,6 @@ define ['./goodies'], (_) ->
   setup: (options) ->
     _.listen _.id('colors'), 'click', (event) => 
       if event.target.classList.contains 'color'
-        #check templates/color.html for more info
         @selectColor event, options
     _.listen _.id('subjects'), 'click', (event) =>
       @removeColor event, options
