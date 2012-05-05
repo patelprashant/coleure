@@ -48,18 +48,3 @@ define ['./keyboard', './settings', './goodies'], (keyboard, settings, _) ->
       head.removeChild(oldLink);
 
     head.appendChild(link)
-
-    ###
-    head = document.head or _.tag('head')[0]
-    link = document.createElement('link')
-    oldLink = _.id 'dynamic-favicon'
-    link.id = 'dynamic-favicon'
-    link.rel = 'shortcut icon'
-    link.href = canvas.toDataURL 'image/png'
-     
-    if oldLink
-      document.head.removeChild(oldLink);
-    
-    document.head.appendChild(link);
-    ###
-    #_.id('dynamic-favicon').href = canvas.toDataURL 'image/png'
