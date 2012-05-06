@@ -187,7 +187,7 @@ Colors and empty slots
 #palette .item {
   width: 32px;
   padding-bottom: 32px;
-  /*-webkit-animation: 0.25s scalemation;*/
+  -webkit-animation: 0.25s scalemation;
 }
 
 #panels {
