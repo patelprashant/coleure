@@ -24,7 +24,7 @@ define ['./goodies'], (_) ->
       #_.unlisten event.currentTarget, event.type, arguments.callee
       _.template options.template, (template) ->
         el = document.createElement 'i'
-        colors.appendChild el
+        colors.insertBefore el, colors.firstChild
         el.outerHTML = template data
 
       # TODO: make decent function, this is just for prototyping

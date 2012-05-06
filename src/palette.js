@@ -28,7 +28,7 @@
           _.template(options.template, function(template) {
             var el;
             el = document.createElement('i');
-            colors.appendChild(el);
+            colors.insertBefore(el, colors.firstChild);
             return el.outerHTML = template(data);
           });
           return _.hide(_.id('drop-message'));
