@@ -1,10 +1,11 @@
 window.addEventListener 'load', ->
   require [
     './colors'
-    './picker'
+    './inspector'
+    './palette'
     './clipboard'
     './formats'],
-    (colors, picker) ->
+    (colors, inspector, palette) ->
       
       "use strict"
 
@@ -12,7 +13,10 @@ window.addEventListener 'load', ->
         colors: 'src/pantone.json'
         template: 'templates/color.html'
 
-      picker.setup
+      inspector.setup
         previewTemplate: 'templates/preview.html'
         singleTemplate: 'templates/test/single.html'
         doubleTemplate: 'templates/test/double.html'
+
+      palette.setup
+        template: 'templates/color.html'

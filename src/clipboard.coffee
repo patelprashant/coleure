@@ -16,7 +16,7 @@ define ['./keyboard', './settings', './goodies'], (keyboard, settings, _) ->
       hoverColor event.target
 
   _.listen _.id('colors'), 'mouseover', verifyIfColor
-  _.listen _.id('subjects'), 'mouseover', verifyIfColor
+  _.listen _.id('panels'), 'mouseover', verifyIfColor
 
   canvas = document.createElement 'canvas'
   canvas.height = canvas.width = 16

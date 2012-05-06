@@ -3,8 +3,15 @@
   define(['./goodies'], function(_) {
     return {
       setup: function(options) {
-        var _this = this;
+        var verifyIfColor,
+          _this = this;
+        verifyIfColor = function(event) {};
         _.listen(_.id('colors'), 'click', function(event) {
+          if (event.target.classList.contains('color')) {
+            return _this.selectColor(event, options);
+          }
+        });
+        _.listen(_.id('palette_colors'), 'click', function(event) {
           if (event.target.classList.contains('color')) {
             return _this.selectColor(event, options);
           }
