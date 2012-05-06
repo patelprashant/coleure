@@ -11,8 +11,8 @@
     </script>
   </head>
   <body>
-    <img id="logo" draggable="false" src="logo.png" alt="Coleure" />
     <aside id="panels">
+
       <section id="inspector">
         <aside id="welcome-message">
           <header class="sep-header s2"><h1>Getting started</h1></header>
@@ -22,23 +22,38 @@
         <div id="subjects" class="clear"></div>
         <div id="tests"></div>
       </section>
+
       <section class="sep clear">
         <header class="sep-header">
-          <input id="clipboard_handler" class="b-size" placeholder="Hover any color" readonly><kbd class="inside-input">⌘C</kbd></input>
+          <input id="clipboard_handler" placeholder="Hover any color" readonly><kbd class="inside-input">⌘C</kbd></input>
           <button id="hex" data-state="active" class="set-format option join">HEX</button>
           <button id="rgb" class="set-format option join">RGB</button>
           <button id="hsl" class="set-format option join">HSL</button>
         </header>
       </section>
-      <section id="palette" class="sep" style="margin-top: 10px; padding-bottom: 50px;">
+
+      <section id="palette" class="sep" style="padding-bottom: 50px;">
         <header class="sep-header">
+          <div class="select">
+            <div class="button select-input  right">Default</div>
+            <div class="select-options">
+              <ul>
+                <li class="select-option">Gioconda</li>
+                <li class="select-option">Berlin</li>
+                <li class="select-option">Experimental colours</li>
+              </ul>
+              <input type="text" autofocus placeholder="New palette…" />
+            </div>
+          </div>
           <h1 class=s2>Palette</h1>
         </header>
-        <div id="palette_colors"></div>
         <div id="drop-message" class="dropzone">Drop your favorite colors here.</div>
+        <div id="palette_colors" class="clear b10"></div>
+        <!-- <button>Show all…</button> -->
       </section>
+
     </aside>
     <section id="colors" class="clear"></section>
-    <p class="note" style="margin-top: 20px;">Pantone colors on computer screens may vary based on the  graphics card and monitor used in your system. Do not rely on this as your only method for final color selection.  For true accuracy use the Pantone Fomula Guide. PANTONE® and other Pantone, Inc. trademarks are the property of Pantone, Inc.  </p>
+    <p class="note" style="margin: 20px 0 0;">Pantone colors on computer screens may vary based on the  graphics card and monitor used in your system. Do not rely on this as your only method for final color selection.  For true accuracy use the Pantone Fomula Guide. PANTONE® and other Pantone, Inc. trademarks are the property of Pantone, Inc.  </p>
   </body>
 </html>

@@ -61,15 +61,20 @@ Foundation
   font-size:100%;
   vertical-align:baseline;
   cursor: default;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
   font: 12px/1.5 "Helvetica Neue", sans-serif;
   color: #000;
-  background: #eee;
   cursor: default;
   padding: 32px 256px;
   padding-left: 30px;
+}
+body, .page-bg {
+  background: #eee;
 }
 header {
   font-size: 14px;
@@ -88,14 +93,17 @@ aside, footer, header, section {
 p {
   margin-bottom: 10px;
 }
-
+li {
+  list-style:none;
+}
 [draggable=true] {
   -khtml-user-drag: element;
   -webkit-user-drag: element;
   -khtml-user-select: none;
   -webkit-user-select: none;
 }
-input, button {
+input, button, .select-input, .select-options {
+  font-family: "Lucida Grande", "Lucida Sans", tahoma, sans-serif;
   border: 1px solid #aaa;
   border-radius: 2px;
   box-shadow: 0 1px #fff;
@@ -141,7 +149,7 @@ button.join:last-of-type {
   border-right-width: 1px;
   border-right-color: #aaa;
 }
-button.join[data-state=active] {
+button.join[data-state=active], button:active {
   color: #fff;
   border-color: #666;
   background: -webkit-linear-gradient(#666, #999);
@@ -157,15 +165,59 @@ kbd {
   color: #fff;
   background: #000;
 }
+.select {
+  position: relative;
+}
+.select-input {
+  padding: 3px 10px;
+  padding-right: 20px;
+  font-size: 12px;
+  background: url('drop.gif') no-repeat right center;
+  color: #666;
+}
+.select-input:hover + .select-options,
+.select-options:hover {
+  display: block;
+}
+.select-options {
+  position: absolute;
+  top: 23px;
+  right: 0;
+  display: none;
+  padding: 5px;
+  background: #fff;
+  z-index: 999;
+}
+.select-options input {
+  font-size: 11px;
+}
+.select-option {
+  padding: 3px 5px;
+  font-size: 11px;
+}
+.select-option:first-of-type {
+  border-radius: 2px 2px 0 0;
+}
+.select-option:last-of-type {
+  border-radius: 0 0 2px 2px;
+}
+.select-option:nth-child(odd) {
+  background: #eee;
+}
+.select-option:hover {
+  color: #fff;
+  background: -webkit-linear-gradient(#e60063, #b20050);
+  background: -moz-linear-gradient(#e60063, #b20050);
+  background: -o-linear-gradient(#e60063, #b20050);
+  background: linear-gradient(#e60063, #b20050);
+}
+.select-option:last-of-type {
+  margin-bottom: 5px;
+}
 
 /* ///////////////////
 Colors and empty slots
 /////////////////// */
-.b-size {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
 .color {
   position: relative;
   z-index: 1;
@@ -176,15 +228,14 @@ Colors and empty slots
 .empty-color {
   border: dashed #ddd;
   border-width: 1px 1px 0 0;
-  margin-top: -1px;
-  margin-right: -1px;
+  margin: -1px -1px 0 1px;
 }
 
 #colors > .item {
   width: 8.333%;
   padding-bottom: 8.333%;
 }
-#palette .item {
+#palette_colors > .item {
   width: 32px;
   padding-bottom: 32px;
   -webkit-animation: 0.25s scalemation;
@@ -196,10 +247,15 @@ Colors and empty slots
   top: 32px;
   right: 32px;
   overflow: auto;
-  bottom: 48px;
+  bottom: 75px;
 }
-#info {
-  height: 240px;
+#inspector {
+  height: 228px;
+}
+#logo {
+  position: fixed;
+  bottom: 0px;
+  right: 32px;
 }
 .color-preview {
   position: relative;
@@ -227,14 +283,15 @@ Colors and empty slots
   font-size: 13px;
 }
 .dropzone {
-  padding: 40px ;
+  padding: 40px;
+  margin-bottom: 10px;
   font-size: 13px;
   text-align: center;
   border: 2px dashed #ccc;
   color: #666;
 }
 .sep {
-  margin-top: 20px;
+  margin-top: 10px;
   border-top: 1px solid #ccc;
 }
 .note {
@@ -246,9 +303,4 @@ Colors and empty slots
 }
 .s2 {
   font-size: 16px;
-}
-#logo {
-  position: fixed;
-  bottom: 0;
-  right: 30px;
 }
