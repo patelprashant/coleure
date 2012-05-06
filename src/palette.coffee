@@ -4,7 +4,7 @@ define ['./goodies'], (_) ->
     colors = _.id 'palette_colors'
     data = null
 
-    _.listen _.id('colors'), 'dragstart', (event) ->
+    colorDrag = (event) ->
       color = event.target
       data =
         name: _.attr color, 'data-name'
@@ -14,6 +14,9 @@ define ['./goodies'], (_) ->
 
       event.dataTransfer.effectAllowed = 'copy'
       event.dataTransfer.setData 'text', 'Color added.'
+
+    _.listen _.id('colors'), 'dragstart', colorDrag
+    _.listen _.id('subjects'), 'dragstart', colorDrag
 
     _.listen dropzone, 'dragover', (event) ->
       event.preventDefault()

@@ -3,11 +3,11 @@
   define(['./goodies'], function(_) {
     return {
       setup: function(options) {
-        var colors, data, dropzone;
+        var colorDrag, colors, data, dropzone;
         dropzone = _.id('palette');
         colors = _.id('palette_colors');
         data = null;
-        _.listen(_.id('colors'), 'dragstart', function(event) {
+        colorDrag = function(event) {
           var color;
           color = event.target;
           data = {
@@ -18,7 +18,9 @@
           };
           event.dataTransfer.effectAllowed = 'copy';
           return event.dataTransfer.setData('text', 'Color added.');
-        });
+        };
+        _.listen(_.id('colors'), 'dragstart', colorDrag);
+        _.listen(_.id('subjects'), 'dragstart', colorDrag);
         _.listen(dropzone, 'dragover', function(event) {
           event.preventDefault();
           event.dataTransfer.dropEffect = 'copy';
