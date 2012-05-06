@@ -17,8 +17,7 @@ define ['./goodies'], (_) ->
   selectColor = (event) ->
     clickedColor = event.target
     return unless clickedColor.classList.contains 'color'
-
-    attribute = _.$getAttr.bind clickedColor
+    attribute = clickedColor.getAttribute.bind clickedColor
     color_previews = _.cls 'color-preview'
     data =
       name: attribute 'data-name'
@@ -70,7 +69,7 @@ define ['./goodies'], (_) ->
 
     _.template options.singleTemplate, changeTests
 
-  setup: ($options) ->
+  setup = ($options) ->
     options = $options
     color_subjects = _.id 'subjects'
     

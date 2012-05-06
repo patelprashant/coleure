@@ -31,7 +31,7 @@ define ['./goodies'], (_) ->
     colors.insertBefore el, colors.firstChild
     el.outerHTML = template data
 
-  setup: (options) ->
+  setup = (options) ->
     colors = _.id 'palette_colors'
     colorTemplate = options.template
 

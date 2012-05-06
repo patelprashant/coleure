@@ -1,5 +1,5 @@
 define ['./goodies'], (_) ->
-  display: (settings) ->
+  _display: (settings) ->
     colors = settings.colors
     template = settings.template
     content = ''
@@ -7,6 +7,6 @@ define ['./goodies'], (_) ->
     _.id('colors').innerHTML = content
   
   load: (sources) ->
-    _.async @, 'display', 2
-    _.json sources.colors, (colors) => @display colors: colors
-    _.template sources.template, (template) => @display template: template
+    _.async @, '_display', 2
+    _.json sources.colors, (colors) => @_display colors: colors
+    _.template sources.template, (template) => @_display template: template

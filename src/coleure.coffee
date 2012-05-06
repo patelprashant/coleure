@@ -13,10 +13,10 @@ window.addEventListener 'load', ->
         colors: 'src/pantone.json'
         template: 'templates/color.html'
 
-      inspector.setup
+      inspector
         previewTemplate: 'templates/preview.html'
         singleTemplate: 'templates/test/single.html'
         doubleTemplate: 'templates/test/double.html'
 
-      palette.setup
+      palette
         template: 'templates/color.html'
