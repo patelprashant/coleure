@@ -1,5 +1,4 @@
 define ['./keyboard', './settings', './goodies'], (keyboard, settings, _) ->
-
   colors_class = 'color'
   clipboard_handler = _.id 'clipboard_handler'
   

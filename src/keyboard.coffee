@@ -19,6 +19,7 @@ define ['./goodies'], (_) ->
     length = singleKeys.length
     singleKeys[length] = key
     singleFunctions[length] = fn
+  
   listenWithCtrl: (key, fn) ->
     length = combinedKeys.length
     combinedKeys[length] = key
