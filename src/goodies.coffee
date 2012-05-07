@@ -6,11 +6,13 @@ define ->
   _document = document
   _documentEl = document.documentElement
   $forEach = Array.prototype.forEach
+  $indexOf = Array.prototype.indexOf
   $id = _document.getElementById
   $getAttr = Element.prototype.getAttribute
   $setAttr = Element.prototype.setAttribute
   $tag = HTMLHtmlElement.prototype.getElementsByTagName
   $cls = HTMLHtmlElement.prototype.getElementsByClassName
+  $createElement = _document.createElement
 
   ########################################
   # Internal template sub-functions.     #
@@ -159,6 +161,12 @@ define ->
 
   forEach: (array, callback) ->
     $forEach.call array, callback
+
+  indexOf: (array, el) ->
+    $indexOf.call array, el
+
+  create: (tag) ->
+    $createElement.call _document, tag
 
   ########################################
   # Shortcuts.                           #

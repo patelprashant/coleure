@@ -1,3 +1,4 @@
 define ->
   format: 'hex'
-  palette: null
+  currentPalette: 0
+  palettes: [[]]

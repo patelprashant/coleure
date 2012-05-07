@@ -44,6 +44,6 @@ define ['./keyboard', './settings', './goodies'], (keyboard, settings, _) ->
 
     head = document.head or _.tag('head')[0]
     if oldLink
-      head.removeChild(oldLink);
+      head.removeChild oldLink
 
-    head.appendChild(link)
+    head.appendChild link
