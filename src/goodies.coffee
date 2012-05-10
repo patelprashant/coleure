@@ -10,7 +10,7 @@ define ->
   $id = _document.getElementById
   $getAttr = Element.prototype.getAttribute
   $setAttr = Element.prototype.setAttribute
-  $tag = HTMLHtmlElement.prototype.getElementsByTagName
+  #$tag = HTMLHtmlElement.prototype.getElementsByTagName
   $cls = HTMLHtmlElement.prototype.getElementsByClassName
   $createElement = _document.createElement
 
@@ -188,9 +188,11 @@ define ->
   
   tag: (element, tagName) ->
     if tagName
-      $tag.call element, tagName
+      element.getElementsByTagName tagName
+      #$tag.call element, tagName
     else
-      $tag.call _documentEl, element
+      _documentEl.getElementsByTagName element
+      #$tag.call _documentEl, element
   
   id: (id) ->
     $id.call _document, id
