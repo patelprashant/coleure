@@ -1,4 +1,4 @@
 define ->
   format: 'hex'
-  activePaletteIndex: 0
+  activePaletteIndex: -1
   palettes: [[]]
