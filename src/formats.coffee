@@ -1,6 +1,9 @@
 define ['./settings', './goodies'], (settings, _) ->
   formats = _.cls 'set-format'
   clipboardHandler = _.id 'clipboard_handler'
+
+  _.attr _.id(settings.format), 'data-state', 'active'
+
   switchFormat = (event) ->
     newFormat = event.target
     settings.format = _.attr newFormat, 'id'

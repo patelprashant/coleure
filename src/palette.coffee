@@ -1,9 +1,21 @@
 define ['./goodies', './settings'], (_, settings) ->
+  #Transfer
   data = null
+
+  #Elements
   colors = null
+  palettesList = null
+  paletteItems = null
+  palettesDropdownLabel = null
+  dropMessage = null
+
+  #Options
   colorTemplate = null
-  dropdown = null
-  paletteColors = null
+
+  #Settings
+  activePalette = null
+
+  #Colors DnD
 
   colorDrag = (event) ->
     color = event.target
@@ -25,48 +37,92 @@ define ['./goodies', './settings'], (_, settings) ->
     
     # TODO: make decent function, this is just for prototyping
     _.template colorTemplate, insertColor
-    _.hide _.id 'drop-message'
-    paletteColors.push data
+    _.hide dropMessage
+    activePalette.push data
 
-  insertColor = (template) ->
-    el = document.createElement 'i'
-    colors.insertBefore el, colors.firstChild
-    el.outerHTML = template data
+  #Palettes
+
+  newPaletteField_changeHandler = (event) ->
+    field = event.target
+    createPalette field.value
+    field.value = ''
+
+  palettesList_clickHandler = (event) ->
+    clickedElement = event.target
+
+    if clickedElement.classList.contains 'remove-option'
+      removePalette clickedElement.parentNode
+    else
+      unless clickedElement.classList.contains 'select-option'
+        clickedElement = clickedElement.parentNode
+      
+      switchPalette clickedElement
+
+  createPalette = (name) ->
+    newPalette = _.create 'li'
+    palettesList.appendChild newPalette
+    newPalette.outerHTML = 
+      """<li class='select-option'>
+        <span class='name-option'>#{name}</span>
+        <a class='remove-option right'>&times;</a>
+      </li>"""
+
+    switchPalette paletteItems[paletteItems.length - 1]
+
+  switchPalette = (palette) ->
+    index = _.indexOf paletteItems, palette
+
+    return unless settings.activePaletteIndex isnt index
+    
+    previousPalette = paletteItems[settings.activePaletteIndex]
+    if previousPalette then previousPalette.classList.remove 'selected'
+    palette.classList.add 'selected'
+
+    settings.activePaletteIndex = index
+    activePalette = settings.palettes[index] or= []
+
+    palettesDropdownLabel.innerHTML = _.cls(palette, 'name-option')[0].innerHTML
+    _.template colorTemplate, replaceColors
 
   replaceColors = (template) ->
     while colors.firstChild
       colors.removeChild colors.firstChild
 
-    for color in paletteColors
+    for color in activePalette
       data = color
       insertColor template
 
-  changePalette = (event) ->
-    palette = event.target
-    return unless palette.classList.contains 'select-option'
-    
-    index = _.indexOf _.tag(dropdown, 'li'), palette
-    settings.currentPalette = index
-    paletteColors = settings.palettes[index] or= []
-    
-    _.template colorTemplate, replaceColors
+    if colors.children.length
+      _.hide dropMessage
+    else
+      _.show dropMessage
 
-  addPalette = (event) ->
-    field = event.target
-    el = _.create 'li'
-    dropdown.appendChild el
-    el.outerHTML = "<li class='select-option'>#{field.value}</li>"
-    field.value = ''
+  removePalette = (element) ->
+    index = _.indexOf paletteItems, element
+    settings.palettes.splice index, 1
+    _.remove element
 
+  #Shared methods
+  insertColor = (template) ->
+    el = _.create 'i'
+    colors.insertBefore el, colors.firstChild
+    el.outerHTML = template data
+
+  #Setup
   setup = (options) ->
-    selectOptions = _.cls('select-options')[0]
+    #Palettes listeners
+    palettesDropdown = _.cls('select-options')[0]
+    palettesDropdownLabel = _.cls('select-input')[0]
 
-    dropdown = _.tag(selectOptions, 'ul')[0]
-    _.listen dropdown, 'click', changePalette
+    palettesList = _.tag(palettesDropdown, 'ul')[0]
+    _.listen palettesList, 'click', palettesList_clickHandler
 
-    newPaletteField = _.tag(selectOptions, 'input')[0]
-    _.listen newPaletteField, 'change', addPalette
+    paletteItems = palettesList.children
 
+    newPaletteField = _.tag(palettesDropdown, 'input')[0]
+    _.listen newPaletteField, 'change', newPaletteField_changeHandler
+
+    #Colors DnD listeners
     dropzone = _.id 'palette'
     _.listen dropzone, 'dragenter', colorOver
     _.listen dropzone, 'dragover', colorOver
@@ -75,6 +131,10 @@ define ['./goodies', './settings'], (_, settings) ->
     _.listen _.id('colors'), 'dragstart', colorDrag
     _.listen _.id('subjects'), 'dragstart', colorDrag
 
+    #Set private variables
+    dropMessage = _.id 'drop-message'
     colors = _.id 'palette_colors'
     colorTemplate = options.template
-    paletteColors = settings.palettes[settings.currentPalette]
+
+    #Apply defaults
+    createPalette 'Default' unless paletteItems.length
