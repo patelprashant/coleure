@@ -1,12 +1,9 @@
 define ['./goodies', './settings'], (_, settings) ->
-  #Transfer
-  data = null
-
   #Elements
-  colors = null
+  palettesDropdownLabel = null
   palettesList = null
   paletteItems = null
-  palettesDropdownLabel = null
+  paletteColors = null
   dropMessage = null
 
   #Options
@@ -26,7 +23,7 @@ define ['./goodies', './settings'], (_, settings) ->
       hsl: _.attr color, 'data-hsl'
 
     event.dataTransfer.effectAllowed = 'copy'
-    event.dataTransfer.setData 'text', 'Color added.'
+    event.dataTransfer.setData 'text', JSON.stringify(data)
 
   colorOver = (event) ->
     event.preventDefault()
@@ -36,9 +33,34 @@ define ['./goodies', './settings'], (_, settings) ->
     event.preventDefault()
     
     # TODO: make decent function, this is just for prototyping
-    _.template colorTemplate, insertColor
+    data = JSON.parse event.dataTransfer.getData 'text'
+
+    _.template colorTemplate, (template) ->
+      insertColor template, data
+
     _.hide dropMessage
     activePalette.push data
+
+  #Palette color removal
+
+  paletteColorDrag = (event) ->
+    event.dataTransfer.effectAllowed = 'move'
+
+    paletteColor = event.target
+    index = _.indexOf paletteColor.parentNode.children, paletteColor
+
+    event.dataTransfer.setData 'text', index
+
+  paletteColorOver = (event) ->
+    event.preventDefault()
+    event.dataTransfer.dropEffect = 'move'
+
+  paletteColorDrop = (event) ->
+    event.preventDefault()
+
+    index = event.dataTransfer.getData 'text'
+    _.remove paletteColors.children.item(index)
+    activePalette.splice(activePalette.length - index - 1, 1)
 
   #Palettes
 
@@ -56,9 +78,17 @@ define ['./goodies', './settings'], (_, settings) ->
       unless clickedElement.classList.contains 'select-option'
         clickedElement = clickedElement.parentNode
       
-      switchPalette clickedElement
+      switchPalette _.indexOf(paletteItems, clickedElement)
 
   createPalette = (name) ->
+    settings.palettes.push 
+      name: name
+      colors: []
+
+    addPalette name
+    switchPalette paletteItems.length-1
+
+  addPalette = (name) ->
     newPalette = _.create 'li'
     palettesList.appendChild newPalette
     newPalette.outerHTML = 
@@ -67,32 +97,30 @@ define ['./goodies', './settings'], (_, settings) ->
         <a class='remove-option right'>&times;</a>
       </li>"""
 
-    switchPalette paletteItems[paletteItems.length - 1]
-
-  switchPalette = (palette) ->
-    index = _.indexOf paletteItems, palette
-
+  switchPalette = (index) ->
     return unless settings.activePaletteIndex isnt index
     
     previousPalette = paletteItems[settings.activePaletteIndex]
     if previousPalette then previousPalette.classList.remove 'selected'
+
+    palette = paletteItems[index]
     palette.classList.add 'selected'
 
     settings.activePaletteIndex = index
-    activePalette = settings.palettes[index] or= []
+    activePalette = settings.palettes[index].colors
+    console.log settings.palettes[index]
 
     palettesDropdownLabel.innerHTML = _.cls(palette, 'name-option')[0].innerHTML
     _.template colorTemplate, replaceColors
 
   replaceColors = (template) ->
-    while colors.firstChild
-      colors.removeChild colors.firstChild
+    while paletteColors.firstChild
+      paletteColors.removeChild paletteColors.firstChild
 
     for color in activePalette
-      data = color
-      insertColor template
+      insertColor template, color
 
-    if colors.children.length
+    if paletteColors.children.length
       _.hide dropMessage
     else
       _.show dropMessage
@@ -103,10 +131,10 @@ define ['./goodies', './settings'], (_, settings) ->
     _.remove element
 
   #Shared methods
-  insertColor = (template) ->
+  insertColor = (template, color) ->
     el = _.create 'i'
-    colors.insertBefore el, colors.firstChild
-    el.outerHTML = template data
+    paletteColors.insertBefore el, paletteColors.firstChild
+    el.outerHTML = template color
 
   #Setup
   setup = (options) ->
@@ -131,10 +159,21 @@ define ['./goodies', './settings'], (_, settings) ->
     _.listen _.id('colors'), 'dragstart', colorDrag
     _.listen _.id('subjects'), 'dragstart', colorDrag
 
+    paletteColors = _.id 'palette_colors'
+    _.listen paletteColors, 'dragstart', paletteColorDrag
+    _.listen _.id('colors'), 'dragenter', paletteColorOver
+    _.listen _.id('colors'), 'dragover', paletteColorOver
+    _.listen _.id('colors'), 'drop', paletteColorDrop
+
     #Set private variables
     dropMessage = _.id 'drop-message'
-    colors = _.id 'palette_colors'
     colorTemplate = options.template
 
-    #Apply defaults
-    createPalette 'Default' unless paletteItems.length
+    #Load settings
+    for palette in settings.palettes
+      addPalette palette.name
+
+    activePaletteIndex = settings.activePaletteIndex
+    settings.activePaletteIndex = -1
+
+    switchPalette activePaletteIndex
