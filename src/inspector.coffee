@@ -14,37 +14,6 @@ define ['./goodies'], (_) ->
       _.show welcome_message
       _.hide color_tests
 
-  selectColor = (event) ->
-    clickedColor = event.target
-    return unless clickedColor.classList.contains 'color'
-    attribute = clickedColor.getAttribute.bind clickedColor
-    color_previews = _.cls 'color-preview'
-    data =
-      name: attribute 'data-name'
-      hex: attribute 'data-hex'
-      rgb: attribute 'data-rgb'
-      hsl: attribute 'data-hsl'
-
-    if color_previews.length > 0 and (event.metaKey or event.ctrlKey)
-      if color_previews.length is 2
-        _.remove color_previews[+!event.shiftKey]
-
-      data.firstHex = _.attr color_previews[0], 'data-hex'
-      colorTemplate = options.doubleTemplate
-      previewsLength = 2
-    else
-      length = color_previews.length
-      while length-- > 0
-        _.remove color_previews[0]
-      colorTemplate = options.singleTemplate
-      previewsLength = 1
-
-    _.attr color_subjects, 'data-subjects', previewsLength
-    toggleMessage true
-
-    _.template options.previewTemplate, changePreview
-    _.template colorTemplate, changeTests
-
   changePreview = (template) ->
     color_subjects.innerHTML += template data
 
@@ -69,10 +38,46 @@ define ['./goodies'], (_) ->
 
     _.template options.singleTemplate, changeTests
 
-  setup = ($options) ->
+  selectColor: (event) ->
+    clickedColor = event.target
+    return unless clickedColor.classList.contains 'color'
+    attribute = clickedColor.getAttribute.bind clickedColor
+    color_previews = _.cls 'color-preview'
+    data =
+      name: attribute 'data-name'
+      hex: attribute 'data-hex'
+      rgb: attribute 'data-rgb'
+      hsl: attribute 'data-hsl'
+
+    if color_previews.length > 0 and (event.altKey)
+      if color_previews.length is 2
+        _.remove color_previews[+!event.shiftKey]
+
+      data.firstHex = _.attr color_previews[0], 'data-hex'
+      colorTemplate = options.doubleTemplate
+      previewsLength = 2
+    else
+      length = color_previews.length
+      while length-- > 0
+        _.remove color_previews[0]
+      colorTemplate = options.singleTemplate
+      previewsLength = 1
+
+    _.attr color_subjects, 'data-subjects', previewsLength
+    toggleMessage true
+
+    _.template options.previewTemplate, changePreview
+    _.template colorTemplate, changeTests
+
+  setup: ($options) ->
     options = $options
     color_subjects = _.id 'subjects'
     
-    _.listen _.id('colors'), 'click', selectColor
-    _.listen _.id('palette_colors'), 'click', selectColor
+    _.listen _.id('colors'), 'click', this.selectColor
+    _.listen _.id('palette_colors'), 'click', this.selectColor
     _.listen _.id('subjects'), 'click', removeColor
+
+    # prevents Chrome to show Console while copying color and pressing alt
+    _.listen 'keydown', (event) ->
+      if event.altKey
+        event.preventDefault()

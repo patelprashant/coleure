@@ -1,8 +1,9 @@
-define ['./keyboard', './settings', './goodies'], (keyboard, settings, _) ->
+define ['./keyboard', './settings', './inspector', './goodies'], (keyboard, settings, i, _) ->
   colors_class = 'color'
   clipboard_handler = _.id 'clipboard_handler'
   
   hoverColor = (color) ->
+    _.attr clipboard_handler, 'data-name', _.attr(color, 'data-name')
     _.attr clipboard_handler, 'data-hex', _.attr(color, 'data-hex')
     _.attr clipboard_handler, 'data-rgb', _.attr(color, 'data-rgb')
     _.attr clipboard_handler, 'data-hsl', _.attr(color, 'data-hsl')
@@ -10,9 +11,11 @@ define ['./keyboard', './settings', './goodies'], (keyboard, settings, _) ->
     clipboard_handler.value = _.attr color, "data-#{settings.format}"
     clipboard_handler.select()
 
+  currentColor = ''
   verifyIfColor = (event) ->
     if event.target.classList.contains colors_class
-      hoverColor event.target
+      currentColor = event
+      hoverColor currentColor.target
 
   _.listen _.id('colors'), 'mouseover', verifyIfColor
   _.listen _.id('panels'), 'mouseover', verifyIfColor
@@ -33,6 +36,8 @@ define ['./keyboard', './settings', './goodies'], (keyboard, settings, _) ->
     ctx.arc(8, 8, 8, 0, Math.PI*2, true)
     ctx.closePath()
     ctx.fill()
+
+    i.selectColor currentColor
 
     link = document.createElement 'link'
     link.id = 'dynamic-favicon'
