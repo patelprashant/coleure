@@ -5,7 +5,7 @@
     return require(['./colors', './inspector', './palette', './clipboard', './formats'], function(colors, inspector, palette) {
       "use strict";
       colors.load({
-        colors: 'src/pantone.json',
+        colors: 'src/colors.json',
         template: 'templates/color.html'
       });
       inspector.setup({
