@@ -65,6 +65,7 @@ header {
 
 a { 
   color: #0083b1; 
+  cursor: pointer;
 }
 
 aside, footer, header, section { 
