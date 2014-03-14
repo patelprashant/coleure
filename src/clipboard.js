@@ -2,15 +2,17 @@
 (function() {
 
   define(['./keyboard', './settings', './inspector', './goodies'], function(keyboard, settings, i, _) {
-    var canvas, clipboard_handler, colors_class, ctx, currentColor, hoverColor, verifyIfColor;
+    var canvas, clipboard_handler, format_status, colors_class, ctx, currentColor, hoverColor, verifyIfColor;
     colors_class = 'color';
     clipboard_handler = _.id('clipboard_handler');
+    format_status = _.id('format_status');
     hoverColor = function(color) {
       _.attr(clipboard_handler, 'data-name', _.attr(color, 'data-name'));
       _.attr(clipboard_handler, 'data-hex', _.attr(color, 'data-hex'));
       _.attr(clipboard_handler, 'data-rgb', _.attr(color, 'data-rgb'));
       _.attr(clipboard_handler, 'data-hsl', _.attr(color, 'data-hsl'));
-      clipboard_handler.value = _.attr(color, "data-" + settings.format);
+      clipboard_handler.value = format_status.innerHTML = _.attr(color, "data-" + settings.format);
+      format_status.style.backgroundColor = '#'+_.attr(color, "data-hex");
       return clipboard_handler.select();
     };
     currentColor = '';

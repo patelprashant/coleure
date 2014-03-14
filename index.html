@@ -10,54 +10,16 @@
       var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-26310431-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
     </script>
   </head>
-  <body>
-    <!-- Facebook API -->
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-
-    <!-- Twitter API -->
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-    <!-- Place this render call where appropriate -->
-    <script type="text/javascript">
-      (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      })();
-    </script>
-
+  <body id="app">
+    <h1 id="logo">Coleure <span id="format_status">Hover any color</span></h1>
+    <input id="clipboard_handler" readonly></input>
     <aside id="panels">
-
       <section id="inspector">
-        <aside id="welcome-message">
-          <header class="sep-header s2"><h1>Welcome to Coleure</h1></header>
-          <p>This app will help you choose the right color for your next project. Hover and copy any color on the app. Have a better idea of how a color will look by clicking on it. Add a second color holding <kbd>alt</kbd>.</p>
-          <div class="fb-like left" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
-          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://coleure.com/" data-text="Coleure: nice way to work with colors." data-via="rnmp">Tweet</a>
-          <div class="g-plusone" data-size="medium" data-href="http://coleure.com/"></div>
-        </aside>
         <div id="subjects" class="clear"></div>
-        <div id="tests"></div>
+        <div id="tests" class="clear"></div>
       </section>
-
-      <section class="sep clear">
-        <header class="sep-header">
-          <input id="clipboard_handler" placeholder="Hover any color" readonly><kbd class="inside-input">⌘C</kbd></input>
-          <button id="hex" class="set-format option join">HEX</button>
-          <button id="rgb" class="set-format option join">RGB</button>
-          <button id="hsl" class="set-format option join">HSL</button>
-        </header>
-      </section>
-
-      <section id="palette" class="sep" style="padding-bottom: 50px;">
-        <header class="sep-header">
+      <section id="palette">
+          <h1>Palette</h1>
           <div class="select">
             <div class="button select-input right">Default</div>
             <div class="select-options">
@@ -65,14 +27,24 @@
               <input type="text" autofocus placeholder="New palette…" />
             </div>
           </div>
-          <h1 class=s2>Palette</h1>
-        </header>
         <div id="drop-message" class="dropzone">Drop your favorite colors here.</div>
         <div id="palette_colors" class="clear b10"></div>
-        <p>Made by <a href="http://rolandomurillo.com/">Rolando Murillo</a> <br>and <a href="http://github.com/ppold">Giorgio Leveroni</a></p>
-        <!-- <button>Show all…</button> -->
       </section>
-      <img id="logo" src="coleure.png" alt="Coleure">
+      <section>
+        <h1>Format</h1>
+        <button id="hex" class="set-format option join">HEX</button><button id="rgb" class="set-format option join">RGB</button><button id="hsl" class="set-format option join">HSL</button>
+      </section>
+      <section>
+        <h1>Tips</h1>
+        <ul>
+          <li>Copy to clipboard with <kbd>cmd+c</kbd> or <kbd>ctrl+c</kbd></li>
+          <li>Add a color with <kbd>alt+click</kbd></li>
+          <li>Save colors by dragging them into Favorites</li>
+        </ul>
+      </section>
+      <footer>
+        <p>Made by <a href="http://rolandomurillo.com/">Rolando Murillo</a> and <a href="http://github.com/ppold">Giorgio Leveroni</a></p>
+      </footer>
     </aside>
     <section id="colors" class="clear"></section>
   </body>

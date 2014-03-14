@@ -11,10 +11,10 @@
       welcome_message = _.id('welcome-message');
       color_tests = _.id('tests');
       if (showTests) {
-        _.hide(welcome_message);
+        _.attr(_.id('app'), 'class', 'active-panels');
         return _.show(color_tests);
       } else {
-        _.show(welcome_message);
+        _.attr(_.id('app'), 'class', 'not-active-panels');
         return _.hide(color_tests);
       }
     };

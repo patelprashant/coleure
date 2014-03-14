@@ -2,9 +2,10 @@
 (function() {
 
   define(['./settings', './goodies'], function(settings, _) {
-    var clipboardHandler, formats, switchFormat;
+    var clipboardHandler, formatStatus, formats, switchFormat;
     formats = _.cls('set-format');
     clipboardHandler = _.id('clipboard_handler');
+    formatStatus = _.id('format_status');
     _.attr(_.id(settings.format), 'data-state', 'active');
     switchFormat = function(event) {
       var newFormat;
