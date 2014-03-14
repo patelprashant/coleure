@@ -2,7 +2,29 @@
 (function() {
 
   define(['./goodies', './settings'], function(_, settings) {
-    var activePalette, addPalette, colorDrag, colorDrop, colorOver, colorTemplate, createPalette, dropMessage, insertColor, newPaletteField_changeHandler, paletteColorDrag, paletteColorDrop, paletteColorOver, paletteColors, paletteItems, palettesDropdownLabel, palettesList, palettesList_clickHandler, removePalette, replaceColors, setup, switchPalette;
+    var activePalette, 
+        addPalette, 
+        colorDrag, 
+        colorDrop, 
+        colorOver, 
+        colorTemplate, 
+        createPalette, 
+        dropMessage, 
+        insertColor, 
+        newPaletteField_changeHandler, 
+        paletteColorDrag, 
+        paletteColorDrop, 
+        paletteColorOver, 
+        paletteColors, 
+        paletteItems, 
+        palettesDropdown,
+        palettesDropdownLabel, 
+        palettesList, 
+        palettesList_clickHandler, 
+        removePalette, 
+        replaceColors, 
+        setup, 
+        switchPalette;
     palettesDropdownLabel = null;
     palettesList = null;
     paletteItems = null;
@@ -52,12 +74,16 @@
       event.preventDefault();
       index = event.dataTransfer.getData('text');
       _.remove(paletteColors.children.item(index));
-      return activePalette.splice(activePalette.length - index - 1, 1);
+      activePalette.splice(activePalette.length - index - 1, 1);
+      if (activePalette.length == 0) {
+        _.show(dropMessage)
+      }
     };
     newPaletteField_changeHandler = function(event) {
       var field;
       field = event.target;
       createPalette(field.value);
+      dropdownAppearanceHandler();
       return field.value = '';
     };
     palettesList_clickHandler = function(event) {
@@ -69,6 +95,7 @@
         if (!clickedElement.classList.contains('select-option')) {
           clickedElement = clickedElement.parentNode;
         }
+        dropdownAppearanceHandler();
         return switchPalette(_.indexOf(paletteItems, clickedElement));
       }
     };
@@ -84,7 +111,7 @@
       var newPalette;
       newPalette = _.create('li');
       palettesList.appendChild(newPalette);
-      return newPalette.outerHTML = "<li class='select-option'>\n  <span class='name-option'>" + name + "</span>\n  <a class='remove-option right'>&times;</a>\n</li>";
+      return newPalette.outerHTML = "<li class='select-option'>\n  <span class='name-option'>" + name + "</span>\n  <a class='remove-option right'>delete</a>\n</li>";
     };
     switchPalette = function(index) {
       var palette, previousPalette;
@@ -99,7 +126,6 @@
       palette.classList.add('selected');
       settings.activePaletteIndex = index;
       activePalette = settings.palettes[index].colors;
-      console.log(settings.palettes[index]);
       palettesDropdownLabel.innerHTML = _.cls(palette, 'name-option')[0].innerHTML;
       return _.template(colorTemplate, replaceColors);
     };
@@ -130,8 +156,15 @@
       paletteColors.insertBefore(el, paletteColors.firstChild);
       return el.outerHTML = template(color);
     };
+
+    var dropdownVisible = false,
+        dropdownAppearanceHandler = function(event) {
+      dropdownVisible ? _.hide(palettesDropdown) : _.show(palettesDropdown);
+      dropdownVisible = !dropdownVisible;
+    };
+
     return setup = function(options) {
-      var activePaletteIndex, dropzone, newPaletteField, palette, palettesDropdown, _i, _len, _ref;
+      var activePaletteIndex, dropzone, newPaletteField, palette, _i, _len, _ref;
       palettesDropdown = _.cls('select-options')[0];
       palettesDropdownLabel = _.cls('select-input')[0];
       palettesList = _.tag(palettesDropdown, 'ul')[0];
@@ -139,6 +172,8 @@
       paletteItems = palettesList.children;
       newPaletteField = _.tag(palettesDropdown, 'input')[0];
       _.listen(newPaletteField, 'change', newPaletteField_changeHandler);
+      _.listen(palettesDropdownLabel, 'click', dropdownAppearanceHandler);
+      _.hide(palettesDropdown);
       dropzone = _.id('palette');
       _.listen(dropzone, 'dragenter', colorOver);
       _.listen(dropzone, 'dragover', colorOver);

@@ -25,7 +25,7 @@
     _.listen(_.id('colors'), 'mouseover', verifyIfColor);
     _.listen(_.id('panels'), 'mouseover', verifyIfColor);
     canvas = document.createElement('canvas');
-    canvas.height = canvas.width = 16;
+    canvas.height = canvas.width = 32;
     ctx = canvas.getContext('2d');
     return keyboard.listenWithCtrl('C', function() {
       var clipboard, head, link, oldLink;
@@ -34,7 +34,7 @@
         return;
       }
       document.title = "" + clipboard + " - Coleure";
-      ctx.clearRect(0, 0, 16, 16);
+      ctx.clearRect(0, 0, 32, 32);
       ctx.fillStyle = "#" + _.attr(clipboard_handler, 'data-hex');
       ctx.beginPath();
       ctx.arc(8, 8, 8, 0, Math.PI * 2, true);

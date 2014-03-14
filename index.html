@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <title>Coleure</title>
     <link href="coleure.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cloud.typography.com/6394892/653404/css/fonts.css" />
     <link id="dynamic-favicon" rel="shortcut icon" type="image/png" href="favicon.png" />
     <script src="src/require.js" data-main="src/coleure"></script>
     <script>
-      var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-26310431-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+      // var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-26310431-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
     </script>
   </head>
   <body id="app">
@@ -18,33 +19,37 @@
         <div id="subjects" class="clear"></div>
         <div id="tests" class="clear"></div>
       </section>
-      <section id="palette">
-          <h1>Palette</h1>
-          <div class="select">
-            <div class="button select-input right">Default</div>
-            <div class="select-options">
-              <ul></ul>
-              <input type="text" autofocus placeholder="New palette…" />
-            </div>
+      <div class="the-rest">
+        <section id="palette">
+          <h1 class="select">
+            <a class="select-input">Default</a>
+            <span class="subtitle">Palette</span> 
+          </h1>
+          <div class="select-options">
+            <ul></ul>
+            <input type="text" autofocus placeholder="New palette…" />
           </div>
-        <div id="drop-message" class="dropzone">Drop your favorite colors here.</div>
-        <div id="palette_colors" class="clear b10"></div>
-      </section>
-      <section>
-        <h1>Format</h1>
-        <button id="hex" class="set-format option join">HEX</button><button id="rgb" class="set-format option join">RGB</button><button id="hsl" class="set-format option join">HSL</button>
-      </section>
-      <section>
-        <h1>Tips</h1>
-        <ul>
-          <li>Copy to clipboard with <kbd>cmd+c</kbd> or <kbd>ctrl+c</kbd></li>
-          <li>Add a color with <kbd>alt+click</kbd></li>
-          <li>Save colors by dragging them into Favorites</li>
-        </ul>
-      </section>
-      <footer>
-        <p>Made by <a href="http://rolandomurillo.com/">Rolando Murillo</a> and <a href="http://github.com/ppold">Giorgio Leveroni</a></p>
-      </footer>
+          <div id="drop-message" class="dropzone">Drop your favorite colors here.</div>
+          <div id="palette_colors" class="clear b10"></div>
+          
+        </section>
+        <section>
+          <h1>Format</h1>
+          <button id="hex" class="set-format option join">HEX</button><button id="rgb" class="set-format option join">RGB</button><button id="hsl" class="set-format option join">HSL</button>
+        </section>
+        <section>
+          <h1>Tips</h1>
+          <ul>
+            <li>Copy to clipboard with <kbd>cmd+c</kbd> or <kbd>ctrl+c</kbd></li>
+            <li>Add a color with <kbd>alt+click</kbd></li>
+            <li>Save colors by dragging them into Favorites</li>
+          </ul>
+        </section>
+        <footer>
+          <p><strong>Coleure</strong> is based on a widely known color system that cannot be mentioned. If you would like to contribute, please go to our <a href="http://github.com/rnmp/coleure">Github repository.</a></p>
+          <p>Made by <a href="http://rolandomurillo.com/">Rolando Murillo</a> <br>and <a href="http://github.com/ppold">Giorgio Leveroni.</a></p>
+        </footer>
+      </div>
     </aside>
     <section id="colors" class="clear"></section>
   </body>
