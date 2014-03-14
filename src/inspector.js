@@ -90,7 +90,6 @@
         return _.template(colorTemplate, changeTests);
       },
       setup: function($options) {
-        console.log('function loaded')
         options = $options;
         color_subjects = _.id('subjects');
         _.listen(_.id('colors'), 'click', this.selectColor);
