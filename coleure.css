@@ -198,9 +198,6 @@ Colors and empty slots
   -o-transition: right .2s;
   transition: right .2s;
 }
-#inspector, .the-rest {
-
-}
 .the-rest {
   -webkit-box-flex: 1;          
   height: 50%;              
@@ -291,7 +288,7 @@ aside footer a {
 }
 #inspector {
   margin-top: 20px;
-  margin-left: -30px;
+  margin-left: -10px;
 }
 #subjects[data-subjects="2"] .color-preview {
   width: 50%;
