@@ -56,7 +56,16 @@
           name: attribute('data-name'),
           hex: attribute('data-hex'),
           rgb: attribute('data-rgb'),
-          hsl: attribute('data-hsl')
+          hsl: attribute('data-hsl'),
+          checkContrast: function (color1, color2) {
+            var contrast = Color(color1).contrast(Color(color2)),
+                roundedContrast = Math.round( contrast * 10 ) / 10;
+            if (contrast >= 5) {
+              return '<abbr title="The contrast between these two colors is '+roundedContrast+'/21. Good enough." class="good contrast">Good contrast</abbr>';
+            } else {
+              return '<abbr title="The contrast between these two colors is '+roundedContrast+'/21. Might be problematic." class="bad contrast">Bad contrast</abbr>';
+            }
+          }
         };
         if (color_previews.length > 0 && event.altKey) {
           if (color_previews.length === 2) {
@@ -79,6 +88,7 @@
         return _.template(colorTemplate, changeTests);
       },
       setup: function($options) {
+        console.log('function loaded')
         options = $options;
         color_subjects = _.id('subjects');
         _.listen(_.id('colors'), 'click', this.selectColor);

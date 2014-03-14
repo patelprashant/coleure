@@ -288,7 +288,7 @@ aside footer a {
 }
 #inspector {
   margin-top: 20px;
-  margin-left: -10px;
+  margin-left: -20px;
 }
 #subjects[data-subjects="2"] .color-preview {
   width: 50%;
@@ -305,11 +305,12 @@ aside footer a {
   z-index: 2;
   font-size: 48px;
   top: -.9em;
-  left: 30px;
+  left: 40px;
   color: #fff;
 }
 .log {
-  padding: 5px 30px;
+  position: relative;
+  padding: 5px 40px;
   font-size: 18px;
 }
 .subtitle {
@@ -321,4 +322,30 @@ aside footer a {
   font-size: 13px;
   text-align: center;
   border: 2px dashed #444;
+}
+.contrast {
+  position: absolute;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  margin-top: -10px;
+  text-indent: -999em;
+  cursor: help;
+  background: no-repeat;
+  background-size: cover;
+}
+.good.contrast {
+  background-image: url('icons/check.png');
+}
+.bad.contrast {
+  background-image: url('icons/warning.png');
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .good.contrast {
+    background-image: url('icons/check@2x.png');
+  }
+  .bad.contrast {
+    background-image: url('icons/warning@2x.png');
+  }
 }

@@ -1,7 +1,8 @@
 {* templates/test.html {
   text: {
     label: "Color",
-    color: hex
+    color: hex,
+    contrast: checkContrast("#"+hex, "#fff")
   },
   bg: {
     label: "white",
@@ -12,7 +13,8 @@
 {* templates/test.html {
   text: {
     label: "White",
-    color: "fff"
+    color: "fff",
+    contrast: checkContrast("#fff","#"+hex)
   },
   bg: {
     label: "color",
@@ -23,18 +25,20 @@
 {* templates/test.html {
   text: {
     label: "Color",
-    color: hex
+    color: hex,
+    contrast: checkContrast("#"+hex,"#111")
   },
   bg: {
     label: "black",
-    color: "000"
+    color: "111"
   }
 }*}
 
 {* templates/test.html {
   text: {
     label: "Black",
-    color: "000"
+    color: "111",
+    contrast: checkContrast("#111","#"+hex)
   },
   bg: {
     label: "color",

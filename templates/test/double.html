@@ -1,7 +1,8 @@
 {* templates/test.html {
   text: {
     label: "First",
-    color: firstHex
+    color: firstHex,
+    contrast: checkContrast("#"+firstHex,"#"+hex)
   },
   bg: {
     label: "second",
@@ -12,7 +13,8 @@
 {* templates/test.html {
   text: {
     label: "Second",
-    color: hex
+    color: hex,
+    contrast: checkContrast("#"+hex,"#"+firstHex)
   },
   bg: {
     label: "first",
