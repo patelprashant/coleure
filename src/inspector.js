@@ -2,7 +2,7 @@
 (function() {
 
   define(['./goodies'], function(_) {
-    var changePreview, changeTests, color_subjects, data, options, removeColor, toggleMessage;
+    var changePreview, changeTests, color_subjects, data, options, removeColor, toggleMessage, checkContrastFunction;
     color_subjects = null;
     options = null;
     data = null;
@@ -18,6 +18,15 @@
         return _.hide(color_tests);
       }
     };
+    checkContrastFunction = function (color1, color2) {
+      var contrast = Color(color1).contrast(Color(color2)),
+          roundedContrast = Math.round( contrast * 10 ) / 10;
+      if (contrast >= 5) {
+        return '<abbr title="The contrast between these two colors is '+roundedContrast+'/21. Good enough." class="good contrast">Good contrast</abbr>';
+      } else {
+        return '<abbr title="The contrast between these two colors is '+roundedContrast+'/21. Might be problematic." class="bad contrast">Bad contrast</abbr>';
+      }
+    }
     changePreview = function(template) {
       return color_subjects.innerHTML += template(data);
     };
@@ -39,7 +48,8 @@
         return;
       }
       data = {
-        hex: _.attr(preview, 'data-hex')
+        hex: _.attr(preview, 'data-hex'),
+        checkContrast: checkContrastFunction
       };
       return _.template(options.singleTemplate, changeTests);
     };
@@ -57,15 +67,7 @@
           hex: attribute('data-hex'),
           rgb: attribute('data-rgb'),
           hsl: attribute('data-hsl'),
-          checkContrast: function (color1, color2) {
-            var contrast = Color(color1).contrast(Color(color2)),
-                roundedContrast = Math.round( contrast * 10 ) / 10;
-            if (contrast >= 5) {
-              return '<abbr title="The contrast between these two colors is '+roundedContrast+'/21. Good enough." class="good contrast">Good contrast</abbr>';
-            } else {
-              return '<abbr title="The contrast between these two colors is '+roundedContrast+'/21. Might be problematic." class="bad contrast">Bad contrast</abbr>';
-            }
-          }
+          checkContrast: checkContrastFunction
         };
         if (color_previews.length > 0 && event.altKey) {
           if (color_previews.length === 2) {
