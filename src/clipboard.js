@@ -37,7 +37,7 @@
       ctx.clearRect(0, 0, 32, 32);
       ctx.fillStyle = "#" + _.attr(clipboard_handler, 'data-hex');
       ctx.beginPath();
-      ctx.arc(8, 8, 8, 0, Math.PI * 2, true);
+      ctx.arc(16, 16, 16, 0, Math.PI * 2, true);
       ctx.closePath();
       ctx.fill();
       i.selectColor(currentColor);
