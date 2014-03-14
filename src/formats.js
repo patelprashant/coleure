@@ -15,7 +15,7 @@
         return _.attr(element, 'data-state', 'inactive');
       });
       _.attr(newFormat, 'data-state', 'active');
-      clipboardHandler.value = _.attr(clipboardHandler, "data-" + settings.format);
+      clipboardHandler.value = formatStatus.innerHTML = _.attr(clipboardHandler, "data-" + settings.format);
       return clipboardHandler.select();
     };
     return _.forEach(formats, function(element) {
