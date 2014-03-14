@@ -90,7 +90,7 @@
       var clickedElement;
       clickedElement = event.target;
       if (clickedElement.classList.contains('remove-option')) {
-        return removePalette(clickedElement.parentNode);
+        if (confirm('Are you sure you want to delete this palette?')) { removePalette(clickedElement.parentNode); }
       } else {
         if (!clickedElement.classList.contains('select-option')) {
           clickedElement = clickedElement.parentNode;
