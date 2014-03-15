@@ -42,7 +42,6 @@
       ctx.arc(16, 16, 16, 0, Math.PI * 2, true);
       ctx.closePath();
       ctx.fill();
-      i.selectColor(currentColor);
       link = document.createElement('link');
       link.id = 'dynamic-favicon';
       link.type = 'image/x-icon';
