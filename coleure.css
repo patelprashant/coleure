@@ -177,7 +177,8 @@ html, body, #library, #colors, #colors > section {
 #colors .item:nth-last-child(-n+12) {
   height: 16vh;
 }
-#colors > .color {
+#colors .color, 
+#palette_colors .color {
   cursor: pointer;
 }
 #palette_colors > .item {
