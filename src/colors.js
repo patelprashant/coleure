@@ -7,7 +7,7 @@
         var color, colors, content, template, _i, _len, html;
         colors = settings.colors;
         template = settings.template;
-        content = '<section>';
+        content = '<div class="color-section">';
         var sectionSize = 84;
         var sectionMarkers = [];
         for (var i = 0; i < (colors.length/sectionSize); i++) {
@@ -18,13 +18,13 @@
           var colorNumber = colors.indexOf(color);
           if (sectionMarkers.indexOf(colorNumber+1) > -1) {
             if (!(colorNumber === 0)) {
-              content += template(color) + '</section><section>';
+              content += template(color) + '</div><div class="color-section">';
             }
           } else {
             content += template(color);
           }
         }
-        return _.id('colors').innerHTML = content+'</section>';
+        return _.id('colors').innerHTML = content+'</div>';
       },
       load: function(sources) {
         var _this = this;
