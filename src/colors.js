@@ -4,15 +4,27 @@
   define(['./goodies'], function(_) {
     return {
       _display: function(settings) {
-        var color, colors, content, template, _i, _len;
+        var color, colors, content, template, _i, _len, html;
         colors = settings.colors;
         template = settings.template;
-        content = '';
+        content = '<section>';
+        var sectionSize = 84;
+        var sectionMarkers = [];
+        for (var i = 0; i < (colors.length/sectionSize); i++) {
+          sectionMarkers.push(sectionSize*i)
+        }
         for (_i = 0, _len = colors.length; _i < _len; _i++) {
           color = colors[_i];
-          content += template(color);
+          var colorNumber = colors.indexOf(color);
+          if (sectionMarkers.indexOf(colorNumber+1) > -1) {
+            if (!(colorNumber === 0)) {
+              content += template(color) + '</section><section>';
+            }
+          } else {
+            content += template(color);
+          }
         }
-        return _.id('colors').innerHTML = content;
+        return _.id('colors').innerHTML = content+'</section>';
       },
       load: function(sources) {
         var _this = this;

@@ -85,9 +85,6 @@ Helpers
   top: -9999em;
   left: -9999em;
 }
-.left, .item {
-  float: left;
-} 
 .right {
   float: right;
 }
@@ -127,7 +124,7 @@ Helpers
 /* ///////////////////
 Colors and empty slots
 /////////////////// */
-#colors {
+#library {
   width: 100%;
   -webkit-transition: width .2s;
   -moz-transition: width .2s;
@@ -135,8 +132,20 @@ Colors and empty slots
   -o-transition: width .2s;
   transition: width .2s;
   background: #232323;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
-.active-panels #colors {
+#colors {
+  display: inline-block;
+  font-size: 0px;
+  white-space: nowrap;
+}
+#colors > section {
+  display: inline-block;
+  width: 168vh;
+  overflow: hidden;
+}
+.active-panels #library {
   width: 75.6525%;
 }
 .color {
@@ -151,11 +160,22 @@ Colors and empty slots
   border-width: 1px 1px 0 0;
   margin: -1px -1px 0 1px;
 }
-
-#colors > .item {
-  width: 8.333%;
-  padding-bottom: 8.333%;
+html, body, #library, #colors, #colors > section {
+  height: 100%;
+}
+#colors .item {
+  width: 14vh;
+  height: 14vh;
   background: #eee;
+}
+.item {
+  float: left;
+}
+#colors .item:nth-child(12n+1) {
+  clear: both;
+}
+#colors .item:nth-last-child(-n+12) {
+  height: 16vh;
 }
 #colors > .color {
   cursor: pointer;
