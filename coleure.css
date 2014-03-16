@@ -142,7 +142,7 @@ Colors and empty slots
 }
 #colors > section {
   display: inline-block;
-  width: 168vh;
+  width: 171.428571432vh;
   overflow: hidden;
 }
 .active-panels #library {
@@ -160,12 +160,9 @@ Colors and empty slots
   border-width: 1px 1px 0 0;
   margin: -1px -1px 0 1px;
 }
-html, body, #library, #colors, #colors > section {
-  height: 100%;
-}
 #colors .item {
-  width: 14vh;
-  height: 14vh;
+  width: 14.285714286vh;
+  height: 14.285714286vh;
   background: #eee;
 }
 .item {
@@ -173,9 +170,6 @@ html, body, #library, #colors, #colors > section {
 }
 #colors .item:nth-child(12n+1) {
   clear: both;
-}
-#colors .item:nth-last-child(-n+12) {
-  height: 16vh;
 }
 #colors .color, 
 #palette_colors .color {

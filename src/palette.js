@@ -91,6 +91,11 @@
       clickedElement = event.target;
       if (clickedElement.classList.contains('remove-option')) {
         if (confirm('Are you sure you want to delete this palette?')) { removePalette(clickedElement.parentNode); }
+        if(settings.palettes.length === 0) {
+          createPalette('Default');
+          switchPalette('0');
+          dropdownAppearanceHandler();
+        }
       } else {
         if (!clickedElement.classList.contains('select-option')) {
           clickedElement = clickedElement.parentNode;
