@@ -24,7 +24,7 @@ body, html {
 body {
 	font: 12px/1.5 "Gotham A", "Gotham B", Futura, sans-serif;
 	color: #000;
-	background: #eee;
+	background: #232323;
 }
 
 a { 
@@ -45,6 +45,7 @@ button, button.active, button[data-state=active] {
 	font-family: inherit;
 	font-weight: bold;
 	font-size: 16px;
+	text-transform: uppercase;
 	color: #232323;
 	background: #fff;
 	cursor: pointer;
@@ -264,6 +265,9 @@ aside footer a {
 	margin-top: 20px;
 	margin-left: -20px;
 }
+#preview {
+	position: relative;
+}
 #subjects[data-subjects="2"] .color-preview {
 	width: 50%;
 	float: left;
@@ -278,12 +282,70 @@ aside footer a {
 	top: -.9em;
 	left: 40px;
 	color: #fff;
+	white-space: nowrap;
 }
 #subjects[data-subjects="2"] .color-name {
 	font-size: 24px;
 	top: -.75em;
 }
-.color-preview:nth-child(2) .color-name {
+
+#mixButton {
+	width: 50px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -25px;
+	margin-top: -15px;
+	z-index: 2;
+/*	
+	Fancy animation here:
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-ms-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;*/
+}
+/*
+Fancy animation here:
+#mixButton:focus {
+	outline: 0;
+	width: 30px;
+	color: #fff;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+}*/
+#mixResult {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	bottom: 0;
+	margin-top: 15px;
+	z-index: 3;
+}
+.mix-mark {
+	color: #ccc;
+}
+.color .mix-mark {
+	position: absolute;
+	top: 2px; left: 5px;
+	font-size: 1.2vw;
+	font-style: normal;
+	font-weight: bold;
+}
+.color-preview .color .mix-mark {
+	display: none;
+}
+
+#subjects[data-subjects="2"] .color-preview:last-child .color-name {
 	left: 20px;
 }
 .log {

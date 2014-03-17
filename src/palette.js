@@ -39,7 +39,8 @@
         name: _.attr(color, 'data-name'),
         hex: _.attr(color, 'data-hex'),
         rgb: _.attr(color, 'data-rgb'),
-        hsl: _.attr(color, 'data-hsl')
+        hsl: _.attr(color, 'data-hsl'),
+        mixed: _.attr(color, 'data-mixed')
       };
       event.dataTransfer.effectAllowed = 'copy';
       return event.dataTransfer.setData('text', JSON.stringify(data));
@@ -141,6 +142,9 @@
       }
       for (_i = 0, _len = activePalette.length; _i < _len; _i++) {
         color = activePalette[_i];
+        if (!color.mixed) { 
+          color.mixed = 'false';
+        }
         insertColor(template, color);
       }
       if (paletteColors.children.length) {
@@ -159,7 +163,11 @@
       var el;
       el = _.create('i');
       paletteColors.insertBefore(el, paletteColors.firstChild);
-      return el.outerHTML = template(color);
+      el.outerHTML = template(color);
+      _.forEach(_.cls(_.id('palette_colors'), 'mix-mark'), function(el) {
+        var hex = _.attr(el, 'data-hex');
+        Color('#'+hex).light() ? el.style.color = "#232323" : el.style.color = "#fff";
+      })
     };
 
     var dropdownVisible = false,

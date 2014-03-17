@@ -15,6 +15,7 @@
         }
         for (_i = 0, _len = colors.length; _i < _len; _i++) {
           color = colors[_i];
+          color.mixed = "false";
           var colorNumber = colors.indexOf(color);
           if (sectionMarkers.indexOf(colorNumber+1) > -1) {
             if (!(colorNumber === 0)) {

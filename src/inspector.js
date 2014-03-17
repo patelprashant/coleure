@@ -6,6 +6,8 @@
     color_subjects = null;
     options = null;
     data = null;
+    var mixPanelHidden = true,
+        mixPanel = _.id('mixPanel');
     toggleMessage = function(showTests) {
       var color_tests, welcome_message;
       welcome_message = _.id('welcome-message');
@@ -55,10 +57,14 @@
     };
     return {
       selectColor: function(event) {
-        var attribute, clickedColor, colorTemplate, color_previews, length, previewsLength;
+        var attribute, clickedColor, colorTemplate, color_previews, length, previewsLength, mixButton;
+        mixButton = _.id('mixButton');
         clickedColor = event.target;
         if (!clickedColor.classList.contains('color')) {
           return;
+        }
+        if (clickedColor.id == "selectMix") {
+          _.hide(_.id('mixResult'))
         }
         attribute = clickedColor.getAttribute.bind(clickedColor);
         color_previews = _.cls('color-preview');
@@ -67,13 +73,23 @@
           hex: attribute('data-hex'),
           rgb: attribute('data-rgb'),
           hsl: attribute('data-hsl'),
-          checkContrast: checkContrastFunction
+          checkContrast: checkContrastFunction,
+          mixed: attribute('data-mixed')
         };
         if (color_previews.length > 0 && event.altKey) {
           if (color_previews.length === 2) {
             _.remove(color_previews[+(!event.shiftKey)]);
           }
           data.firstHex = _.attr(color_previews[0], 'data-hex');
+          data.firstName = _.attr(color_previews[0], 'data-name');
+
+          if (mixPanelHidden) { _.show(mixPanel) };
+          mixPanelHidden = false;
+          
+          _.attr(mixButton, 'data-hex-a', data.firstHex);
+          _.attr(mixButton, 'data-hex-b', data.hex);
+          _.attr(mixButton, 'data-name-a', data.firstName);
+          _.attr(mixButton, 'data-name-b', data.name);
           colorTemplate = options.doubleTemplate;
           previewsLength = 2;
         } else {
@@ -81,6 +97,9 @@
           while (length-- > 0) {
             _.remove(color_previews[0]);
           }
+          if (!mixPanelHidden) { _.hide(mixPanel) };
+          mixPanelHidden = true;
+          _.hide(_.id('mixResult'))
           colorTemplate = options.singleTemplate;
           previewsLength = 1;
         }
@@ -89,12 +108,36 @@
         _.template(options.previewTemplate, changePreview);
         return _.template(colorTemplate, changeTests);
       },
+      mixColors: function (event) {
+        var mixButton = event.target,
+            color1 = _.attr(mixButton, 'data-hex-a'),
+            color2 = _.attr(mixButton, 'data-hex-b'),
+            name1 = _.attr(mixButton, 'data-name-a'),
+            name2 = _.attr(mixButton, 'data-name-b'),
+            result = Color('#'+color1).mix(Color('#'+color2)),
+            mixResult = _.id('mixResult'),
+            selectMix = _.id('selectMix'),
+            hex = result.hexString().substring(1).toLowerCase(),
+            rgb = result.values.rgb[0]+", "+result.values.rgb[1]+", "+result.values.rgb[2],
+            hsl = result.values.hsl[0]+", "+result.values.hsl[1]+"%, "+result.values.hsl[2]+"%";
+        _.attr(selectMix, 'data-name', name1+' + '+name2);
+        _.attr(selectMix, 'data-hex', hex);
+        _.attr(selectMix, 'data-rgb', rgb);
+        _.attr(selectMix, 'data-hsl', hsl);
+        _.attr(selectMix, 'data-mixed', 'true');
+        _.show(mixResult)
+        mixResult.style.backgroundColor = '#'+hex;
+      },
       setup: function($options) {
         options = $options;
         color_subjects = _.id('subjects');
         _.listen(_.id('colors'), 'click', this.selectColor);
         _.listen(_.id('palette_colors'), 'click', this.selectColor);
         _.listen(_.id('subjects'), 'click', removeColor);
+        _.listen(_.id('mixButton'), 'click', this.mixColors);
+        _.listen(_.id('selectMix'), 'click', this.selectColor);
+        _.hide(_.id('mixPanel'));
+        _.hide(_.id('mixResult'));
         return _.listen('keydown', function(event) {
           if (event.altKey) {
             return event.preventDefault();

@@ -26,6 +26,7 @@
     };
     _.listen(_.id('colors'), 'mouseover', verifyIfColor);
     _.listen(_.id('panels'), 'mouseover', verifyIfColor);
+
     canvas = document.createElement('canvas');
     canvas.height = canvas.width = 32;
     ctx = canvas.getContext('2d');
