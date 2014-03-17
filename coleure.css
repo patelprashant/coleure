@@ -340,6 +340,7 @@ Fancy animation here:
 	font-size: 1.2vw;
 	font-style: normal;
 	font-weight: bold;
+	pointer-events: none;
 }
 .color-preview .color .mix-mark {
 	display: none;
