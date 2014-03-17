@@ -248,6 +248,10 @@ aside footer a {
 	color: #fff;
 }
 
+*:focus {
+	outline: none
+}
+
 .color-preview {
 	position: relative;
 }
@@ -289,27 +293,38 @@ aside footer a {
 	top: -.75em;
 }
 
-#mixButton {
-	width: 50px;
-	height: 30px;
+#mixButton, #mixControls {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-left: -25px;
 	margin-top: -15px;
-	z-index: 2;
-/*	
-	Fancy animation here:
-	-webkit-transform: rotate(0deg);
-	-moz-transform: rotate(0deg);
-	-ms-transform: rotate(0deg);
-	-o-transform: rotate(0deg);
-	transform: rotate(0deg);
-	-webkit-transition: all .2s;
-	-moz-transition: all .2s;
-	-ms-transition: all .2s;
-	-o-transition: all .2s;
-	transition: all .2s;*/
+}
+#mixButton, #mixBalance {
+	z-index: 4;
+}
+#mixButton {
+	width: 50px;
+	height: 30px;
+	margin-left: -25px;
+}
+#mixControls {
+	margin-left: -65px;
+	background-color: #232323;
+}
+#mixBalance {
+    -webkit-appearance: none;
+    position: relative;
+    width: 130px;
+    height: 30px;
+    background-color: transparent;
+}
+#mixBalance::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 /*
 Fancy animation here:

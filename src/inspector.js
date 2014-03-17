@@ -46,6 +46,8 @@
       _.remove(closeButton.parentNode);
       toggleMessage(previewsLength !== 0);
       preview = _.cls('color-preview')[0];
+      if (!mixPanelHidden) { _.hide(mixPanel) };
+          mixPanelHidden = true;
       if (!preview) {
         return;
       }
@@ -65,6 +67,7 @@
         }
         if (clickedColor.id == "selectMix") {
           _.hide(_.id('mixResult'))
+          _.hide(_.id('mixControls'));
         }
         attribute = clickedColor.getAttribute.bind(clickedColor);
         color_previews = _.cls('color-preview');
@@ -100,6 +103,7 @@
           if (!mixPanelHidden) { _.hide(mixPanel) };
           mixPanelHidden = true;
           _.hide(_.id('mixResult'))
+          _.hide(_.id('mixControls'));
           colorTemplate = options.singleTemplate;
           previewsLength = 1;
         }
@@ -114,19 +118,25 @@
             color2 = _.attr(mixButton, 'data-hex-b'),
             name1 = _.attr(mixButton, 'data-name-a'),
             name2 = _.attr(mixButton, 'data-name-b'),
-            result = Color('#'+color1).mix(Color('#'+color2)),
             mixResult = _.id('mixResult'),
-            selectMix = _.id('selectMix'),
+            selectMix = _.id('selectMix');
+        _.show(_.id('mixControls'));
+        _.id('mixBalance').style.backgroundImage = "linear-gradient(to right, #"+color1+", #"+color2+")"
+        function setResult(weight) {
+          var result = Color('#'+color1).mix(Color('#'+color2), weight),
             hex = result.hexString().substring(1).toLowerCase(),
             rgb = result.values.rgb[0]+", "+result.values.rgb[1]+", "+result.values.rgb[2],
             hsl = result.values.hsl[0]+", "+result.values.hsl[1]+"%, "+result.values.hsl[2]+"%";
-        _.attr(selectMix, 'data-name', name1+' + '+name2);
-        _.attr(selectMix, 'data-hex', hex);
-        _.attr(selectMix, 'data-rgb', rgb);
-        _.attr(selectMix, 'data-hsl', hsl);
-        _.attr(selectMix, 'data-mixed', 'true');
-        _.show(mixResult)
-        mixResult.style.backgroundColor = '#'+hex;
+          _.attr(selectMix, 'data-name', name1+' + '+name2);
+          _.attr(selectMix, 'data-hex', hex);
+          _.attr(selectMix, 'data-rgb', rgb);
+          _.attr(selectMix, 'data-hsl', hsl);
+          _.attr(selectMix, 'data-mixed', 'true');
+          _.show(mixResult);
+          mixResult.style.backgroundColor = '#'+hex;
+        }
+        setResult(_.id('mixBalance').value);
+        _.listen(_.id('mixBalance'), 'change', function(){setResult(_.id('mixBalance').value)})
       },
       setup: function($options) {
         options = $options;
@@ -138,6 +148,7 @@
         _.listen(_.id('selectMix'), 'click', this.selectColor);
         _.hide(_.id('mixPanel'));
         _.hide(_.id('mixResult'));
+        _.hide(_.id('mixControls'));
         return _.listen('keydown', function(event) {
           if (event.altKey) {
             return event.preventDefault();
