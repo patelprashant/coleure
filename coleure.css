@@ -307,6 +307,11 @@ aside footer a {
 	height: 30px;
 	margin-left: -25px;
 }
+#selectMix {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
 #mixControls {
 	margin-left: -65px;
 	background-color: #232323;

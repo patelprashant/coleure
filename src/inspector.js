@@ -122,6 +122,7 @@
             selectMix = _.id('selectMix');
         _.show(_.id('mixControls'));
         _.id('mixBalance').style.backgroundImage = "linear-gradient(to right, #"+color1+", #"+color2+")"
+        _.show(mixResult);
         function setResult(weight) {
           var result = Color('#'+color1).mix(Color('#'+color2), weight),
             hex = result.hexString().substring(1).toLowerCase(),
@@ -132,11 +133,16 @@
           _.attr(selectMix, 'data-rgb', rgb);
           _.attr(selectMix, 'data-hsl', hsl);
           _.attr(selectMix, 'data-mixed', 'true');
-          _.show(mixResult);
           mixResult.style.backgroundColor = '#'+hex;
         }
-        setResult(_.id('mixBalance').value);
-        _.listen(_.id('mixBalance'), 'change', function(){setResult(_.id('mixBalance').value)})
+        setResult(0.5);
+        _.id('mixBalance').value = 0.5;
+        var intervalFn = function(){
+          setResult(_.id('mixBalance').value)
+        }
+        var interval;
+        _.listen(_.id('mixBalance'), 'mousedown', function(){ interval = setInterval(intervalFn,50); })
+        _.listen(_.id('mixBalance'), 'mouseup', function(){clearInterval(interval)})
       },
       setup: function($options) {
         options = $options;
