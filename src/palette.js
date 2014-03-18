@@ -37,7 +37,6 @@
       var color, data;
       color = event.target;
       colorOrigin = _.attr(color, 'data-origin');
-      console.log(colorOrigin)
       data = {
         name: _.attr(color, 'data-name'),
         hex: _.attr(color, 'data-hex'),
@@ -46,12 +45,10 @@
         mixed: _.attr(color, 'data-mixed')
       };
       event.dataTransfer.effectAllowed = 'copy';
-      console.log('colorDrag');
       return event.dataTransfer.setData('text', JSON.stringify(data));
     };
     colorOver = function(event) {
       event.preventDefault();
-      console.log('colorOver');
       return event.dataTransfer.dropEffect = 'copy';
     };
     colorDrop = function(event) {
@@ -62,7 +59,6 @@
         return insertColor(template, data);
       });
       _.hide(dropMessage);
-      console.log('colorDrop');
       return activePalette.push(data);
     };
     paletteColorDrag = function(event) {
@@ -70,14 +66,11 @@
       event.dataTransfer.effectAllowed = 'move';
       paletteColor = event.target;
       colorOrigin = _.attr(paletteColor, 'data-origin');
-      console.log(colorOrigin)
       index = _.indexOf(paletteColor.parentNode.children, paletteColor);
-      console.log('paletteColorDrag');
       return event.dataTransfer.setData('text', index);
     };
     paletteColorOver = function(event) {
       event.preventDefault();
-      console.log('paletteColorOver');
       return event.dataTransfer.dropEffect = 'move';
     };
     paletteColorDrop = function(event) {
@@ -86,7 +79,6 @@
       index = event.dataTransfer.getData('text');
       visualColor = paletteColors.children.item(index);
       origin = _.attr(visualColor, 'data-origin');
-      console.log(origin)
       if (colorOrigin == "palette") {
         _.remove(visualColor);
         activePalette.splice(activePalette.length - index - 1, 1);
