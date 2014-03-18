@@ -77,7 +77,8 @@
           rgb: attribute('data-rgb'),
           hsl: attribute('data-hsl'),
           checkContrast: checkContrastFunction,
-          mixed: attribute('data-mixed')
+          mixed: attribute('data-mixed'),
+          origin: 'false'
         };
         if (color_previews.length > 0 && event.altKey) {
           if (color_previews.length === 2) {

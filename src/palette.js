@@ -24,7 +24,8 @@
         removePalette, 
         replaceColors, 
         setup, 
-        switchPalette;
+        switchPalette,
+        colorOrigin;
     palettesDropdownLabel = null;
     palettesList = null;
     paletteItems = null;
@@ -35,6 +36,8 @@
     colorDrag = function(event) {
       var color, data;
       color = event.target;
+      colorOrigin = _.attr(color, 'data-origin');
+      console.log(colorOrigin)
       data = {
         name: _.attr(color, 'data-name'),
         hex: _.attr(color, 'data-hex'),
@@ -43,10 +46,12 @@
         mixed: _.attr(color, 'data-mixed')
       };
       event.dataTransfer.effectAllowed = 'copy';
+      console.log('colorDrag');
       return event.dataTransfer.setData('text', JSON.stringify(data));
     };
     colorOver = function(event) {
       event.preventDefault();
+      console.log('colorOver');
       return event.dataTransfer.dropEffect = 'copy';
     };
     colorDrop = function(event) {
@@ -57,28 +62,40 @@
         return insertColor(template, data);
       });
       _.hide(dropMessage);
+      console.log('colorDrop');
       return activePalette.push(data);
     };
     paletteColorDrag = function(event) {
       var index, paletteColor;
       event.dataTransfer.effectAllowed = 'move';
       paletteColor = event.target;
+      colorOrigin = _.attr(paletteColor, 'data-origin');
+      console.log(colorOrigin)
       index = _.indexOf(paletteColor.parentNode.children, paletteColor);
+      console.log('paletteColorDrag');
       return event.dataTransfer.setData('text', index);
     };
     paletteColorOver = function(event) {
       event.preventDefault();
+      console.log('paletteColorOver');
       return event.dataTransfer.dropEffect = 'move';
     };
     paletteColorDrop = function(event) {
-      var index;
+      var index, origin, visualColor;
       event.preventDefault();
       index = event.dataTransfer.getData('text');
-      _.remove(paletteColors.children.item(index));
-      activePalette.splice(activePalette.length - index - 1, 1);
+      visualColor = paletteColors.children.item(index);
+      origin = _.attr(visualColor, 'data-origin');
+      console.log(origin)
+      if (colorOrigin == "palette") {
+        _.remove(visualColor);
+        activePalette.splice(activePalette.length - index - 1, 1);
+      }
       if (activePalette.length == 0) {
         _.show(dropMessage)
       }
+
+      console.log('paletteColorDrop');
     };
     newPaletteField_changeHandler = function(event) {
       var field;
@@ -163,6 +180,7 @@
       var el;
       el = _.create('i');
       paletteColors.insertBefore(el, paletteColors.firstChild);
+      color.origin = "palette";
       el.outerHTML = template(color);
       _.forEach(_.cls(_.id('palette_colors'), 'mix-mark'), function(el) {
         var hex = _.attr(el, 'data-hex');
