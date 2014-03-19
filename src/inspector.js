@@ -90,11 +90,6 @@
           if (mixPanelHidden) { _.show(mixPanel) };
           mixPanelHidden = false;
           _.show(mixButton)
-
-          // if (!settings.tips.tipSecondColor) {
-            // _.hide(_.id('tipSecondColor'))
-            // settings.tips.tipSecondColor = true;
-          // }
           
           _.attr(mixButton, 'data-hex-a', data.firstHex);
           _.attr(mixButton, 'data-hex-b', data.hex);
@@ -107,9 +102,6 @@
           while (length-- > 0) {
             _.remove(color_previews[0]);
           }
-          // if (!settings.tips.tipSecondColor) {
-            // _.show(_.id('tipSecondColor'))
-          // }
           if (!mixPanelHidden) { _.hide(mixPanel) };
           mixPanelHidden = true;
           _.hide(_.id('mixResult'))
@@ -169,8 +161,6 @@
         _.hide(_.id('mixPanel'));
         _.hide(_.id('mixResult'));
         _.hide(_.id('mixControls'));
-        _.hide(_.id('tipSecondColor'))
-        // settings.tips.tipSecondColor = settings.tips.tipSecondColor || false
         return _.listen('keydown', function(event) {
           if (event.altKey) {
             return event.preventDefault();
