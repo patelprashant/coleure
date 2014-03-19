@@ -170,7 +170,7 @@
         _.hide(_.id('mixResult'));
         _.hide(_.id('mixControls'));
         _.hide(_.id('tipSecondColor'))
-        settings.tip.tipSecondColor = settings.tip.tipSecondColor || false
+        settings.tip.tipSecondColor = false
         return _.listen('keydown', function(event) {
           if (event.altKey) {
             return event.preventDefault();
