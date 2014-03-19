@@ -303,9 +303,32 @@ aside footer a {
 	z-index: 4;
 }
 #mixButton {
+	padding-left: 0;
+	padding-right: 0;
+	text-align: center;
 	width: 50px;
 	height: 30px;
-	margin-left: -25px;
+	-webkit-transform: translate(-50%, 0);
+	-moz-transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+	-o-transform: translate(-50%, 0);
+	transform: translate(, -50%);
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+}
+#mixButton.active {
+	outline: 0;
+	width: 30px;
+	color: #fff;
+	pointer-events: none;
+	-webkit-transform: translate(-50%, 0) rotate(45deg);
+	-moz-transform: translate(-50%, 0) rotate(45deg);
+	-ms-transform: translate(-50%, 0) rotate(45deg);
+	-o-transform: translate(-50%, 0) rotate(45deg);
+	transform: translate(-50%, 0) rotate(45deg);
 }
 #selectMix {
 	position: absolute;
@@ -315,6 +338,9 @@ aside footer a {
 #mixControls {
 	margin-left: -65px;
 	background-color: #232323;
+	-webkit-animation: opacityTrick .2s;
+	-o-animation: opacityTrick .2s;
+	animation: opacityTrick .2s;
 }
 #mixBalance {
     -webkit-appearance: none;
@@ -331,18 +357,7 @@ aside footer a {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-/*
-Fancy animation here:
-#mixButton:focus {
-	outline: 0;
-	width: 30px;
-	color: #fff;
-	-webkit-transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	transform: rotate(45deg);
-}*/
+
 #mixResult {
 	position: absolute;
 	width: 100%;
@@ -350,6 +365,9 @@ Fancy animation here:
 	bottom: 0;
 	margin-top: 15px;
 	z-index: 3;
+	-webkit-animation: opacityTrick .2s;
+	-o-animation: opacityTrick .2s;
+	animation: opacityTrick .2s;
 }
 .mix-mark {
 	color: #ccc;
@@ -385,6 +403,16 @@ Fancy animation here:
 	border: 2px dashed #444;
 }
 
+.tip {
+	position: absolute;
+	z-index: 2;
+	margin: 20px;
+	padding: 1% 1.5%;
+	font-size: 16px;
+	background: #232323; 
+	color: #fff;
+}
+
 /* Animations */
 @-webkit-keyframes scalemation {
 	0%   { width: 0%; }
@@ -397,6 +425,18 @@ Fancy animation here:
 @keyframes scalemation {
 	0%   { width: 0%; }
 	100% { width: 12.5%; }
+}
+@-webkit-keyframes opacityTrick {
+	0%   { opacity: 0%; }
+	100% { opacity: 100%; }
+}
+@-moz-keyframes opacityTrick {
+	0%   { opacity: 0%; }
+	100% { opacity: 100%; }
+}
+@keyframes opacityTrick {
+	0%   { opacity: 0%; }
+	100% { opacity: 100%; }
 }
 
 /* Icons */

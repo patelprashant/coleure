@@ -17,7 +17,10 @@
           name: 'Default',
           colors: []
         }
-      ]
+      ],
+      tips: {
+        tipSecondColor: false
+      }
     };
   });
 

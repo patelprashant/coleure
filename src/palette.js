@@ -77,6 +77,7 @@
       var index, origin, visualColor;
       event.preventDefault();
       index = event.dataTransfer.getData('text');
+      console.log(event.target)
       visualColor = paletteColors.children.item(index);
       origin = _.attr(visualColor, 'data-origin');
       if (colorOrigin == "palette") {
