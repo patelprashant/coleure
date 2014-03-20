@@ -97,6 +97,10 @@
           _.attr(mixButton, 'data-name-b', data.name);
           colorTemplate = options.doubleTemplate;
           previewsLength = 2;
+          if (settings.tipSecondColor == false){
+            _.hide(_.id('tipSecondColor'));
+            settings.tips.tipSecondColor = true;
+          }
         } else {
           length = color_previews.length;
           while (length-- > 0) {
@@ -109,6 +113,9 @@
           _.attr(mixButton, 'class', 'not-active')
           colorTemplate = options.singleTemplate;
           previewsLength = 1;
+          if (settings.tipSecondColor == false){
+            _.show(_.id('tipSecondColor'));
+          }
         }
         _.attr(color_subjects, 'data-subjects', previewsLength);
         toggleMessage(true);
@@ -161,6 +168,7 @@
         _.hide(_.id('mixPanel'));
         _.hide(_.id('mixResult'));
         _.hide(_.id('mixControls'));
+        _.hide(_.id('tipSecondColor'));
         return _.listen('keydown', function(event) {
           if (event.altKey) {
             return event.preventDefault();

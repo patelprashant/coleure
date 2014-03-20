@@ -18,9 +18,7 @@
           colors: []
         }
       ],
-      tips: {
-        tipSecondColor: false
-      }
+      tipSecondColor: false
     };
   });
 
