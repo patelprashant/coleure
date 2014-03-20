@@ -99,7 +99,7 @@
           previewsLength = 2;
           if (settings.tipSecondColor == false){
             _.hide(_.id('tipSecondColor'));
-            settings.tips.tipSecondColor = true;
+            settings.tipSecondColor = true;
           }
         } else {
           length = color_previews.length;
