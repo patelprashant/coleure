@@ -150,12 +150,7 @@
         }
         setResult(0.5);
         _.id('mixBalance').value = 0.5;
-        var intervalFn = function(){
-          setResult(_.id('mixBalance').value)
-        }
-        var interval;
-        _.listen(_.id('mixBalance'), 'mousedown', function(){ interval = setInterval(intervalFn,50); })
-        _.listen(_.id('mixBalance'), 'mouseup', function(){clearInterval(interval)})
+        _.listen(_.id('mixBalance'), 'input', function(){setResult(_.id('mixBalance').value)})
       },
       setup: function($options) {
         options = $options;

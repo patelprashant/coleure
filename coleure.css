@@ -308,11 +308,7 @@ aside footer a {
 	text-align: center;
 	width: 50px;
 	height: 30px;
-	-webkit-transform: translate(-50%, 0);
-	-moz-transform: translate(-50%, 0);
-	-ms-transform: translate(-50%, 0);
-	-o-transform: translate(-50%, 0);
-	transform: translate(, -50%);
+	margin-left: -25px;
 	-webkit-transition: all 0.2s;
 	-moz-transition: all 0.2s;
 	-ms-transition: all 0.2s;
@@ -322,13 +318,14 @@ aside footer a {
 #mixButton.active {
 	outline: 0;
 	width: 30px;
+	margin-left: -15px;
 	color: #fff;
 	pointer-events: none;
-	-webkit-transform: translate(-50%, 0) rotate(45deg);
-	-moz-transform: translate(-50%, 0) rotate(45deg);
-	-ms-transform: translate(-50%, 0) rotate(45deg);
-	-o-transform: translate(-50%, 0) rotate(45deg);
-	transform: translate(-50%, 0) rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 #selectMix {
 	position: absolute;
