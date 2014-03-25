@@ -22,7 +22,7 @@ body, html {
 }
 
 body {
-	font: 12px/1.5 "Gotham A", "Gotham B", Futura, sans-serif;
+	font: 12px/1.5 "Gotham A", "Gotham B", "Gotham HTF", Futura, sans-serif;
 	color: #000;
 	background: #232323;
 }
@@ -169,7 +169,7 @@ kbd {
 	height: 14.285714286vh;
 }
 
-#inspector .color {
+#inspector .color:not(button) {
 	cursor: default;
 }
 
@@ -327,11 +327,7 @@ aside footer a {
 	-o-transform: rotate(45deg);
 	transform: rotate(45deg);
 }
-#selectMix {
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
-}
+
 #mixControls {
 	margin-left: -65px;
 	background-color: #232323;
@@ -360,11 +356,16 @@ aside footer a {
 	width: 100%;
 	top: 50%;
 	bottom: 0;
-	margin-top: 15px;
 	z-index: 3;
+	margin-top: 15px;
+	padding: 20px;
+	text-align: right;
 	-webkit-animation: opacityTrick .2s;
 	-o-animation: opacityTrick .2s;
 	animation: opacityTrick .2s;
+}
+#mixResult > button {
+	margin-top: 10px;
 }
 .mix-mark {
 	color: #ccc;
