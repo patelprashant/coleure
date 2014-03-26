@@ -8,9 +8,7 @@
     var mixPanelHidden = true,
         mixPanel = _.id('mixPanel');
     toggleMessage = function(showTests) {
-      var color_tests, welcome_message;
-      welcome_message = _.id('welcome-message');
-      color_tests = _.id('tests');
+      var color_tests = _.id('tests');
       if (showTests) {
         _.attr(_.id('app'), 'class', 'active-panels');
         return _.show(color_tests);
@@ -95,8 +93,7 @@
           if (mixPanelHidden) { 
             _.show(mixPanel) 
           } else {
-            console.log('expected behavior 2');
-            this.mixColors;
+            cancelMix();
           }
           mixPanelHidden = false;
           _.show(mixButton)
@@ -142,7 +139,6 @@
             selectMix = _.id('selectMix');
 
             setTimeout(function(){_.hide(mixButton)}, 200)
-        
         _.attr(mixButton, 'class', 'active')
         _.id('mixBalance').style.backgroundImage = "linear-gradient(to right, #"+color1+", #"+color2+")"
         setTimeout(function(){_.show(_.id('mixControls')); _.show(mixResult)}, 100);

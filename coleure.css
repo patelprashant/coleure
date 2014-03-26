@@ -73,7 +73,6 @@ kbd {
 	color: #fff;
 }
 .select-options {
-	display: block;
 	font-size: 16px;
 	margin-bottom: 10px;
 }
@@ -121,11 +120,11 @@ kbd {
 #library {
 	width: 100%; 
 	height: 100%;
-	-webkit-transition: width .2s;
-	-moz-transition: width .2s;
-	-ms-transition: width .2s;
-	-o-transition: width .2s;
-	transition: width .2s;
+	-webkit-transition: width .5s ease;
+	-moz-transition: width .5s ease;
+	-ms-transition: width .5s ease;
+	-o-transition: width .5s ease;
+	transition: width .5s ease;
 	background: #232323;
 	overflow-y: hidden;
 	overflow-x: scroll;
@@ -203,11 +202,11 @@ kbd {
 	-ms-flex-direction: column;
 	flex-direction: column;
 
-	-webkit-transition: right .2s;
-	-moz-transition: right .2s;
-	-ms-transition: right .2s;
-	-o-transition: right .2s;
-	transition: right .2s;
+	-webkit-transition: right .5s ease;
+	-moz-transition: right .5s ease;
+	-ms-transition: right .5s ease;
+	-o-transition: right .5s ease;
+	transition: right .5s ease;
 }
 .the-rest {
 	-webkit-box-flex: 1;          
@@ -314,6 +313,9 @@ aside footer a {
 	-ms-transition: all 0.2s;
 	-o-transition: all 0.2s;
 	transition: all 0.2s;
+	-webkit-animation: opacity .2s;
+	-o-animation: opacity .2s;
+	animation: opacity .2s;
 }
 #mixButton.active {
 	outline: 0;
@@ -331,9 +333,6 @@ aside footer a {
 #mixControls {
 	margin-left: -65px;
 	background-color: #232323;
-	-webkit-animation: opacityTrick .2s;
-	-o-animation: opacityTrick .2s;
-	animation: opacityTrick .2s;
 }
 #mixBalance {
     -webkit-appearance: none;
@@ -360,9 +359,9 @@ aside footer a {
 	margin-top: 15px;
 	padding: 20px;
 	text-align: right;
-	-webkit-animation: opacityTrick .2s;
-	-o-animation: opacityTrick .2s;
-	animation: opacityTrick .2s;
+	-webkit-animation: opacity .2s;
+	-o-animation: opacity .2s;
+	animation: opacity .2s;
 }
 #mixResult > button {
 	margin-top: 10px;
@@ -424,17 +423,18 @@ aside footer a {
 	0%   { width: 0%; }
 	100% { width: 12.5%; }
 }
-@-webkit-keyframes opacityTrick {
-	0%   { opacity: 0%; }
-	100% { opacity: 100%; }
+
+@-webkit-keyframes opacity {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
 }
-@-moz-keyframes opacityTrick {
-	0%   { opacity: 0%; }
-	100% { opacity: 100%; }
+@-moz-keyframes opacity {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
 }
-@keyframes opacityTrick {
-	0%   { opacity: 0%; }
-	100% { opacity: 100%; }
+@keyframes opacity {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
 }
 
 /* Icons */
