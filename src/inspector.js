@@ -152,6 +152,10 @@
           _.attr(selectMix, 'data-rgb', rgb);
           _.attr(selectMix, 'data-hsl', hsl);
           _.attr(selectMix, 'data-mixed', 'true');
+          _.id('mixWeightA').innerHTML = (weight*100).toFixed()+"%";
+          Color('#'+color1).light() ? _.id('mixWeightA').style.color = "#232323" : _.id('mixWeightA').style.color = "#fff";
+          _.id('mixWeightB').innerHTML = ((1-weight)*100).toFixed()+"%";
+          Color('#'+color2).light() ? _.id('mixWeightB').style.color = "#232323" : _.id('mixWeightB').style.color = "#fff";
           mixResult.style.backgroundColor = '#'+hex;
         }
         setResult(0.5);

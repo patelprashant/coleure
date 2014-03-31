@@ -339,7 +339,8 @@ aside footer a {
     position: relative;
     width: 130px;
     height: 30px;
-    background-color: transparent;
+    background: no-repeat transparent center;
+    background-size: 120px 100%;
 }
 #mixBalance::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -366,6 +367,24 @@ aside footer a {
 #mixResult > button {
 	margin-top: 10px;
 }
+
+#mixWeightA, #mixWeightB {
+	position: absolute;
+	bottom: 100%;
+	font-weight: bold;
+	color: #232323;
+	font-size: 21px;
+}
+
+#mixWeightA {
+	right: 50%;
+	margin-right: 75px;
+}
+#mixWeightB {
+	left: 50%;
+	margin-left: 75px;
+}
+
 .mix-mark {
 	color: #ccc;
 }
