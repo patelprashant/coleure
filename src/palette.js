@@ -79,14 +79,15 @@
       visualColor = paletteColors.children.item(index);
       origin = _.attr(visualColor, 'data-origin');
       if (colorOrigin == "palette") {
-        _.remove(visualColor);
         activePalette.splice(activePalette.length - index - 1, 1);
+        visualColor.classList.add('deleted');
+        setTimeout(function(){
+          _.remove(visualColor);
+          if (activePalette.length == 0) {
+            _.show(dropMessage)
+          }
+        }, 200)
       }
-      if (activePalette.length == 0) {
-        _.show(dropMessage)
-      }
-
-      console.log('paletteColorDrop');
     };
     newPaletteField_changeHandler = function(event) {
       var field;
