@@ -173,29 +173,25 @@
       paletteColors.insertBefore(el, paletteColors.firstChild);
       color.origin = "palette";
       el.outerHTML = template(color);
-      _.forEach(_.cls(_.id('palette_colors'), 'mix-mark'), function(el) {
-        var hex = _.attr(el, 'data-hex');
-        Color('#'+hex).light() ? el.style.color = "#232323" : el.style.color = "#fff";
-      })
     };
 
     var dropdownVisible = false,
         dropdownAppearanceHandler = function(event) {
-      dropdownVisible ? _.hide(palettesDropdown) : _.show(palettesDropdown);
+      dropdownVisible ? palettesDropdown.classList.remove('active') : palettesDropdown.classList.add('active');
       dropdownVisible = !dropdownVisible;
     };
 
     return setup = function(options) {
       var activePaletteIndex, dropzone, newPaletteField, palette, _i, _len, _ref;
       palettesDropdown = _.cls('select-options')[0];
-      palettesDropdownLabel = _.cls('select-input')[0];
+      palettesDropdownLabel = _.cls('active-palette')[0];
+      palettesEditBtn = _.id('edit-palettes');
       palettesList = _.tag(palettesDropdown, 'ul')[0];
       _.listen(palettesList, 'click', palettesList_clickHandler);
       paletteItems = palettesList.children;
       newPaletteField = _.tag(palettesDropdown, 'input')[0];
       _.listen(newPaletteField, 'change', newPaletteField_changeHandler);
-      _.listen(palettesDropdownLabel, 'click', dropdownAppearanceHandler);
-      _.hide(palettesDropdown);
+      _.listen(palettesEditBtn, 'click', dropdownAppearanceHandler);
       dropzone = _.id('palette');
       _.listen(dropzone, 'dragenter', colorOver);
       _.listen(dropzone, 'dragover', colorOver);

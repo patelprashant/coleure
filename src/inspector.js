@@ -8,13 +8,10 @@
     var mixPanelHidden = true,
         mixPanel = _.id('mixPanel');
     toggleMessage = function(showTests) {
-      var color_tests = _.id('tests');
       if (showTests) {
         _.attr(_.id('app'), 'class', 'active-panels');
-        return _.show(color_tests);
       } else {
         _.attr(_.id('app'), 'class', 'not-active-panels');
-        return _.hide(color_tests);
       }
     };
     checkContrastFunction = function (color1, color2) {
@@ -40,7 +37,8 @@
       }
       previewsLength = _.cls('color-preview').length - 1;
       _.attr(_.id('subjects'), 'data-subjects', previewsLength, true);
-      _.remove(closeButton.parentNode);
+      console.log(previewsLength);
+      if (previewsLength >=1) { _.remove(closeButton.parentNode); }
       toggleMessage(previewsLength !== 0);
       preview = _.cls('color-preview')[0];
       if (!mixPanelHidden) { _.hide(mixPanel) };

@@ -22,6 +22,28 @@
   <body id="app">
     <h1 id="logo">Coleure <span id="format_status" class="format-instance">Hover any color</span></h1>
     <input id="clipboard_handler" readonly></input>
+    <section id="palette">
+      <div id="drop-message" class="dropzone">
+        <i class="sample item color"></i>
+        <i class="sample item color"></i>
+        <i class="sample item color"></i>
+        <i class="sample item color"></i>
+        <i class="sample item color"></i>
+        <p><i class="drop"></i>Drop your favorite<br>colors here.</p>
+      </div>  
+      <div id="palette_colors" class="clear b10"></div>
+      <header class="select">
+        <h1 class="subtitle">
+          <span class="active-palette">Default</span>
+          <button id="edit-palettes">Change</button>
+        </h1>
+        <h2>Palette</h2>
+        <div class="select-options">
+          <ul></ul>
+          <input type="text" autofocus placeholder="New palette…" />
+        </div>
+      </header>
+    </section>
     <aside id="panels">
       <section id="inspector">
         <div id="preview">
@@ -41,19 +63,6 @@
         <div id="tests" class="clear"></div>
       </section>
       <div class="the-rest">
-        <section id="palette">
-          <h1 class="select">
-            <a class="select-input">Default</a>
-            <span class="subtitle">Palette</span> 
-          </h1>
-          <div class="select-options">
-            <ul></ul>
-            <input type="text" autofocus placeholder="New palette…" />
-          </div>
-          <div id="drop-message" class="dropzone">Drop your favorite colors here.</div>
-          <div id="palette_colors" class="clear b10"></div>
-          
-        </section>
         <section>
           <h1>Format</h1>
           <button id="hex" class="set-format option join">HEX</button><button id="rgb" class="set-format option join">RGB</button><button id="hsl" class="set-format option join">HSL</button>

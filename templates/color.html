@@ -1,5 +1,6 @@
 {% if (this.valueOf()) { %}
 <i
+  data-yolo="true"
   draggable="true"
   class="item color"
   data-name="{{ name }}"
@@ -9,7 +10,7 @@
   data-mixed="{{ mixed }}"
   data-origin="{{ origin }}"
   style="background: #{{ hex }}">
-	{% if (mixed == "true") { %}<strong class="mix-mark" data-hex="{{ hex }}">M</strong>{% } %}
+	<span class="name">{% if (mixed == "true") { %}<strong class="mix-mark" data-hex="{{ hex }}">M</strong>{% } %}{{ name }}</span>
 </i>
 {% } else { %}
 <div class="item empty-color"></div>
