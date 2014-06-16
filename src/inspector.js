@@ -139,7 +139,7 @@
 					_.id('app').classList.add('active-compare-mode');
 				} else {
 					_.id('compareModeButton').classList.remove('active')
-					_.id('app').classList.remove('active-mode');
+					if(mixModeStatus == false){_.id('app').classList.remove('active-mode')}
 					_.id('app').classList.remove('active-compare-mode');
 				}
 				compareModeStatus = !compareModeStatus;
@@ -148,7 +148,7 @@
 				_.listen(_.id('palette_colors'), 'mouseover', updateDialogBackground)
 			},
 			exit: function(){
-				_.id('app').classList.remove('active-mode');
+				if(mixModeStatus == false){_.id('app').classList.remove('active-mode')}
 				_.id('app').classList.remove('active-compare-mode');
 				_.id('compareModeButton').classList.remove('active')
 				compareModeStatus = false;
@@ -175,7 +175,7 @@
 					_.id('app').classList.add('active-mix-mode');
 					_.id('mixModeButton').classList.add('active');
 				} else {
-					_.id('app').classList.remove('active-mode');
+					if(compareModeStatus == false){_.id('app').classList.remove('active-mode')}
 					_.id('app').classList.remove('active-mix-mode');
 					_.id('mixModeButton').classList.remove('active');
 				}
@@ -185,7 +185,7 @@
 				_.listen(_.id('palette_colors'), 'mouseover', updateDialogBackground)
 			},
 			exit: function(){
-				_.id('app').classList.remove('active-mode');
+				if(compareModeStatus == false){_.id('app').classList.remove('active-mode')}
 				_.id('app').classList.remove('active-mix-mode');
 				_.id('mixModeButton').classList.remove('active');
 				mixModeStatus = false;
