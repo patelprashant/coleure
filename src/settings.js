@@ -16,8 +16,7 @@
           name: 'Default',
           colors: []
         }
-      ],
-      tipSecondColor: false
+      ]
     };
   });
 

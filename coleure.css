@@ -36,9 +36,12 @@ aside, footer, header, section {
 	display: block;
 }
 
-button.join {
+button.join, button.secondary {
 	background: #111;
-	color: #666;
+	color: #999;
+}
+button.secondary {
+	color: #fff;
 }
 button, button.active, button[data-state=active] {
 	padding: 5px 10px;
@@ -96,14 +99,16 @@ kbd {
 }
 
 /* Layout */
+#library, #panels, #palette {
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	transition: all .3s ease;
+}
 #library {
 	width: 82.5%; 
 	height: 100%;
-	-webkit-transition: width .3s ease;
-	-moz-transition: width .3s ease;
-	-ms-transition: width .3s ease;
-	-o-transition: width .3s ease;
-	transition: width .3s ease;
 	background: #232323;
 	overflow-y: hidden;
 	overflow-x: scroll;
@@ -130,6 +135,13 @@ kbd {
 	-ms-transform: scale(1);
 	-o-transform: scale(1);
 	transform: scale(1);
+}
+.active-mode #library {
+	margin-top: 45px;
+}
+.active-mode #panels,
+.active-mode #palette {
+	top: 45px;
 }
 
 /* Colors */
@@ -180,13 +192,37 @@ kbd {
 	-ms-transform: scale(1.4);
 	-o-transform: scale(1.4);
 	transform: scale(1.4);
-
-	-webkit-transition: all .3s ease;
-	-moz-transition: all .3s ease;
-	-ms-transition: all .3s ease;
-	-o-transition: all .3s ease;
-	transition: all .3s ease;
 }
+
+.subject-options {
+	overflow: hidden;
+}
+.subject-options .column {
+	float: left;
+	width: 50%;
+}
+.subject-options .column:nth-child(2n-1) {
+	padding-right: 10px;
+}
+.subject-options .column:nth-child(2n) {
+	padding-left: 10px;
+}
+
+.block-button {
+	display: block;
+	padding: 10px 15px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	border: 2px solid #333;
+}
+.block-button.active {
+	background: #333;
+}
+
+
+
 #palette, .the-rest {
 	padding: 20px;
 }
@@ -553,14 +589,30 @@ aside footer a {
 	border: 2px dashed #444;
 }
 
-.tip {
+.mode-dialog {
 	position: absolute;
-	z-index: 2;
-	margin: 20px;
-	padding: 1% 1.5%;
-	font-size: 16px;
-	background: #232323; 
-	color: #fff;
+	top: -45px;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	height: 45px;
+	padding: 8px 20px;
+	line-height: 30px;
+	font-size: 18px;
+	font-weight: bold;
+	background: #fff;
+	-webkit-transition: top 0.3s ease;
+	-moz-transition: top 0.3s ease;
+	-ms-transition: top 0.3s ease;
+	-o-transition: top 0.3s ease;
+	transition: top 0.3s ease;
+}
+.active-compare-mode #compareModeDialog,
+.active-mix-mode #mixModeDialog {
+	top: 0;
+}
+.mode-dialog button {
+	float: right;
 }
 
 /* Animations */
@@ -610,6 +662,22 @@ aside footer a {
 	background: rgba(0,0,0,.5);
 }
 
+i.compare-icon,
+i.mix-icon {
+	cursor: pointer;
+	display: inline-block;
+	width: 76px;
+	height: 38px;
+	background: center no-repeat;
+	background-size: auto 38px;
+}
+i.compare-icon {
+	background-image: url('icons/compare.png');
+}
+i.mix-icon {
+	background-image: url('icons/mix.png');
+}
+
 .contrast {
 	position: absolute;
 	right: 20px;
@@ -644,5 +712,12 @@ i.drop {
 	}
 	.bad.contrast {
 		background-image: url('icons/warning@2x.png');
+	}
+
+	i.compare-icon {
+		background-image: url('icons/compare@2x.png');
+	}
+	i.mix-icon {
+		background-image: url('icons/mix@2x.png');
 	}
 }

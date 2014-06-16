@@ -20,6 +20,8 @@
     </script>
   </head>
   <body id="app">
+    <div id="compareModeDialog" class="mode-dialog">Select the color you want to compare with. <button id="exitCompareModeButton" class="secondary">Done</button></div>
+    <div id="mixModeDialog" class="mode-dialog">Select the color you want to mix with. <button id="exitMixModeButton" class="secondary">Done</button></div>
     <h1 id="logo">Coleure <span id="format_status" class="format-instance">Hover any color</span></h1>
     <input id="clipboard_handler" readonly></input>
     <section id="palette">
@@ -53,8 +55,8 @@
                 <input id="mixBalance" type="range" min="0.01" max="0.99" step="0.01" value="0.5">
               </div>
             <div id="mixResult">
-              <span id="mixWeightA">0.5</span>
-              <span id="mixWeightB">0.5</span>
+              <span id="mixWeightA">50%</span>
+              <span id="mixWeightB">50%</span>
               <button id="cancelMix" class="join">Cancel</button><button id="selectMix" class="color">Select</button>
             </div>
           </div>
@@ -63,6 +65,10 @@
         <div id="tests" class="clear"></div>
       </section>
       <div class="the-rest">
+        <section class="subject-options">
+          <div class="column"><a id="compareModeButton" class="block-button"><i class="compare-icon"></i><br>Compare</a></div>
+          <div class="column"><a id="mixModeButton" class="block-button"><i class="mix-icon"></i><br>Mix</a></div>
+        </section>
         <section>
           <h1>Format</h1>
           <button id="hex" class="set-format option join">HEX</button><button id="rgb" class="set-format option join">RGB</button><button id="hsl" class="set-format option join">HSL</button>
@@ -80,7 +86,6 @@
       </div>
     </aside>
     <section id="library">
-      <div id="tipSecondColor" class="tip">Sweet! Now hold the <kbd>alt</kbd> key and click another color.</div>
       <div id="colors"></div>
     </section>
   </body>
