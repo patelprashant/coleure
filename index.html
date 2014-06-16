@@ -69,6 +69,21 @@
           <div class="column"><a id="compareModeButton" class="block-button"><i class="compare-icon"></i><br>Compare</a></div>
           <div class="column"><a id="mixModeButton" class="block-button"><i class="mix-icon"></i><br>Mix</a></div>
         </section>
+        <div class="color-editor">
+          <label for="#">Code</label>
+          <input type="text" id="colorCode">
+          <label for="#">H</label>
+          <input type="text" id="colorHueValue" value="161">
+          <input id="colorHueRange" type="range" min="1" max="360" step="1" value="161">
+          <label for="#">S</label>
+          <input type="text" id="colorSaturationValue" value="100%">
+          <input id="colorSaturationRange" type="range" min="1" max="100" step="1" value="50">
+          <label for="#">L</label>
+          <input type="text" id="colorLightValue" value="38%">
+          <input id="colorLightRange" type="range" min="1" max="100" step="1" value="38">
+          <label for="#">Name</label>
+          <input type="text" id="colorName">
+        </div>
         <section>
           <h1>Format</h1>
           <button id="hex" class="set-format option join">HEX</button><button id="rgb" class="set-format option join">RGB</button><button id="hsl" class="set-format option join">HSL</button>
